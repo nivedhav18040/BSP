@@ -11,922 +11,1629 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --blue: #0a66c2;
-      --red: #e53935;
-      --dark: #0f172a;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --bg-light: #f8fafc;
+    :root{
+      --blue:#0a66c2;
+      --blue-2:#2563eb;
+      --red:#e53935;
+      --dark:#0f172a;
+      --muted:#6b7280;
+      --muted-2:#64748b;
+      --border:#e5e7eb;
+      --bg-light:#f8fafc;
+
+      --radius:16px;
+      --shadow-sm:0 10px 24px rgba(15,23,42,0.08);
+      --shadow-md:0 20px 40px rgba(15,23,42,0.10);
+      --shadow-lg:0 32px 72px rgba(15,23,42,0.10);
+
+      --container:1280px;
+      --pad-x:24px;
+      --section-y:72px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--dark);
-      background: #ffffff;
-      line-height: 1.6;
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; }
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--dark);
+      background:#fff;
+      line-height:1.6;
     }
+    img,video{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; }
 
-    /* ---------- GLOBAL ---------- */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+    .container{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:0 var(--pad-x);
+    }
 
     /* ---------- HEADER ---------- */
-    header {
-      padding: 14px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      gap: 16px;
+    header{
+      border-bottom:1px solid var(--border);
+      background:#fff;
+    }
+    .header-inner{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:16px var(--pad-x);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      width:100%;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:-0.01em;
+      white-space:nowrap;
+    }
+    .logo img{ height:38px; width:auto; }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--dark);
+      font-weight:500;
+      padding:8px 10px;
+      border-radius:10px;
+      transition:background .18s ease, color .18s ease;
+    }
+    nav a:hover{
+      background:#f1f5f9;
+      color:#0b1220;
     }
 
-    nav a {
-      margin-left: 24px;
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      white-space: nowrap;
+    @media (max-width: 820px){
+      :root{ --pad-x:18px; }
+      .header-inner{
+        padding:14px var(--pad-x);
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      nav{
+        width:100%;
+        justify-content:flex-start;
+        gap:8px;
+      }
+      nav a{
+        background:#f8fafc;
+        border:1px solid rgba(15,23,42,0.06);
+      }
     }
-
-    .logo { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-    .logo img { height: 36px; width: auto; display: block; }
 
     /* ---------- HERO ---------- */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f2a44, #1e4f91, #2563eb);
-      padding: 56px 32px 60px;
-      text-align: center;
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:64px 0 66px;
+      text-align:center;
+      background:linear-gradient(135deg,#0f2a44,#1e4f91,#2563eb);
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      top:-60px;
+      left:-60px;
+      width:520px;
+      height:520px;
+      background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      bottom:-70px;
+      right:-70px;
+      width:440px;
+      height:440px;
+      background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    .hero > .container{ position:relative; z-index:1; }
+
+    .hero h1{
+      font-size:46px;
+      line-height:1.12;
+      max-width:1040px;
+      margin:0 auto 20px;
+      letter-spacing:-0.035em;
+    }
+    .hero-title-main{ color:#fff; font-weight:800; }
+    .hero-title-sub{
+      display:block;
+      margin-top:6px;
+      color:#b6dcff;
+      font-weight:600;
+    }
+    .hero p{
+      max-width:820px;
+      margin:0 auto 28px;
+      color:#e0ecff;
+      font-size:16px;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -50px;
-      left: -50px;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:24px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .hero-cta{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+    }
+    .btn{
+      min-width:200px;
+      padding:14px 28px;
+      font-size:16px;
+      font-weight:700;
+      border-radius:12px;
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      display:inline-block;
+      text-align:center;
+      border:2px solid transparent;
+      user-select:none;
+    }
+    .btn-primary{
+      background:var(--red);
+      color:#fff;
+      box-shadow:0 10px 24px rgba(229,57,53,0.30);
+    }
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.28);
+      filter:brightness(1.02);
+    }
+    .btn:focus-visible{
+      outline:3px solid rgba(255,255,255,0.35);
+      outline-offset:3px;
+    }
+    .cta-note{ font-size:14px; font-weight:600; color:#fff; }
+
+    .hero small{
+      display:block;
+      margin-top:22px;
+      color:#dbeafe;
+      font-size:14px;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -50px;
-      right: -50px;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,0.03), transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
+    @media (max-width: 820px){
+      .hero{ padding:52px 0 58px; }
+      .hero h1{ font-size:38px; }
+      .hero p{ margin-bottom:22px; }
+    }
+    @media (max-width: 480px){
+      .hero h1{ font-size:32px; }
+      .btn{ min-width: 240px; }
     }
 
-    .hero > * { position: relative; z-index: 1; }
-
-    .hero h1 {
-      font-size: 44px;
-      line-height: 1.12;
-      max-width: 1100px;
-      padding: 0 24px;
-      margin: 0 auto 18px;
-      letter-spacing: -0.035em;
+    /* ---------- TRUST + CREDIBILITY ---------- */
+    .trust-proof{
+      position:relative;
+      padding:62px 0;
+      background:linear-gradient(180deg,#ffffff 0%,#f9fbff 55%,#ffffff 100%);
+      border-bottom:1px solid var(--border);
     }
-
-    .hero-title-main { color: #ffffff; font-weight: 700; }
-    .hero-title-sub { display: block; margin-top: 6px; color: #b6dcff; font-weight: 600; }
-
-    .hero p {
-      max-width: 760px;
-      margin: 0 auto 34px;
-      color: #e0ecff;
-      font-size: 16px;
+    .trust-proof::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:url("images/worldmap.png");
+      background-repeat:no-repeat;
+      background-size:contain;
+      background-position:center center;
+      opacity:0.22;
+      filter:grayscale(100%) contrast(90%);
+      pointer-events:none;
     }
-
-    /* ---------- CTA ---------- */
-    .hero-buttons { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-    .hero-cta { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-
-    .btn {
-      min-width: 190px;
-      padding: 14px 28px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .btn-primary { background: var(--red); color: #ffffff; box-shadow: 0 10px 24px rgba(229,57,53,0.35); }
-    .btn-secondary { border: 2px solid #ffffff; color: #ffffff; }
-
-    .btn:hover { transform: scale(1.06); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
-
-    .cta-note { font-size: 14px; font-weight: 500; color: #ffffff; }
-
-    .hero small { display: block; margin-top: 26px; color: #dbeafe; font-size: 14px; }
-
-    /* ---------- TRUST + CREDIBILITY (COMBINED) ---------- */
-    .trust-proof {
-      position: relative;
-      padding: 56px 0;
-      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 55%, #ffffff 100%);
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    /* World map watermark (local first, ACP fallback) */
-    .trust-proof::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        url("images/worldmap.png"),
-        url("https://snehaa-p.github.io/acp-landing-page/images/worldmap.png");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center center;
-      opacity: 0.27;
-      filter: grayscale(100%) contrast(90%);
-      pointer-events: none;
-    }
-
     .trust-proof::after{
       content:"";
       position:absolute;
       inset:0;
-      background: radial-gradient(ellipse at center,
+      background:radial-gradient(ellipse at center,
         rgba(255,255,255,0.0) 35%,
-        rgba(255,255,255,0.75) 85%
-      );
+        rgba(255,255,255,0.75) 85%);
       pointer-events:none;
     }
+    .trust-proof > .container{ position:relative; z-index:1; }
 
-    .trust-proof > .container { position: relative; z-index: 1; }
-
-    /* Header */
-    .trust-head { text-align: center; margin-bottom: 36px; }
-    .trust-kicker {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .trust-head{ text-align:center; margin-bottom:28px; }
+    .trust-kicker{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    /* Logos */
-    .trust-logos {
-      max-width: 1100px;
-      margin: 40px auto 0;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      align-items: center;
-      gap: 28px;
+    .trust-logos{
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:22px;
+      align-items:stretch;
     }
-
-    /* Logo tiles (uniform white rectangles) */
     .logo-tile{
-      height: 72px;
-      padding: 12px 18px;
-      border-radius: 14px;
-      background: #ffffff;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      height:74px;
+      padding:12px 18px;
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 6px 18px rgba(15,23,42,0.05);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(15,23,42,0.06);
     }
-
-    /* IMPORTANT: We’re using one combined screenshot strip placed inside each tile.
-       This exactly matches your attached “trusted industry” style on BSP.
-    */
     .logo-tile img{
-      max-height: 52px;
-      max-width: 100%;
-      object-fit: contain;
-      display: block;
-      opacity: 0.98;
+      max-height:32px;
+      max-width:100%;
+      object-fit:contain;
+      opacity:0.92;
     }
 
-    /* Divider */
-    .trust-spacer { height: 56px; }
+    .trust-spacer{ height:44px; }
 
-    /* Metrics */
-    .trust-metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      text-align: center;
+    .trust-metrics{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      text-align:center;
     }
-
     .metric { padding: 16px 12px; }
 
-    .metric strong {
-      display: inline-block;
-      font-weight: 900;
-      font-size: clamp(34px, 3.6vw, 44px);
-      letter-spacing: -0.05em;
-      background: linear-gradient(180deg, #0b1220, #2563eb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-                  text-shadow 0.32s ease;
+    .metric strong{
+      display:inline-block;
+      font-weight:900;
+      font-size:clamp(34px, 3.2vw, 44px);
+      letter-spacing:-0.05em;
+      background:linear-gradient(180deg, #0b1220, #2563eb);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      transition:transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                 text-shadow 0.32s ease;
+    }
+    .metric span{
+      display:block;
+      margin-top:10px;
+      font-size:14px;
+      color:#64748b;
+    }
+    .metric:hover strong{
+      transform:scale(1.18);
+      text-shadow:0 18px 36px rgba(37,99,235,0.35);
     }
 
-    .metric span {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #64748b;
+    @media (max-width: 1024px){
+      .trust-logos{ grid-template-columns:repeat(3,1fr); }
+      .trust-metrics{ grid-template-columns:repeat(2,1fr); }
     }
-
-    /* Hover enlarge (controlled) */
-    .metric:hover strong {
-      transform: scale(1.26);
-      text-shadow: 0 18px 36px rgba(37,99,235,0.35);
+    @media (max-width: 640px){
+      .trust-logos{ grid-template-columns:repeat(2,1fr); }
+      .trust-metrics{ grid-template-columns:1fr; }
+      .trust-proof::before{ display:none; }
     }
-
-    /* ---------- TESTIMONIALS ---------- */
-    .testimonials { padding: 56px 20px; background: var(--bg-light); }
-
-    .testimonial-grid {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-      gap: 40px;
-    }
-
-    .testimonial {
-      background: #ffffff;
-      padding: 22px;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    }
-    .testimonial p { font-size: 18px; line-height: 1.6; margin-bottom: 24px; color: var(--dark); }
-    .testimonial footer strong { display: block; font-weight: 600; }
-    .testimonial footer span { font-size: 14px; color: var(--muted); }
 
     /* ---------- FEATURES ---------- */
-    .features { padding: 64px 16px; background: var(--bg-light); text-align: center; }
-
-    .feature-heading {
-      font-size: 32px;
-      line-height: 1.35;
-      max-width: 900px;
-      margin: 0 auto 48px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #000;
+    .features{
+      padding:var(--section-y) 0;
+      background:var(--bg-light);
+      text-align:center;
     }
-
-    .feature-heading .highlight { color: var(--blue); font-weight: 700; }
-
-    .feature-grid {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+    .feature-heading{
+      font-size:32px;
+      line-height:1.35;
+      max-width:1040px;
+      margin:0 auto 44px;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      color:#0b1220;
+      padding:0 var(--pad-x);
     }
+    .feature-heading .highlight{ color:var(--blue); font-weight:800; }
 
-    .card {
-      background: #ffffff;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      text-align: left;
-      transition: box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-      border: 2px solid transparent;
+    .feature-grid{
+      max-width:var(--container);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+      gap:24px;
+      padding:0 var(--pad-x);
     }
-
-    .card:hover {
-      background-color: #f0f7ff;
-      border-color: var(--blue);
-      box-shadow: 0 28px 60px rgba(10,102,194,0.25);
-      transform: scale(1.02);
+    .card{
+      background:#fff;
+      padding:26px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-md);
+      text-align:left;
+      transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
+      border:2px solid transparent;
     }
-
-    .card p { margin-bottom: 24px; color: var(--muted); font-size: 16px; }
-    .card h3 { margin-bottom: 20px; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
-
-    .feature-list { list-style: none; }
-    .feature-list li { margin-bottom: 18px; position: relative; padding-left: 24px; }
-    .feature-list li::before { content: "✓"; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
-    .feature-list strong { display: block; font-weight: 600; color: var(--dark); }
-
-    .feature-list span {
-      display: block;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      font-size: 14px;
-      color: var(--muted);
-      transition: max-height 0.35s ease, opacity 0.3s ease;
+    .card:hover{
+      background-color:#f0f7ff;
+      border-color:var(--blue);
+      box-shadow:0 28px 60px rgba(10,102,194,0.22);
+      transform:translateY(-2px);
     }
-    .card:hover .feature-list span { max-height: 140px; opacity: 1; }
+    .card h3{
+      margin-bottom:12px;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-0.01em;
+    }
+    .card p{
+      margin-bottom:18px;
+      color:var(--muted);
+      font-size:16px;
+    }
+    .feature-list{ list-style:none; }
+    .feature-list li{
+      margin-bottom:16px;
+      position:relative;
+      padding-left:24px;
+    }
+    .feature-list li::before{
+      content:"✓";
+      position:absolute;
+      left:0;
+      top:0;
+      color:var(--blue);
+      font-weight:900;
+    }
+    .feature-list strong{
+      display:block;
+      font-weight:700;
+      color:var(--dark);
+    }
+    .feature-list span{
+      display:block;
+      margin-top:6px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      font-size:14px;
+      color:var(--muted);
+      transition:max-height .35s ease, opacity .25s ease;
+    }
+    .card:hover .feature-list span{ max-height:140px; opacity:1; }
+    .feature-list a{ text-decoration:none; }
+    .feature-list a:hover{ color:var(--blue); text-decoration:underline; }
 
-    .feature-list a, .feature-list a:visited { color: inherit !important; text-decoration: none; }
-    .feature-list a:hover { color: var(--blue); text-decoration: underline; cursor: pointer; }
-
-    /* ---------- HOW IT WORKS ---------- */
-    .howitworks {
-      padding: 64px 16px;
-      background: #ffffff;
+    /* ================= FLOW SECTION (FLIP CARDS, ONE HORIZONTAL STRIP) ================= */
+    .flow-as-flip{
+      padding: var(--section-y) 24px;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      border-bottom: 1px solid rgba(15,23,42,0.06);
       text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
     }
-
-    .howitworks h2 {
-      font-size: 32px;
-      line-height: 1.35;
-      max-width: 900px;
-      margin: 0 auto 14px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #000;
-    }
-
-    .howitworks p.lead {
-      max-width: 720px;
-      margin: 0 auto 42px;
-      color: #64748b;
-      font-size: 16px;
-    }
-
-    .how-grid {
-      max-width: 1100px;
+    .flow-as-flip .features-container{
+      max-width: var(--container);
       margin: 0 auto;
+    }
+    .flow-as-flip .features-intro{
+      max-width: var(--container);
+      margin: 0 auto 36px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .flow-as-flip .features-intro h2{
+      font-size: 30px;
+      line-height: 1.3;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+    .flow-as-flip .features-intro p{
+      max-width: 780px;
+      margin: 10px auto 0;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .flow-as-flip .features-grid{
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+      grid-auto-flow: column;
+      grid-auto-columns: 200px;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 6px 6px 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      justify-content: start;
+    }
+    .flow-as-flip .features-grid::before{
+      content:"";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 50%;
+      height: 1px;
+      transform: translateY(-50%);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(15,42,68,0.35),
+        rgba(37,99,235,0.45),
+        rgba(15,42,68,0.35),
+        transparent
+      );
+      opacity: 0.55;
+      pointer-events:none;
+    }
+    .flow-as-flip .flow-wrap{ position: relative; }
+
+    .flow-as-flip .feature-card{
+      display: block;
+      width: 200px;
+      height: 160px;
+      scroll-snap-align: start;
+      position: relative;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .flow-as-flip .feature-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(800px 260px at 20% 18%, rgba(255,255,255,0.20), transparent 60%),
+        linear-gradient(135deg, #0f2a44 0%, #1e4f91 45%, #2563eb 100%);
+      opacity:0;
+      transition:opacity 0.25s ease;
+    }
+    .flow-as-flip .feature-front,
+    .flow-as-flip .feature-back{
+      position:absolute;
+      inset:0;
+      padding: 22px 18px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      transition:opacity 0.25s ease, transform 0.25s ease;
+    }
+    .flow-as-flip .feature-front h3{
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .flow-as-flip .feature-back{
+      opacity: 0;
+      transform: translateY(16px);
+      color: #ffffff;
+    }
+    .flow-as-flip .feature-back p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      max-width: 26ch;
+      color: #eaf2ff;
+    }
+
+    .flow-as-flip .feature-card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.16);
+    }
+    .flow-as-flip .feature-card:hover::before{ opacity: 1; }
+    .flow-as-flip .feature-card:hover .feature-front{ opacity: 0; transform: translateY(-6px); }
+    .flow-as-flip .feature-card:hover .feature-back{ opacity: 1; transform: translateY(0); }
+    .flow-as-flip .feature-card:hover .feature-front h3{ color: #eaf2ff; }
+
+    .flow-as-flip .features-grid::-webkit-scrollbar{ height: 10px; }
+    .flow-as-flip .features-grid::-webkit-scrollbar-thumb{
+      background: rgba(100,116,139,0.25);
+      border-radius: 999px;
+    }
+    .flow-as-flip .features-grid::-webkit-scrollbar-track{ background: transparent; }
+
+    @media (min-width: 900px){
+      .flow-as-flip .features-grid{
+        overflow: visible;
+        grid-auto-flow: unset;
+        grid-auto-columns: unset;
+        grid-template-columns: repeat(3, 220px);
+        justify-content: center;
+        gap: 40px;
+        padding: 12px 0 0;
+      }
+      .flow-as-flip .feature-card{ width: 220px; height: 160px; }
+    }
+    @media (max-width: 899px){
+      .flow-as-flip .features-grid{
+        grid-auto-flow: column;
+        grid-auto-columns: 220px;
+        justify-content: start;
+        overflow-x: auto;
+        padding: 6px 6px 12px;
+        gap: 16px;
+      }
+      .flow-as-flip .feature-card{ width: 220px; height: 160px; }
+    }
+
+    /* ---------- CAROUSEL ---------- */
+    .carousel{
+      background:
+        radial-gradient(1200px 500px at 20% 10%, rgba(37,99,235,0.14), transparent 60%),
+        radial-gradient(900px 420px at 80% 20%, rgba(10,102,194,0.12), transparent 62%),
+        linear-gradient(135deg, #d0e3ed 0%, #eaf2ff 50%, #f8fafc 100%);
+      padding:var(--section-y) 0 60px;
+    }
+    .carousel-shell{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:0 var(--pad-x);
+      position:relative;
+    }
+    .carousel-viewport{ max-width:1240px; margin:0 auto; position:relative; }
+    .carousel-track{ width:100%; position:relative; min-height:540px; }
+
+    .carousel-item{ display:none; flex-direction:column; align-items:center; text-align:center; }
+    .carousel-item.active{ display:flex; animation:fadeUp 280ms ease both; }
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(8px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .carousel-caption{ max-width:920px; margin-bottom:16px; padding:0 12px; }
+    .carousel-caption strong{
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:-0.035em;
+      color:#0b1220;
+    }
+    .carousel-caption p{ margin-top:10px; font-size:16px; color:#475569; }
+
+    .carousel-item img,
+    .carousel-item video{
+      width:100%;
+      max-width:1100px;
+      height:440px;
+      object-fit:contain;
+      background:transparent;
+      filter:drop-shadow(0 18px 34px rgba(15,23,42,0.18));
+      border-radius:14px;
+      margin:0 auto 26px;
+    }
+
+    .carousel-btn{
+      position:absolute;
+      top:52%;
+      transform:translateY(-50%);
+      background:#fff;
+      border:none;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      font-size:22px;
+      color:#475569;
+      cursor:pointer;
+      box-shadow:0 18px 40px rgba(15,23,42,0.18);
+      transition:transform .18s ease, box-shadow .18s ease;
+      z-index:5;
+    }
+    .carousel-btn.prev{ left:10px; }
+    .carousel-btn.next{ right:10px; }
+    .carousel-btn:hover{ transform:translateY(-50%) scale(1.10); box-shadow:0 24px 60px rgba(15,23,42,0.22); }
+
+    .carousel-nav{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:0;
+      padding:0 10px;
+    }
+    .carousel-dot{
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.75);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(148,163,184,0.55);
+      color:#0f172a;
+      font-size:13px;
+      font-weight:750;
+      letter-spacing:-0.01em;
+      transition:transform .16s ease, background .16s ease, border-color .16s ease;
+      cursor:pointer;
+    }
+    .carousel-dot:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,0.92);
+      border-color:rgba(37,99,235,0.55);
+    }
+    .carousel-dot.active{
+      background:#2563eb;
+      border-color:#2563eb;
+      color:#fff;
+      box-shadow:0 14px 34px rgba(37,99,235,0.28);
+    }
+    .carousel-dot .pill{
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background:rgba(100,116,139,0.55);
+      display:inline-block;
+      margin-right:8px;
+      vertical-align:middle;
+    }
+    .carousel-dot.active .pill{ background:rgba(255,255,255,0.95); }
+
+    .carousel-btn:focus-visible,
+    .carousel-dot:focus-visible{
+      outline:3px solid rgba(37,99,235,0.35);
+      outline-offset:3px;
+    }
+
+    @media (max-width: 900px){
+      .carousel-btn{ display:none; }
+      .carousel-item img, .carousel-item video{ height:320px; }
+      .carousel-track{ min-height:410px; }
+      .carousel-caption strong{ font-size:28px; }
+    }
+
+    /* ---------- OUTCOMES ---------- */
+    .outcomes{
+      padding:var(--section-y) 0;
+      background:#f8fafc;
+      text-align:center;
+    }
+    .outcomes-heading{
+      font-size:28px;
+      font-weight:900;
+      margin-bottom:44px;
+      color:var(--dark);
+      padding:0 var(--pad-x);
+    }
+    .outcomes-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:24px;
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 var(--pad-x);
+      align-items:stretch;
+    }
+    .outcome-card{
+      background:#fff;
+      padding:24px;
+      border-radius:var(--radius);
+      box-shadow:0 20px 40px rgba(0,0,0,0.05);
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      text-align:left;
+      border:1px solid rgba(15,23,42,0.06);
+    }
+    .outcome-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 28px 60px rgba(0,0,0,0.08);
+      border-color:rgba(15,23,42,0.10);
+    }
+    .outcome-card h3{
+      font-size:20px;
+      font-weight:900;
+      margin-bottom:12px;
+      color:var(--dark);
+    }
+    .outcome-card ul{ list-style:none; padding:0; }
+    .outcome-card ul li{
+      position:relative;
+      padding-left:24px;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .outcome-card ul li::before{
+      content:"✔";
+      position:absolute;
+      left:0;
+      top:0;
+      color:var(--blue);
+      font-weight:900;
+    }
+    @media (max-width: 820px){
+      .outcomes-grid{ grid-template-columns:1fr; }
+    }
+
+    /* ======================= PRICING / EVALUATION SECTION (CSS) ======================= */
+    .pricing-compare{
+      padding: calc(var(--section-y) - 12px) 0;
+      background:
+        radial-gradient(900px 380px at 25% 0%, rgba(37,99,235,0.10), transparent 60%),
+        linear-gradient(180deg,#f7faff 0%, #ffffff 65%);
+    }
+
+    .pricing-wrap{
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      text-align: center;
+    }
+
+    .pricing-title{
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0b1220;
+      margin-bottom: 10px;
+    }
+
+    .pricing-sub{
+      max-width: 900px;
+      margin: 0 auto 34px;
+      font-size: 16px;
+      color: var(--muted-2);
+      line-height: 1.7;
+    }
+
+    .pricing-grid{
+      display: grid;
+      grid-template-columns: 2fr 1.15fr;
+      gap: 24px;
       align-items: stretch;
     }
 
-    .how-step {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: left;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.06);
-      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-      position: relative;
+    .compare-card{
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(15,23,42,0.08);
+      border-radius: 22px;
+      box-shadow: 0 18px 48px rgba(15,23,42,0.10);
       overflow: hidden;
+      position: relative;
+    }
+    .compare-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 360px at 30% 15%, rgba(37,99,235,0.10), transparent 60%),
+        radial-gradient(900px 360px at 70% 10%, rgba(15,42,68,0.08), transparent 65%);
+      pointer-events:none;
     }
 
-    .how-step:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 60px rgba(10,102,194,0.18);
-      border-color: rgba(10,102,194,0.35);
+    .compare-cols{
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
 
-    .how-step strong {
-      display: block;
-      font-weight: 800;
-      color: #0b1220;
-      margin-bottom: 10px;
+    .plan-col{
+      position: relative;
+      padding: 24px 24px 22px;
+      text-align: left;
+    }
+
+    .plan-col + .plan-col{
+      border-left: 1px solid rgba(15,23,42,0.08);
+      background: rgba(37,99,235,0.04);
+    }
+
+    .plan-col h3{
+      font-size: 22px;
+      font-weight: 900;
       letter-spacing: -0.01em;
-      font-size: 15px;
+      margin: 6px 0 14px;
+      color: #0b1220;
     }
 
-    .how-step span {
-      display: block;
-      color: #64748b;
+    .plan-price{ margin-bottom: 12px; }
+
+    .plan-kicker{
+      display: inline-block;
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: 0.06em;
+      color: rgba(100,116,139,0.95);
+      margin-bottom: 6px;
+    }
+
+    .plan-amount-row{
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .plan-amount-row .amt{
+      font-size: 36px;
+      font-weight: 1000;
+      letter-spacing: -0.03em;
+      color: #0b1220;
+    }
+
+    .plan-amount-row .unit{
+      font-size: 16px;
+      color: var(--muted-2);
+      font-weight: 600;
+    }
+
+    .plan-divider{
+      height: 1px;
+      background: rgba(37,99,235,0.20);
+      margin: 14px 0 18px;
+    }
+
+    .plan-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .plan-list li{
+      position: relative;
+      padding-left: 28px;
+      color: #0f172a;
       font-size: 14px;
       line-height: 1.55;
     }
 
-    /* ---------- OUTCOMES ---------- */
-    .outcomes { padding: 64px 16px; background: #f8fafc; text-align: center; }
-    .outcomes-heading { font-size: 28px; font-weight: 700; margin-bottom: 60px; color: var(--dark); }
-
-    .outcomes-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      max-width: 900px;
-      margin: 0 auto;
+    .plan-list li::before{
+      content:"✓";
+      position:absolute;
+      left: 0;
+      top: 0;
+      font-weight: 900;
+      color: #2563eb;
     }
 
-    .outcome-card {
-      background: #ffffff;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: left;
+    .plan-cta-row{
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
     }
 
-    .outcome-card:hover { transform: translateY(-4px); box-shadow: 0 28px 60px rgba(0,0,0,0.08); }
-    .outcome-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: var(--dark); }
-    .outcome-card ul { list-style: none; padding: 0; }
-    .outcome-card ul li { position: relative; padding-left: 24px; margin-bottom: 12px; color: var(--muted); font-size: 16px; }
-    .outcome-card ul li::before { content: "✔"; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
-
-    /* ---------- EVALUATE SECTION (PRICING) ---------- */
-    .eval-soft { padding: 64px 16px; background: linear-gradient(180deg, #f7faff 0%, #ffffff 60%); }
-    .eval-wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
-    .eval-soft h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
-    .eval-lead { font-size: 18px; color: #64748b; margin: 12px auto 64px; max-width: 680px; }
-    .eval-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; align-items: stretch; }
-
-    .eval-panel {
-      padding: 36px; border-radius: 20px;
-      background: #ffffff;
-      box-shadow: 0 32px 72px rgba(15, 23, 42, 0.08);
-      text-align: left;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-
-    .eval-panel.primary { background: linear-gradient(180deg, #ffffff, #eef5ff); box-shadow: 0 50px 110px rgba(37, 99, 235, 0.18); }
-    .eval-panel:hover { transform: translateY(-8px); box-shadow: 0 70px 140px rgba(15, 23, 42, 0.16); }
-    .eval-panel h3 { font-size: 22px; font-weight: 600; margin-bottom: 12px; }
-
-    .eval-price { display: block; font-size: 42px; font-weight: 800; letter-spacing: -0.02em; }
-    .eval-price small { font-size: 22px; font-weight: 500; color: #64748b; margin-left: 6px; letter-spacing: 0; }
-    .eval-meta { color: #64748b; margin: 12px 0 36px; }
-
-    .eval-cta {
-      display: inline-block;
-      padding: 14px 34px;
-      border-radius: 999px;
-      font-weight: 600;
+    .plan-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 900;
       text-decoration: none;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      min-width: 220px;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease, background .18s ease, border-color .18s ease;
     }
 
-    .eval-cta.subtle { background: #f1f5f9; color: #0f172a; }
-    .eval-cta.strong { background: #2563eb; color: #ffffff; }
-    .eval-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25); }
+    .plan-btn.outline{
+      background: #ffffff;
+      color: #2563eb;
+      border: 1.5px solid rgba(37,99,235,0.55);
+      box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+    }
 
-    .eval-inner-center { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .eval-inner-center.left { align-items: flex-start; text-align: left; }
+    .plan-btn.solid{
+      color: #ffffff;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg,#0f2a44,#1e4f91,#2563eb);
+      box-shadow: 0 18px 44px rgba(37,99,235,0.25);
+    }
+
+    .plan-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 22px 56px rgba(37,99,235,0.25);
+      filter: brightness(1.02);
+    }
+
+    .pitch-card{
+      background:
+        linear-gradient(
+          180deg,
+          rgba(37,99,235,0.10) 0%,
+          rgba(15,42,68,0.08) 100%
+        );
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 22px;
+      box-shadow: 0 22px 56px rgba(15,23,42,0.14);
+      padding: 28px 26px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pitch-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 380px at 20% 10%, rgba(37,99,235,0.25), transparent 60%),
+        radial-gradient(900px 380px at 80% 30%, rgba(15,42,68,0.22), transparent 65%);
+      pointer-events:none;
+    }
+
+    .pitch-top, .pitch-bottom{ position: relative; z-index: 1; }
+
+    .pitch-kicker{
+      margin: 0 0 6px;
+      font-size: 16px;
+      color: #0b1220;
+      font-weight: 500;
+    }
+
+    .pitch-title{
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 900;
+      color: #0b1220;
+    }
+
+    .pitch-divider{
+      height: 1px;
+      background: rgba(37,99,235,0.22);
+      margin: 10px 0 18px;
+    }
+
+    .pitch-plus{
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .pitch-plus .plus{
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      color: #2563eb;
+      margin-top: 2px;
+    }
+
+    .pitch-plus .plus-text{
+      font-size: 18px;
+      font-weight: 900;
+      color: #0b1220;
+    }
+
+    .pitch-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .pitch-list li{
+      position: relative;
+      padding-left: 28px;
+      font-size: 14px;
+      color: #0f172a;
+      line-height: 1.55;
+    }
+
+    .pitch-list li::before{
+      content:"✓";
+      position:absolute;
+      left: 0;
+      top: 0;
+      font-weight: 900;
+      color: #2563eb;
+    }
+
+    .pitch-bottom{
+      display: flex;
+      justify-content: center;
+    }
+
+    .pitch-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 22px;
+      border-radius: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      min-width: 220px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0f2a44, #1e4f91, #2563eb);
+      box-shadow: 0 22px 60px rgba(37,99,235,0.35);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .pitch-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 22px 56px rgba(37,99,235,0.24);
+      filter: brightness(1.02);
+    }
+
+    .pricing-footnote{
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted-2);
+    }
+
+    @media (max-width: 1024px){
+      .pricing-grid{ grid-template-columns: 1fr; }
+      .plan-col{ min-height: 0; }
+    }
+    @media (max-width: 820px){
+      .compare-cols{ grid-template-columns: 1fr; }
+      .plan-col + .plan-col{
+        border-left: none;
+        border-top: 1px solid rgba(15,23,42,0.08);
+      }
+    }
+    @media (max-width: 640px){
+      .pricing-title{ font-size: 30px; }
+      .plan-col{ padding: 26px 22px; }
+      .pitch-card{ padding: 24px 22px; }
+      .plan-btn, .pitch-btn{ width: 100%; min-width: 0; }
+    }
 
     /* ---------- FAQ SECTION ---------- */
-    .faq-section { padding: 64px 0; background: #f8fafc; text-align: center; }
-    .faq-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
-    .faq-subtext { font-size: 16px; color: #64748b; margin-bottom: 48px; }
-
-    .faq-carousel { max-width: 760px; margin: auto; position: relative; display: flex; align-items: center; }
-    .faq-track { width: 100%; min-height: 220px; position: relative; }
-
-    .faq-item {
-      position: relative;
-      inset: 0;
-      opacity: 1;
-      pointer-events: auto;
-      background: #ffffff;
-      padding: 28px;
-      border-radius: 16px;
-      text-align: left;
-      box-shadow: 0 20px 44px rgba(15, 23, 42, 0.06);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      transform: translateY(6px);
-      display: none;
+    .faq-section{
+      padding:var(--section-y) 0;
+      background:#f8fafc;
+      text-align:center;
+      border-top:1px solid rgba(15,23,42,0.06);
     }
-
-    .faq-item.active { opacity: 1; pointer-events: auto; transform: translateY(0); display: block; }
-    .faq-item h3 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
-    .faq-item p { font-size: 16px; line-height: 1.6; color: #475569; }
-
-    .faq-nav {
-      border: none;
-      background: #ffffff;
-      font-size: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      color: #64748b;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
-      transition: transform 0.25s ease, color 0.25s ease;
+    .faq-section h2{
+      font-size:36px;
+      font-weight:1000;
+      margin-bottom:8px;
+      padding:0 var(--pad-x);
     }
+    .faq-subtext{
+      font-size:16px;
+      color:var(--muted-2);
+      margin-bottom:32px;
+      padding:0 var(--pad-x);
+    }
+    .faq-carousel{
+      max-width:1040px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:0 var(--pad-x);
+    }
+    .faq-track{
+      width:100%;
+      min-height:220px;
+      position:relative;
+      display:flex;
+      align-items:center;
+    }
+    .faq-item{
+      background:#fff;
+      padding:26px;
+      border-radius:16px;
+      text-align:left;
+      box-shadow:0 20px 44px rgba(15,23,42,0.06);
+      border:1px solid rgba(15,23,42,0.06);
+      display:none;
+      animation:fadeUp 220ms ease both;
+      width:100%;
+    }
+    .faq-item.active{ display:block; }
+    .faq-item h3{ font-size:18px; font-weight:900; margin-bottom:10px; }
+    .faq-item p{ font-size:15px; line-height:1.7; color:#475569; }
+    .faq-item a{ color:var(--blue); text-decoration:underline; }
 
-    .faq-nav:hover { color: #2563eb; transform: scale(1.1); }
-    .faq-nav.prev { margin-right: 16px; }
-    .faq-nav.next { margin-left: 16px; }
+    .faq-nav{
+      border:none;
+      background:#fff;
+      font-size:24px;
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      color:#64748b;
+      cursor:pointer;
+      box-shadow:0 8px 20px rgba(15,23,42,0.12);
+      transition:transform .18s ease, color .18s ease;
+      flex:0 0 auto;
+      transform: translateY(-2px);
+    }
+    .faq-nav:hover{ color:#2563eb; transform:scale(1.08); }
+    .faq-nav:focus-visible{ outline:3px solid rgba(37,99,235,0.35); outline-offset:3px; }
+
+    @media (max-width: 640px){
+      .faq-carousel{ flex-direction:column; }
+      .faq-nav{ width:100%; border-radius:14px; height:44px; }
+      .faq-section h2{ font-size:28px; }
+    }
 
     /* ---------- FOOTER ---------- */
-    footer {
-      padding: 24px;
-      text-align: center;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      font-size: 14px;
-      background: #ffffff;
+    footer{
+      padding:22px var(--pad-x);
+      text-align:center;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      font-size:14px;
+      background:#fff;
     }
 
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 1024px) {
-      .trust-logos { grid-template-columns: repeat(3, 1fr); }
-      .trust-metrics { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-      .how-grid { grid-template-columns: repeat(2, 1fr); }
+    /* ---------- SMALL NOTE CHIP ---------- */
+    .note-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:14px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.16);
+      color:#eaf2ff;
+      border:1px solid rgba(255,255,255,0.18);
+      font-size:13px;
+      font-weight:600;
+      backdrop-filter: blur(10px);
     }
-
-    @media (max-width: 820px) {
-      .hero h1 { font-size: 42px; }
-      header { padding: 18px 24px; }
-    }
-
-    @media (max-width: 768px) {
-      .outcomes-grid { grid-template-columns: 1fr; }
-      .trust-logos { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    }
-
-    @media (max-width: 640px) {
-      nav { display: none; }
-      .trust-metrics { grid-template-columns: 1fr; }
-      .trust-proof::before { display: none; }
-      .how-grid { grid-template-columns: 1fr; }
-      .testimonial-grid { grid-template-columns: 1fr; }
+    .note-chip .dot{
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.85);
+      display:inline-block;
     }
   </style>
 </head>
 
-<body id="top">
+<body>
 
 <header>
-  <div class="logo">
-    <!-- BSP Logo (local images/ first, fallback to repo root) -->
-    <img
-      src="images/Browser%20Security%20Plus_with%20ME_White.png"
-      alt="Browser Security Plus logo"
-      onerror="this.onerror=null; this.src='./Browser%20Security%20Plus_with%20ME_White.png';"
-    />
-  </div>
+  <div class="header-inner">
+    <div class="logo">
+      <!-- Logo file provided by you in container: /mnt/data/Browser Security Plus_Black.png
+           Place it in your repo at: /images/Browser Security Plus_Black.png -->
+      <img src="images/Browser%20Security%20Plus_Black.png" alt="Browser Security Plus logo">
+    </div>
 
-  <nav>
-    <!-- Overview should refresh this same page -->
-    <a href="index.html" onclick="event.preventDefault(); window.location.href = window.location.pathname;">Overview</a>
-    <a target="_blank" rel="noopener noreferrer" href="https://www.manageengine.com/browser-security/features.html">Features</a>
-    <a target="_blank" rel="noopener noreferrer" href="https://www.manageengine.com/browser-security/request-demo.html">Demo</a>
-    <a target="_blank" rel="noopener noreferrer" href="https://www.manageengine.com/browser-security/help.html">Documents</a>
-    <a target="_blank" rel="noopener noreferrer" href="https://www.manageengine.com/browser-security/get-quote.html">Get Quote</a>
-    <a target="_blank" rel="noopener noreferrer" href="https://www.manageengine.com/browser-security/support.html">Support</a>
-  </nav>
+    <nav aria-label="Primary">
+      <a href="https://www.manageengine.com/browser-security/features.html">Features</a>
+      <a href="https://www.manageengine.com/browser-security/request-demo.html">Demo</a>
+      <a href="https://www.manageengine.com/browser-security/help.html">Documents</a>
+      <a href="https://www.manageengine.com/browser-security/get-quote.html">Get Quote</a>
+      <a href="https://www.manageengine.com/browser-security/support.html">Support</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>
-    <span class="hero-title-main">Secure enterprise browsers</span>
-    <span class="hero-title-sub">and reduce browser-based attack surface across your network</span>
-  </h1>
+<section class="hero" id="overview">
+  <div class="container">
+    <h1>
+      <span class="hero-title-main">Secure and manage enterprise browsers</span>
+      <span class="hero-title-sub">to prevent web-based attacks and data leaks</span>
+    </h1>
 
-  <p>
-    Centralize browser hardening, control extensions and plug-ins, lock down risky browsing behavior,
-    and maintain compliance with policy-based enforcement—across multiple browsers from one console.
-  </p>
+    <p>
+      Gain complete visibility into browsers and add-ons, harden configurations, control extensions,
+      isolate risky web sessions, and enforce safe browsing—centrally, from one console.
+    </p>
 
-  <div class="hero-buttons">
-    <div class="hero-cta">
-      <a target="_blank" rel="noopener noreferrer"
-         href="https://www.manageengine.com/browser-security/request-demo.html"
-         class="btn btn-primary">Request demo</a>
-      <span class="cta-note">See it in action</span>
+    <div class="hero-buttons">
+      <div class="hero-cta">
+        <a href="https://www.manageengine.com/browser-security/request-demo.html" class="btn btn-primary">Request demo</a>
+        <span class="cta-note">See it live</span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary">View pricing</a>
+        <span class="cta-note">Per device / year</span>
+      </div>
     </div>
 
-    <div class="hero-cta">
-      <a target="_blank" rel="noopener noreferrer"
-         href="https://www.manageengine.com/browser-security/get-quote.html"
-         class="btn btn-primary">Get quote</a>
-      <span class="cta-note">Pricing for your environment</span>
-    </div>
+    <span class="note-chip"><span class="dot" aria-hidden="true"></span>Free edition available (up to 25 computers) · Professional edition for full features</span>
   </div>
-
-  <small>Centralized management · Policy-based controls · Better compliance readiness</small>
 </section>
 
 <section class="trust-proof" aria-label="Global trust and credibility">
   <div class="container">
     <div class="trust-head">
-      <p class="trust-kicker">Trusted by leading organizations worldwide</p>
+      <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <!-- Trusted industry logos (use your attached screenshot as a file in /images) -->
-    <!-- Save the attached strip as: images/bsp-trusted-logos.png -->
+    <!-- Trusted industry logos:
+         "please take from the existing page I sent you" -> download those logos from the BSP page
+         and place them in /images/ as below (replace filenames if needed). -->
     <div class="trust-logos" aria-label="Customer logos">
-      <div class="logo-tile">
-        <img
-          src="images/bsp-trusted-logos.png"
-          alt="Trusted customers"
-          onerror="this.onerror=null; this.src='./bsp-trusted-logos.png';"
-        />
-      </div>
-      <div class="logo-tile">
-        <img
-          src="images/bsp-trusted-logos.png"
-          alt="Trusted customers"
-          onerror="this.onerror=null; this.src='./bsp-trusted-logos.png';"
-        />
-      </div>
-      <div class="logo-tile">
-        <img
-          src="images/bsp-trusted-logos.png"
-          alt="Trusted customers"
-          onerror="this.onerror=null; this.src='./bsp-trusted-logos.png';"
-        />
-      </div>
-      <div class="logo-tile">
-        <img
-          src="images/bsp-trusted-logos.png"
-          alt="Trusted customers"
-          onerror="this.onerror=null; this.src='./bsp-trusted-logos.png';"
-        />
-      </div>
-      <div class="logo-tile">
-        <img
-          src="images/bsp-trusted-logos.png"
-          alt="Trusted customers"
-          onerror="this.onerror=null; this.src='./bsp-trusted-logos.png';"
-        />
-      </div>
+      <div class="logo-tile"><img src="images/bsp-trusted-1.png" alt="Trusted brand logo 1"></div>
+      <div class="logo-tile"><img src="images/bsp-trusted-2.png" alt="Trusted brand logo 2"></div>
+      <div class="logo-tile"><img src="images/bsp-trusted-3.png" alt="Trusted brand logo 3"></div>
+      <div class="logo-tile"><img src="images/bsp-trusted-4.png" alt="Trusted brand logo 4"></div>
+      <div class="logo-tile"><img src="images/bsp-trusted-5.png" alt="Trusted brand logo 5"></div>
+      <div class="logo-tile"><img src="images/bsp-trusted-6.png" alt="Trusted brand logo 6"></div>
     </div>
 
     <div class="trust-spacer" aria-hidden="true"></div>
 
-    <!-- Metrics (kept same visual behavior as EDLP; content aligned to BSP positioning) -->
-    <div class="trust-metrics">
+    <!-- Metrics: keep ACP-style hover emboss. Replace numbers if you want exact values from BSP. -->
+    <div class="trust-metrics" aria-label="Key product metrics">
       <div class="metric">
-        <strong>1 console</strong>
-        <span>for multi-browser control</span>
+        <strong>25</strong>
+        <span>devices on Free Edition</span>
       </div>
       <div class="metric">
-        <strong>Policy</strong>
-        <span>driven hardening</span>
+        <strong>1</strong>
+        <span>centralized console</span>
       </div>
       <div class="metric">
-        <strong>Audit</strong>
-        <span>with reports & insights</span>
+        <strong>4+</strong>
+        <span>major browsers supported</span>
       </div>
       <div class="metric">
-        <strong>Lockdown</strong>
-        <span>risky web behavior</span>
+        <strong>100%</strong>
+        <span>policy-based enforcement</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="features">
+<section class="features" id="features">
   <h2 class="feature-heading">
-    <span class="highlight">Visibility</span> into browsers and add-ons, plus <span class="highlight">controls</span> to enforce safer browsing.
+    Prevent browser-based threats with <span class="highlight">policy-driven controls</span>,
+    and reduce risk using <span class="highlight">isolation, lockdown, and visibility</span>.
   </h2>
 
   <div class="feature-grid">
     <div class="card">
-      <h3>Insights & vulnerability awareness</h3>
+      <h3>Visibility & Browser Insights</h3>
+      <p>Know what browsers and add-ons exist in your environment before you enforce policy.</p>
       <ul class="feature-list">
         <li>
-          <strong>Browser usage insights</strong>
-          <span>Get visibility into browser usage trends across the organization.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Insights</a></strong>
+          <span>Gain complete visibility of browsers in the network, their versions, and add-on details.</span>
         </li>
         <li>
-          <strong>Add-on visibility</strong>
-          <span>Identify extensions and plug-ins that can introduce risk or non-compliance.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Web activity tracking</a></strong>
+          <span>Understand website and web-app usage trends to make informed access decisions.</span>
         </li>
         <li>
-          <strong>Risk detection</strong>
-          <span>Spot weak configurations and risky add-ons early to reduce exposure.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Compliance readiness</a></strong>
+          <span>Identify deviations from approved configurations and tighten controls where needed.</span>
         </li>
       </ul>
     </div>
 
     <div class="card">
-      <h3>Security configurations & compliance</h3>
+      <h3>Secure Configuration & Add-on Control</h3>
+      <p>Harden browser settings and prevent risky extensions or plugins from becoming entry points.</p>
       <ul class="feature-list">
         <li>
-          <strong>Centralized policy enforcement</strong>
-          <span>Deploy hardened configurations to supported browsers from one console.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser configurations</a></strong>
+          <span>Simple policy configuration to secure browsers against security breaches.</span>
         </li>
         <li>
-          <strong>Standard-aligned controls</strong>
-          <span>Align browsers to compliance standards and reduce configuration drift.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Add-on management</a></strong>
+          <span>Control installation and usage of browser extensions and plugins.</span>
         </li>
         <li>
-          <strong>Configuration auditing</strong>
-          <span>Detect non-compliant endpoints and remediate with policy updates.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser restriction</a></strong>
+          <span>Mandate the use of trusted/approved browsers across the network.</span>
         </li>
       </ul>
     </div>
 
     <div class="card">
-      <h3>Extension, plug-in, and site controls</h3>
+      <h3>Access Control, Filtering & Isolation</h3>
+      <p>Reduce exposure by controlling access, restricting downloads, and isolating risky sessions.</p>
       <ul class="feature-list">
         <li>
-          <strong>Extension & plug-in management</strong>
-          <span>Allow, block, or restrict add-ons to prevent shadow IT and risky components.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Web filter</a></strong>
+          <span>Allow or deny access to specific sites and categories based on business needs.</span>
         </li>
         <li>
-          <strong>Browser lockdown</strong>
-          <span>Restrict browsing so users access only business-required, trusted web apps.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Download restriction</a></strong>
+          <span>Restrict file downloads from unauthorized websites to ensure safer browsing.</span>
         </li>
         <li>
-          <strong>Web controls</strong>
-          <span>Apply rules to reduce exposure to phishing, malware, and unsafe browsing behavior.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser isolation</a></strong>
+          <span>Handle untrusted sites away from enterprise sites to reduce malware exposure.</span>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS (same layout/UX as EDLP) -->
-<section class="howitworks">
-  <div class="container">
-    <h2>How it works (visibility first, enforce next)</h2>
-    <p class="lead">
-      A simple rollout flow—understand browser risks first, then enforce policies to lock down what matters.
-    </p>
+<section class="flow-as-flip" id="flow">
+  <div class="features-container">
+    <div class="features-intro">
+      <h2>From visibility to protection</h2>
+      <p>Discover browser posture, harden settings, then enforce access and isolation policies confidently.</p>
+    </div>
 
-    <div class="how-grid">
-      <div class="how-step">
-        <strong>Discover</strong>
-        <span>Identify browsers and add-ons used across endpoints.</span>
-      </div>
+    <div class="flow-wrap">
+      <div class="features-grid" aria-label="Discover to enforce workflow">
+        <a class="feature-card" href="https://www.manageengine.com/browser-security/features.html" aria-label="Discover">
+          <div class="feature-front">
+            <h3>Discover</h3>
+          </div>
+          <div class="feature-back">
+            <p>Inventory browsers, versions, and add-ons across endpoints.</p>
+          </div>
+        </a>
 
-      <div class="how-step">
-        <strong>Assess</strong>
-        <span>Detect risky configurations, unsafe add-ons, and non-compliant endpoints.</span>
-      </div>
+        <a class="feature-card" href="https://www.manageengine.com/browser-security/features.html" aria-label="Harden">
+          <div class="feature-front">
+            <h3>Harden</h3>
+          </div>
+          <div class="feature-back">
+            <p>Apply secure configurations and extension controls via policy.</p>
+          </div>
+        </a>
 
-      <div class="how-step">
-        <strong>Harden</strong>
-        <span>Deploy security configurations across supported browsers from one console.</span>
-      </div>
-
-      <div class="how-step">
-        <strong>Control</strong>
-        <span>Manage extensions, plug-ins, and browsing behavior (lockdown where needed).</span>
-      </div>
-
-      <div class="how-step">
-        <strong>Report</strong>
-        <span>Generate compliance and audit reports for continuous oversight.</span>
+        <a class="feature-card" href="https://www.manageengine.com/browser-security/features.html" aria-label="Enforce">
+          <div class="feature-front">
+            <h3>Enforce</h3>
+          </div>
+          <div class="feature-back">
+            <p>Filter access, restrict downloads, and isolate risky browsing.</p>
+          </div>
+        </a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="carousel" aria-label="Product walkthrough" tabindex="0">
+  <div class="carousel-shell">
+    <button class="carousel-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
+
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <!-- Replace these images/videos with your BSP assets in /images or /videos -->
+        <div class="carousel-item active" data-title="Insights">
+          <div class="carousel-caption">
+            <strong>Get complete browser visibility</strong>
+            <p>Identify browsers, versions, and add-ons across endpoints to spot risk early.</p>
+          </div>
+          <img src="images/bsp-slide-insights.png" alt="Browser insights screenshot">
+        </div>
+
+        <div class="carousel-item" data-title="Add-ons">
+          <div class="carousel-caption">
+            <strong>Control extensions and plugins</strong>
+            <p>Allow, block, or restrict add-ons to reduce attack surface from malicious extensions.</p>
+          </div>
+          <img src="images/bsp-slide-addons.png" alt="Add-on management screenshot">
+        </div>
+
+        <div class="carousel-item" data-title="Isolation">
+          <div class="carousel-caption">
+            <strong>Isolate risky web sessions</strong>
+            <p>Handle untrusted sites away from enterprise browsing to reduce malware exposure.</p>
+          </div>
+          <img src="images/bsp-slide-isolation.png" alt="Browser isolation screenshot">
+        </div>
+
+        <div class="carousel-item" data-title="Web Filter">
+          <div class="carousel-caption">
+            <strong>Filter access and restrict downloads</strong>
+            <p>Control websites, apps, and downloads with policy-based web filtering.</p>
+          </div>
+          <img src="images/bsp-slide-webfilter.png" alt="Web filter screenshot">
+        </div>
+      </div>
+
+      <div class="carousel-nav" aria-label="Choose a slide"></div>
+    </div>
+
+    <button class="carousel-btn next" type="button" aria-label="Next slide">&#10095;</button>
   </div>
 </section>
 
 <section class="outcomes">
   <div class="container">
-    <h2 class="outcomes-heading">When browser security controls are in place</h2>
+    <h2 class="outcomes-heading">When enterprise browsers are secured and controlled</h2>
 
     <div class="outcomes-grid">
       <div class="outcome-card">
-        <h3>Reduced browser-based risk</h3>
+        <h3>Reduced browser attack surface</h3>
         <ul>
-          <li>Prevent risky configurations and unsafe add-ons</li>
-          <li>Lower exposure to phishing and malicious websites</li>
+          <li>Block risky add-ons and enforce secure browser configurations</li>
+          <li>Restrict unsafe downloads and prevent access to malicious sites</li>
         </ul>
       </div>
 
       <div class="outcome-card">
-        <h3>Safer browsing for users</h3>
+        <h3>Stronger data protection</h3>
         <ul>
-          <li>Lock down browsing to trusted business web apps</li>
-          <li>Control downloads and web activity based on policy</li>
+          <li>Control access to web apps and domains by policy</li>
+          <li>Use isolation and restrictions to minimize data leak pathways</li>
         </ul>
       </div>
 
       <div class="outcome-card">
-        <h3>Better compliance readiness</h3>
+        <h3>Better compliance posture</h3>
         <ul>
-          <li>Standard-aligned configuration baselines</li>
-          <li>Audit-ready reports for reviews and assessments</li>
+          <li>Detect deviations from approved configurations</li>
+          <li>Generate audit-ready visibility into browsing controls</li>
         </ul>
       </div>
 
       <div class="outcome-card">
-        <h3>Centralized control for IT</h3>
+        <h3>Improved productivity control</h3>
         <ul>
-          <li>One console to manage multiple browsers</li>
-          <li>Faster remediation with policy deployment</li>
+          <li>Track web usage trends and block non-work sites if required</li>
+          <li>Keep browsing aligned with business policies</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="testimonials">
-  <div class="testimonial-grid">
-    <blockquote class="testimonial">
-      <p>
-        “We finally got visibility into extensions being used across departments.
-        Blocking risky add-ons and enforcing policies became straightforward.”
-      </p>
-      <footer>
-        <strong>IT Security Team</strong>
-        <span>Enterprise environment</span>
-      </footer>
-    </blockquote>
-
-    <blockquote class="testimonial">
-      <p>
-        “Browser lockdown helped us reduce exposure to unsafe sites without disrupting
-        business-critical web apps. Reporting made audits easier.”
-      </p>
-      <footer>
-        <strong>IT Operations</strong>
-        <span>Distributed workforce</span>
-      </footer>
-    </blockquote>
-  </div>
-</section>
-
-<!-- Evaluate / CTA (same visual section as EDLP) -->
-<section class="eval-soft">
-  <div class="eval-wrap">
-    <h2>Evaluate Browser Security Plus</h2>
-    <p class="eval-lead">
-      Start with a quick demo to understand your browser risk posture, then scale with the right plan.
+<section class="pricing-compare" id="pricing">
+  <div class="pricing-wrap">
+    <h2 class="pricing-title">Pick the right plan for browser security</h2>
+    <p class="pricing-sub">
+      Start free to secure up to 25 computers. Upgrade to Professional for the complete feature set and organization-wide rollout.
     </p>
 
-    <div class="eval-layout">
-      <div class="eval-panel">
-        <div class="eval-inner-center left">
-          <h3>Need a walkthrough?</h3>
-          <span class="eval-price">Demo</span>
-          <p class="eval-meta">See policies, add-on control, and lockdown in action.</p>
-          <a target="_blank" rel="noopener noreferrer"
-             href="https://www.manageengine.com/browser-security/request-demo.html"
-             class="eval-cta subtle">Request demo</a>
+    <div class="pricing-grid">
+      <!-- LEFT: 2-up comparison card (Free + Professional) -->
+      <div class="compare-card" aria-label="Plans comparison">
+        <div class="compare-cols">
+          <!-- Free -->
+          <div class="plan-col">
+            <h3>Free Edition</h3>
+
+            <div class="plan-price">
+              <span class="plan-kicker">STARTS AT</span>
+              <div class="plan-amount-row">
+                <span class="amt">$0</span>
+                <span class="unit">up to 25 computers</span>
+              </div>
+            </div>
+
+            <div class="plan-divider" aria-hidden="true"></div>
+
+            <ul class="plan-list">
+              <li>Secure a small environment with core browser controls</li>
+              <li>Get visibility into browsers, versions, and add-ons</li>
+              <li>Validate policies before scaling across the org</li>
+              <li>Ideal for pilots and small teams</li>
+              <li>No credit card required</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <a href="https://www.manageengine.com/browser-security/get-quote.html" class="plan-btn outline">Get started</a>
+            </div>
+          </div>
+
+          <!-- Professional -->
+          <div class="plan-col">
+            <h3>Professional Edition</h3>
+
+            <div class="plan-price">
+              <span class="plan-kicker">STARTS AT</span>
+              <div class="plan-amount-row">
+                <span class="amt">$345</span>
+                <span class="unit">/ year for 50 computers (≈ $6.90 / device / year)</span>
+              </div>
+            </div>
+
+            <div class="plan-divider" aria-hidden="true"></div>
+
+            <ul class="plan-list">
+              <li>Deploy browser security policies at scale</li>
+              <li>Enforce add-on management, web filter & restrictions</li>
+              <li>Use isolation/lockdown controls where required</li>
+              <li>Track web activity and strengthen compliance posture</li>
+              <li>Flexible pricing for your device count</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <a href="https://www.manageengine.com/browser-security/get-quote.html" class="plan-btn solid">
+                Get quote
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="eval-panel primary">
-        <h3>Browser Security Plus</h3>
-        <span class="eval-price">Get pricing <small>for your endpoint count</small></span>
-        <p class="eval-meta">Ask for a quote tailored to your environment and requirements.</p>
+      <!-- RIGHT: Endpoint Central pitch (keep ACP-style, but BSP-relevant) -->
+      <aside class="pitch-card" aria-label="Endpoint Central Cloud pitch">
+        <div class="pitch-top">
+          <p class="pitch-kicker">Want broader endpoint protection?</p>
+          <h3 class="pitch-title">Explore Endpoint Central</h3>
 
-        <a target="_blank" rel="noopener noreferrer"
-           href="https://www.manageengine.com/browser-security/get-quote.html"
-           class="eval-cta strong">Get quote</a>
+          <div class="pitch-divider" aria-hidden="true"></div>
 
-        <small style="display:block; margin-top:8px; color:#64748b; font-size:12px;">
-          Want the full list of features?
-          <a target="_blank" rel="noopener noreferrer"
-             href="https://www.manageengine.com/browser-security/features.html"
-             style="color:var(--blue); text-decoration:underline;">Explore features</a>
-        </small>
-      </div>
+          <div class="pitch-block">
+            <div class="pitch-plus">
+              <span class="plus">+</span>
+              <span class="plus-text">Everything in Browser Security Plus</span>
+            </div>
+
+            <ul class="pitch-list">
+              <li>Patch management</li>
+              <li>Vulnerability management</li>
+              <li>Application control & least privilege</li>
+              <li>Device control</li>
+              <li>Endpoint data security & DLP</li>
+              <li>Remote troubleshooting and more</li>
+              <li>Unified endpoint management</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pitch-bottom">
+          <a class="pitch-btn" href="https://www.manageengine.com/products/desktop-central/cloud/">Explore now</a>
+        </div>
+      </aside>
     </div>
+
+    <p class="pricing-footnote">
+      *Pricing varies by device count and model (subscription/perpetual). For a personalized quote, use
+      <a href="https://www.manageengine.com/browser-security/get-quote.html" target="_blank" rel="noopener">Get Quote</a>.
+    </p>
   </div>
 </section>
 
-<!-- FAQ (same as EDLP, only product name + link updated) -->
 <section class="faq-section">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
     <p class="faq-subtext">Answers to common evaluation questions</p>
 
     <div class="faq-carousel">
-      <button class="faq-nav prev" aria-label="Previous FAQ">‹</button>
+      <button class="faq-nav prev" type="button" aria-label="Previous FAQ">‹</button>
 
       <div class="faq-track">
         <div class="faq-item active">
           <h3>Can I get a demo of ManageEngine Browser Security Plus?</h3>
           <p>
-            Yes, you can request a
-            <a target="_blank" rel="noopener noreferrer"
-               href="https://www.manageengine.com/browser-security/request-demo.html">personalized demo</a>
-            to see how centralized browser security, add-on controls, and policy enforcement work in your environment.
+            Yes, you can request a personalized
+            <a href="https://www.manageengine.com/browser-security/request-demo.html">demo</a>
+            to see how browser policies, add-on control, and isolation can be enforced in your environment.
           </p>
         </div>
 
         <div class="faq-item">
           <h3>Does ManageEngine Browser Security Plus have a free plan?</h3>
           <p>
-            Please check the latest edition and licensing details on the official product site or request a quote for
-            your endpoint count and requirements.
+            Yes. Browser Security Plus offers a Free Edition that supports up to 25 computers.
+            To scale beyond that, choose the Professional Edition and request a
+            <a href="https://www.manageengine.com/browser-security/get-quote.html">price quote</a>.
           </p>
         </div>
 
         <div class="faq-item">
-          <h3>Is support available?</h3>
+          <h3>Is support available during evaluation?</h3>
           <p>
-            Yes, ManageEngine provides technical support, along with documentation and help resources.
-            Visit the <a target="_blank" rel="noopener noreferrer" href="https://www.manageengine.com/browser-security/support.html">Support</a>
-            page for options.
+            Yes. You can access product documentation and resources via
+            <a href="https://www.manageengine.com/browser-security/help.html">Documents</a>,
+            and contact the team through
+            <a href="https://www.manageengine.com/browser-security/support.html">Support</a>.
           </p>
         </div>
 
         <div class="faq-item">
-          <h3>Where can I find product documentation?</h3>
+          <h3>Should I choose Browser Security Plus or Endpoint Central?</h3>
           <p>
-            You can access product documentation and guides here:
-            <a target="_blank" rel="noopener noreferrer"
-               href="https://www.manageengine.com/browser-security/help.html">Browser Security Plus documentation</a>.
+            Browser Security Plus is purpose-built for enterprise browser security and management.
+            If you also need patching, vulnerability management, device control, or unified endpoint management,
+            <a href="https://www.manageengine.com/products/desktop-central/">Endpoint Central</a>
+            would be more suitable.
           </p>
         </div>
       </div>
 
-      <button class="faq-nav next" aria-label="Next FAQ">›</button>
+      <button class="faq-nav next" type="button" aria-label="Next FAQ">›</button>
     </div>
   </div>
 </section>
@@ -936,7 +1643,67 @@
 </footer>
 
 <script>
-  /* ================= FAQ CAROUSEL (same as EDLP) ================= */
+  /* ================= CAROUSEL (NO AUTOSCROLL) ================= */
+  const carouselEl = document.querySelector(".carousel");
+  const slides = carouselEl.querySelectorAll(".carousel-item");
+  const prevBtn = carouselEl.querySelector(".carousel-btn.prev");
+  const nextBtn = carouselEl.querySelector(".carousel-btn.next");
+  const nav = carouselEl.querySelector(".carousel-nav");
+  let currentIndex = 0;
+
+  function stopAllMedia() {
+    slides.forEach((s) => {
+      const v = s.querySelector("video");
+      if (v) { try { v.pause(); } catch (_) {} }
+    });
+  }
+
+  function playActiveMedia() {
+    const active = slides[currentIndex];
+    const v = active.querySelector("video");
+    if (v) { try { v.play(); } catch (_) {} }
+  }
+
+  function setActive(index) {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((s) => s.classList.remove("active"));
+    slides[currentIndex].classList.add("active");
+
+    const dots = nav.querySelectorAll(".carousel-dot");
+    dots.forEach((d) => d.classList.remove("active"));
+    if (dots[currentIndex]) dots[currentIndex].classList.add("active");
+
+    stopAllMedia();
+    playActiveMedia();
+  }
+
+  function buildNav() {
+    nav.innerHTML = "";
+    slides.forEach((slide, i) => {
+      const label = slide.getAttribute("data-title") || `Slide ${i + 1}`;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "carousel-dot";
+      btn.setAttribute("aria-label", `Go to ${label}`);
+      btn.innerHTML = `<span class="pill" aria-hidden="true"></span>${label}`;
+      btn.addEventListener("click", () => setActive(i));
+      nav.appendChild(btn);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => setActive(currentIndex - 1));
+  nextBtn.addEventListener("click", () => setActive(currentIndex + 1));
+
+  carouselEl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") setActive(currentIndex - 1);
+    if (e.key === "ArrowRight") setActive(currentIndex + 1);
+  });
+
+  buildNav();
+  setActive(0);
+
+  /* ================= FAQ CAROUSEL ================= */
   const faqItems = document.querySelectorAll(".faq-item");
   const faqPrev = document.querySelector(".faq-nav.prev");
   const faqNext = document.querySelector(".faq-nav.next");
