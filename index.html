@@ -8,17 +8,17 @@
   <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* BSP palette: Blue + Orange */
-      --blue:#0a66c2;
+      /* BSP palette (blue + orange) */
+      --blue:#1e4f91;
       --blue-2:#2563eb;
-      --blue-deep:#0f2a44;
 
       --orange:#f59e0b;
       --orange-2:#fb923c;
+      --orange-deep:#ea580c;
 
       --dark:#0f172a;
       --muted:#6b7280;
@@ -27,7 +27,9 @@
       --bg-light:#f8fafc;
 
       --radius:16px;
+      --shadow-sm:0 10px 24px rgba(15,23,42,0.08);
       --shadow-md:0 20px 40px rgba(15,23,42,0.10);
+      --shadow-lg:0 32px 72px rgba(15,23,42,0.10);
 
       --container:1280px;
       --pad-x:24px;
@@ -39,7 +41,10 @@
     body{
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--dark);
-      background:#fff;
+      background:
+        radial-gradient(1200px 520px at 20% 0%, rgba(245,158,11,0.09), transparent 62%),
+        radial-gradient(1100px 520px at 85% 10%, rgba(37,99,235,0.08), transparent 60%),
+        #fff;
       line-height:1.6;
     }
     img,video{ max-width:100%; height:auto; display:block; }
@@ -54,7 +59,8 @@
     /* ---------- HEADER ---------- */
     header{
       border-bottom:1px solid var(--border);
-      background:#fff;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
     }
     .header-inner{
       max-width:var(--container);
@@ -70,10 +76,13 @@
       display:flex;
       align-items:center;
       gap:12px;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-0.01em;
       white-space:nowrap;
     }
-    /* Reduced logo size (as requested) */
-    .logo img{ height:24px; width:auto; }
+    /* BSP logo smaller like ACP */
+    .logo img{ height:34px; width:auto; }
 
     nav{
       display:flex;
@@ -91,7 +100,7 @@
       transition:background .18s ease, color .18s ease;
     }
     nav a:hover{
-      background:#f1f5f9;
+      background:rgba(245,158,11,0.10);
       color:#0b1220;
     }
 
@@ -108,7 +117,7 @@
         gap:8px;
       }
       nav a{
-        background:#f8fafc;
+        background:#fff;
         border:1px solid rgba(15,23,42,0.06);
       }
     }
@@ -117,12 +126,14 @@
     .hero{
       position:relative;
       overflow:hidden;
-      padding:64px 0 66px;
+      padding:64px 0 52px;
       text-align:center;
+
+      /* more orange hue + BSP feel */
       background:
-        radial-gradient(900px 420px at 20% 10%, rgba(251,146,60,0.28), transparent 60%),
-        radial-gradient(900px 420px at 80% 10%, rgba(10,102,194,0.22), transparent 62%),
-        linear-gradient(135deg, var(--blue-deep), #1e4f91, var(--blue-2));
+        radial-gradient(1200px 520px at 18% 10%, rgba(245,158,11,0.30), transparent 62%),
+        radial-gradient(900px 420px at 82% 18%, rgba(251,146,60,0.18), transparent 60%),
+        linear-gradient(135deg,#0f2a44,#1e4f91,#2563eb);
     }
     .hero::before{
       content:"";
@@ -142,41 +153,29 @@
       right:-70px;
       width:440px;
       height:440px;
-      background:radial-gradient(circle,rgba(245,158,11,0.18),transparent 70%);
+      background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%);
       border-radius:50%;
       pointer-events:none;
     }
     .hero > .container{ position:relative; z-index:1; }
 
     .hero h1{
-      font-size:46px;
+      font-size:44px;
       line-height:1.12;
       max-width:1040px;
-      margin:0 auto 14px;
+      margin:0 auto 18px;
       letter-spacing:-0.035em;
-    }
-    .hero-title-main{ color:#fff; font-weight:800; }
-    .hero-title-sub{
-      display:block;
-      margin-top:6px;
-      color:#dbeafe;
-      font-weight:600;
-    }
-    .hero p{
-      max-width:860px;
-      margin:0 auto 26px;
-      color:#eaf2ff;
-      font-size:16px;
+      color:#fff;
+      font-weight:900;
     }
 
     .hero-buttons{
       display:flex;
       justify-content:center;
-      gap:24px;
+      gap:22px;
       flex-wrap:wrap;
-      margin-top:6px;
+      margin-top:10px;
     }
-
     .hero-cta{
       display:flex;
       flex-direction:column;
@@ -186,36 +185,34 @@
 
     .btn{
       min-width:220px;
-      padding:16px 34px;
-      font-size:17px;
+      padding:14px 28px;
+      font-size:16px;
       font-weight:900;
-      border-radius:16px;
+      border-radius:14px;
       text-decoration:none;
       transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
       display:inline-block;
       text-align:center;
-      border:2px solid rgba(255,255,255,0.10);
+      border:2px solid transparent;
       user-select:none;
     }
+
+    /* Orange buttons for BSP */
     .btn-orange{
-      background:linear-gradient(135deg, var(--orange), var(--orange-2));
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 55%, var(--orange-deep) 100%);
       color:#0b1220;
-      box-shadow:0 14px 30px rgba(245,158,11,0.30);
+      box-shadow:0 14px 34px rgba(245,158,11,0.30);
+    }
+
+    /* Blink / pulse on hover */
+    @keyframes bspBlink{
+      0%{ filter:brightness(1); transform:translateY(0); }
+      50%{ filter:brightness(1.12); transform:translateY(-1px); }
+      100%{ filter:brightness(1); transform:translateY(0); }
     }
     .btn-orange:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.02);
-      animation:blinkGlow .9s ease-in-out infinite;
-    }
-    @keyframes blinkGlow{
-      0%,100%{
-        box-shadow:0 14px 30px rgba(245,158,11,0.30),
-                   0 0 0 rgba(255,255,255,0.0);
-      }
-      50%{
-        box-shadow:0 18px 44px rgba(245,158,11,0.40),
-                   0 0 22px rgba(255,255,255,0.25);
-      }
+      animation:bspBlink 0.55s ease-in-out 1;
+      box-shadow:0 18px 48px rgba(245,158,11,0.36);
     }
     .btn:focus-visible{
       outline:3px solid rgba(255,255,255,0.35);
@@ -223,33 +220,91 @@
     }
 
     .cta-note{
-      font-size:14px;
-      font-weight:700;
+      font-size:13px;
+      font-weight:800;
       color:#fff;
       opacity:0.95;
     }
 
-    .trial-line{
-      display:inline-block;
+    .hero small{
+      display:block;
       margin-top:18px;
-      padding:12px 18px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.10);
-      border:1px solid rgba(255,255,255,0.16);
       color:#eaf2ff;
       font-size:14px;
-      font-weight:700;
-      backdrop-filter: blur(10px);
+      font-weight:650;
     }
 
     @media (max-width: 820px){
-      .hero{ padding:52px 0 58px; }
-      .hero h1{ font-size:38px; }
-      .hero p{ margin-bottom:22px; }
+      .hero{ padding:52px 0 46px; }
+      .hero h1{ font-size:36px; }
     }
     @media (max-width: 480px){
-      .hero h1{ font-size:32px; }
-      .btn{ min-width: 260px; }
+      .hero h1{ font-size:30px; }
+      .btn{ min-width: 240px; }
+    }
+
+    /* ---------- BROWSERS SUPPORTED (right after hero) ---------- */
+    .browsers{
+      padding: 46px 0 10px;
+      background:
+        radial-gradient(1100px 420px at 20% 0%, rgba(245,158,11,0.10), transparent 62%),
+        linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border-bottom:1px solid rgba(15,23,42,0.06);
+      text-align:center;
+    }
+    .browsers h2{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+      color:#0b1220;
+      margin:0 auto 26px;
+      padding:0 var(--pad-x);
+    }
+
+    .browser-grid{
+      margin: 0 auto 26px;
+      max-width: 1020px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px 26px;
+      align-items: center;
+      padding: 0 var(--pad-x);
+    }
+    .browser-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(15,23,42,0.05);
+      box-shadow: 0 12px 26px rgba(15,23,42,0.06);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .browser-item:hover{
+      transform: translateY(-2px);
+      border-color: rgba(245,158,11,0.30);
+      box-shadow: 0 18px 40px rgba(245,158,11,0.14);
+    }
+    .browser-item img{
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(15,23,42,0.10));
+    }
+    .browser-item span{
+      font-size: 14px;
+      font-weight: 750;
+      color: #0f172a;
+      text-align:center;
+    }
+    @media (max-width: 1024px){
+      .browser-grid{ grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 720px){
+      .browser-grid{ grid-template-columns: repeat(2, 1fr); }
+      .browser-item img{ width: 54px; height: 54px; }
     }
 
     /* ---------- TRUST + CREDIBILITY ---------- */
@@ -258,25 +313,21 @@
       padding:62px 0;
       background:linear-gradient(180deg,#ffffff 0%,#f9fbff 55%,#ffffff 100%);
       border-bottom:1px solid var(--border);
-      overflow:hidden;
     }
 
-    /* ACP worldmap (with fallback SVG) */
+    /* worldmap behind is mandatory – pulled from ACP GitHub page */
     .trust-proof::before{
       content:"";
       position:absolute;
       inset:0;
-      background-image:
-        url("https://snehaa-p.github.io/acp-landing-page/images/worldmap.png"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='800' viewBox='0 0 1600 800'%3E%3Crect width='1600' height='800' fill='white'/%3E%3Cg fill='%2394a3b8' fill-opacity='0.28'%3E%3Cpath d='M215 360c40-40 85-55 125-35 18 9 30 25 26 44-4 18-23 33-44 42-35 15-90 6-107-19-12-17-7-22 0-32z'/%3E%3Cpath d='M365 300c30-18 78-15 102 10 20 20 6 44-22 60-33 18-76 18-99-5-19-19-13-51 19-65z'/%3E%3Cpath d='M560 260c58-22 130-8 165 35 28 35-12 70-62 84-72 20-154 0-173-42-16-34 16-61 70-77z'/%3E%3Cpath d='M840 275c54-32 145-30 205 10 46 30 36 70-18 92-70 29-176 20-215-14-28-25-10-70 28-88z'/%3E%3Cpath d='M1110 310c40-25 120-22 158 8 30 24 16 55-22 70-52 20-132 12-158-10-22-18-10-52 22-68z'/%3E%3Cpath d='M1310 340c38-18 90-10 120 15 24 20 10 45-20 55-42 14-96 7-118-13-19-18-11-44 18-57z'/%3E%3Cpath d='M980 470c55-28 130-18 160 20 22 28-6 58-52 72-60 18-140 6-162-25-16-22 0-52 54-67z'/%3E%3Cpath d='M720 490c40-18 95-12 120 10 20 18 10 40-16 50-38 14-92 8-114-12-18-16-10-38 10-48z'/%3E%3Cpath d='M420 500c44-18 98-10 120 18 18 22-4 44-30 54-44 16-106 6-124-18-14-18-6-40 34-54z'/%3E%3Cpath d='M210 520c26-10 62-6 76 10 12 14 2 30-14 36-26 10-62 6-74-10-10-12-4-28 12-36z'/%3E%3C/g%3E%3C/svg%3E");
+      background-image:url("https://snehaa-p.github.io/acp-landing-page/images/worldmap.png");
       background-repeat:no-repeat;
       background-size:contain;
       background-position:center center;
       opacity:0.22;
-      filter:grayscale(100%) contrast(92%);
+      filter:grayscale(100%) contrast(90%);
       pointer-events:none;
     }
-
     .trust-proof::after{
       content:"";
       position:absolute;
@@ -297,38 +348,38 @@
       color:var(--muted);
     }
 
-    /* Trusted image blending */
-    .trusted-img{
-      width:100%;
-      max-width: 1180px;
-      margin: 10px auto 0;
-      display:block;
-      border:0;
-      outline:0;
-      border-radius:0;
-      background:transparent;
-      box-shadow:none;
-      mix-blend-mode:multiply;
-      opacity:0.98;
-      filter:saturate(1.02) contrast(1.02);
+    /* Trusted industry image – blend with bg (no tile outline look) */
+    .trusted-image-wrap{
+      max-width: 1100px;
+      margin: 0 auto 32px;
+      padding: 0 var(--pad-x);
     }
-
-    .trust-spacer{ height:40px; }
+    .trusted-image{
+      width:100%;
+      border-radius: 18px;
+      background: transparent;
+      /* remove “stuck rectangle” feel */
+      box-shadow: 0 26px 66px rgba(15,23,42,0.10);
+      border: 0;
+      outline: 0;
+      mix-blend-mode: multiply;
+      filter: saturate(1.02) contrast(1.02);
+    }
 
     .trust-metrics{
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:12px;
       text-align:center;
+      margin-top: 6px;
     }
     .metric { padding: 16px 12px; }
-
     .metric strong{
       display:inline-block;
-      font-weight:900;
+      font-weight:1000;
       font-size:clamp(34px, 3.2vw, 44px);
       letter-spacing:-0.05em;
-      background:linear-gradient(180deg, #0b1220, var(--blue-2));
+      background:linear-gradient(180deg, #0b1220, #2563eb);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       transition:transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
@@ -339,82 +390,43 @@
       margin-top:10px;
       font-size:14px;
       color:#64748b;
+      font-weight:650;
     }
     .metric:hover strong{
       transform:scale(1.18);
-      text-shadow:0 18px 36px rgba(245,158,11,0.22);
+      text-shadow:0 18px 36px rgba(245,158,11,0.18);
     }
-
     @media (max-width: 1024px){
       .trust-metrics{ grid-template-columns:repeat(2,1fr); }
     }
     @media (max-width: 640px){
       .trust-metrics{ grid-template-columns:1fr; }
       .trust-proof::before{ display:none; }
-      .trusted-img{ mix-blend-mode:normal; opacity:1; }
     }
 
     /* ---------- FEATURES ---------- */
     .features{
-      padding:var(--section-y) 0 54px;
-      background:var(--bg-light);
+      padding:var(--section-y) 0;
+      background:
+        radial-gradient(1100px 520px at 18% 20%, rgba(245,158,11,0.10), transparent 62%),
+        var(--bg-light);
       text-align:center;
     }
-
-    /* Reduced heading size (as requested) */
     .feature-heading{
-      font-size:26px;
+      font-size:32px;
       line-height:1.35;
-      max-width:980px;
-      margin:0 auto 22px;
+      max-width:1040px;
+      margin:0 auto 44px;
       font-weight:900;
       letter-spacing:-0.02em;
       color:#0b1220;
       padding:0 var(--pad-x);
     }
-
-    /* Browsers supported block */
-    .browsers-block{
-      max-width: 1100px;
-      margin: 0 auto 36px;
-      padding: 0 var(--pad-x);
-    }
-
-    .browser-grid{
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px 10px;
-      align-items: start;
-      justify-items: center;
-    }
-
-    .browser-item{
-      text-align:center;
-      min-width: 120px;
-    }
-
-    /* Smaller + consistent icon sizing */
-    .browser-item img{
-      width:48px;
-      height:48px;
-      object-fit:contain;
-      margin:0 auto 10px;
-      filter: drop-shadow(0 10px 18px rgba(15,23,42,0.10));
-    }
-
-    .browser-item span{
-      display:block;
-      font-size:15px;
-      color:#0f172a;
-      font-weight:600;
-    }
-
-    @media (max-width: 980px){
-      .browser-grid{ grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 520px){
-      .browser-grid{ grid-template-columns: repeat(2, 1fr); }
-      .browser-item span{ font-size:14px; }
+    .feature-heading .highlight{
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      font-weight:1000;
     }
 
     .feature-grid{
@@ -435,15 +447,15 @@
       border:2px solid transparent;
     }
     .card:hover{
-      background-color:#f6fbff;
-      border-color:rgba(245,158,11,0.75);
+      background-color:#fff7ed;
+      border-color:rgba(245,158,11,0.55);
       box-shadow:0 28px 60px rgba(245,158,11,0.18);
       transform:translateY(-2px);
     }
     .card h3{
       margin-bottom:12px;
       font-size:22px;
-      font-weight:900;
+      font-weight:1000;
       letter-spacing:-0.01em;
     }
     .card p{
@@ -451,6 +463,15 @@
       color:var(--muted);
       font-size:16px;
     }
+
+    /* sentence below both cards (your request) */
+    .card-sub{
+      margin: -4px 0 14px;
+      font-size: 14px;
+      font-weight: 750;
+      color: var(--muted-2);
+    }
+
     .feature-list{ list-style:none; }
     .feature-list li{
       margin-bottom:16px;
@@ -462,8 +483,8 @@
       position:absolute;
       left:0;
       top:0;
-      color:var(--blue-2);
-      font-weight:900;
+      color:var(--orange-deep);
+      font-weight:1000;
     }
     .feature-list strong{
       display:block;
@@ -480,17 +501,17 @@
       color:var(--muted);
       transition:max-height .35s ease, opacity .25s ease;
     }
-    .card:hover .feature-list span{ max-height:140px; opacity:1; }
+    .card:hover .feature-list span{ max-height:120px; opacity:1; }
     .feature-list a{ text-decoration:none; }
-    .feature-list a:hover{ color:var(--blue-2); text-decoration:underline; }
+    .feature-list a:hover{ color:var(--orange-deep); text-decoration:underline; }
 
-    /* ---------- VIDEO CAROUSEL (NO ARROWS) ---------- */
+    /* ---------- CAROUSEL (NO ARROWS) ---------- */
     .carousel{
       background:
-        radial-gradient(1200px 500px at 20% 10%, rgba(245,158,11,0.12), transparent 60%),
-        radial-gradient(900px 420px at 80% 20%, rgba(10,102,194,0.12), transparent 62%),
-        linear-gradient(135deg, #d0e3ed 0%, #eaf2ff 50%, #f8fafc 100%);
-      padding: 56px 0 28px;
+        radial-gradient(1200px 500px at 20% 10%, rgba(245,158,11,0.14), transparent 60%),
+        radial-gradient(900px 420px at 80% 20%, rgba(37,99,235,0.10), transparent 62%),
+        linear-gradient(135deg, #fff7ed 0%, #eaf2ff 55%, #ffffff 100%);
+      padding:var(--section-y) 0 34px;
     }
     .carousel-shell{
       max-width:var(--container);
@@ -502,13 +523,17 @@
     .carousel-track{ width:100%; position:relative; min-height:520px; }
 
     .carousel-item{ display:none; flex-direction:column; align-items:center; text-align:center; }
-    .carousel-item.active{ display:flex; animation:fadeUp 260ms ease both; }
+    .carousel-item.active{ display:flex; animation:fadeUp 280ms ease both; }
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(8px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
 
     .carousel-caption{ max-width:920px; margin-bottom:16px; padding:0 12px; }
     .carousel-caption strong{
-      font-size:32px;
+      font-size:30px;
       font-weight:1000;
-      letter-spacing:-0.035em;
+      letter-spacing:-0.03em;
       color:#0b1220;
     }
     .carousel-caption p{ margin-top:10px; font-size:16px; color:#475569; }
@@ -521,7 +546,7 @@
       background:transparent;
       filter:drop-shadow(0 18px 34px rgba(15,23,42,0.18));
       border-radius:14px;
-      margin:0 auto 18px;
+      margin:0 auto 22px;
     }
 
     .carousel-nav{
@@ -529,29 +554,30 @@
       justify-content:center;
       flex-wrap:wrap;
       gap:12px;
-      padding: 6px 10px 0;
+      margin-top:0;
+      padding:0 10px;
     }
     .carousel-dot{
       padding:10px 18px;
       border-radius:999px;
-      background:rgba(255,255,255,0.78);
+      background:rgba(255,255,255,0.80);
       backdrop-filter:blur(10px);
       border:1px solid rgba(148,163,184,0.55);
       color:#0f172a;
       font-size:13px;
-      font-weight:800;
+      font-weight:850;
       letter-spacing:-0.01em;
       transition:transform .16s ease, background .16s ease, border-color .16s ease;
       cursor:pointer;
     }
     .carousel-dot:hover{
       transform:translateY(-1px);
-      background:rgba(255,255,255,0.92);
+      background:rgba(255,255,255,0.94);
       border-color:rgba(245,158,11,0.55);
     }
     .carousel-dot.active{
-      background:linear-gradient(135deg, var(--orange), var(--orange-2));
-      border-color:rgba(245,158,11,0.9);
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      border-color: transparent;
       color:#0b1220;
       box-shadow:0 14px 34px rgba(245,158,11,0.24);
     }
@@ -564,76 +590,75 @@
       margin-right:8px;
       vertical-align:middle;
     }
-    .carousel-dot.active .pill{ background:rgba(15,23,42,0.85); }
+    .carousel-dot.active .pill{ background:rgba(15,23,42,0.95); }
 
     .carousel-dot:focus-visible{
-      outline:3px solid rgba(245,158,11,0.35);
+      outline:3px solid rgba(245,158,11,0.28);
       outline-offset:3px;
     }
 
     @media (max-width: 900px){
       .carousel-item video{ height:320px; }
-      .carousel-track{ min-height:400px; }
-      .carousel-caption strong{ font-size:28px; }
+      .carousel-track{ min-height:410px; }
+      .carousel-caption strong{ font-size:26px; }
     }
 
-    /* ---------- DEMO STRIP BELOW CAROUSEL ---------- */
+    /* Demo CTA strip under carousel */
     .demo-strip{
-      background:#ffffff;
-      padding: 26px 0 34px;
-      border-bottom: 1px solid rgba(15,23,42,0.06);
-    }
-    .demo-inner{
-      max-width: var(--container);
-      margin: 0 auto;
+      margin: 28px auto 0;
+      max-width: 1240px;
       padding: 0 var(--pad-x);
+    }
+    .demo-strip-inner{
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(15,23,42,0.08);
+      border-radius: 26px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.10);
+      padding: 18px 18px 18px 22px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.96);
-      box-shadow: 0 18px 44px rgba(15,23,42,0.06);
-      border: 1px solid rgba(15,23,42,0.06);
-      padding: 22px 22px;
+      gap:14px;
     }
-    .demo-inner h3{
+    .demo-strip-inner strong{
       font-size: 22px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
+      font-weight: 1000;
+      letter-spacing:-0.02em;
       color:#0b1220;
     }
-    .demo-btn{
+    .demo-strip-inner a{
+      text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 14px 20px;
+      padding: 14px 22px;
       border-radius: 999px;
-      border: 2px solid rgba(15,23,42,0.12);
-      background:#fff;
-      text-decoration:none;
-      font-weight: 900;
-      color:#0b1220;
-      white-space:nowrap;
+      font-weight: 1000;
+      background: #fff;
+      border: 2px solid rgba(15,23,42,0.14);
+      box-shadow: 0 14px 34px rgba(15,23,42,0.10);
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      white-space:nowrap;
     }
-    .demo-btn:hover{
+    .demo-strip-inner a:hover{
       transform: translateY(-1px);
-      box-shadow: 0 16px 36px rgba(15,23,42,0.10);
       border-color: rgba(245,158,11,0.55);
+      box-shadow: 0 18px 44px rgba(245,158,11,0.16);
     }
     @media (max-width: 820px){
-      .demo-inner{ flex-direction:column; align-items:flex-start; }
-      .demo-btn{ width:100%; justify-content:center; }
+      .demo-strip-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .demo-strip-inner a{ width:100%; }
     }
 
-    /* ---------- PRICING ---------- */
+    /* ---------- PRICING (NO EC PITCH) ---------- */
     .pricing-compare{
       padding: calc(var(--section-y) - 12px) 0;
       background:
-        radial-gradient(900px 380px at 20% 0%, rgba(245,158,11,0.10), transparent 60%),
-        radial-gradient(900px 380px at 80% 10%, rgba(37,99,235,0.10), transparent 62%),
-        linear-gradient(180deg,#f7faff 0%, #ffffff 65%);
+        radial-gradient(900px 380px at 25% 0%, rgba(245,158,11,0.14), transparent 60%),
+        linear-gradient(180deg,#fffaf2 0%, #ffffff 65%);
     }
 
     .pricing-wrap{
@@ -644,38 +669,46 @@
     }
 
     .pricing-title{
-      font-size: 36px;
-      font-weight: 900;
+      font-size: 34px;
+      font-weight: 1000;
       letter-spacing: -0.02em;
       color: #0b1220;
       margin-bottom: 10px;
     }
 
     .pricing-sub{
-      max-width: 920px;
+      max-width: 860px;
       margin: 0 auto 34px;
       font-size: 16px;
       color: var(--muted-2);
       line-height: 1.7;
     }
 
+    .pricing-grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: stretch;
+      justify-content:center;
+    }
+
     .compare-card{
-      background: rgba(255,255,255,0.94);
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.95);
       border: 1px solid rgba(15,23,42,0.08);
       border-radius: 22px;
       box-shadow: 0 18px 48px rgba(15,23,42,0.10);
       overflow: hidden;
       position: relative;
-      max-width: 980px;
-      margin: 0 auto;
     }
     .compare-card::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(900px 360px at 18% 10%, rgba(245,158,11,0.12), transparent 62%),
-        radial-gradient(900px 360px at 78% 0%, rgba(37,99,235,0.10), transparent 65%);
+        radial-gradient(900px 360px at 18% 10%, rgba(245,158,11,0.12), transparent 60%),
+        radial-gradient(900px 360px at 72% 12%, rgba(37,99,235,0.08), transparent 65%);
       pointer-events:none;
     }
 
@@ -687,13 +720,13 @@
 
     .plan-col{
       position: relative;
-      padding: 26px 24px 22px;
+      padding: 24px 24px 22px;
       text-align: left;
     }
 
     .plan-col + .plan-col{
       border-left: 1px solid rgba(15,23,42,0.08);
-      background: rgba(245,158,11,0.035);
+      background: rgba(245,158,11,0.05);
     }
 
     .plan-col h3{
@@ -719,12 +752,26 @@
       display: flex;
       align-items: baseline;
       gap: 10px;
-      flex-wrap: wrap;
+    }
+
+    /* star above price */
+    .amt-wrap{
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      line-height: 1;
+    }
+    .amt-star{
+      font-size: 18px;
+      font-weight: 1000;
+      color: #0b1220;
+      margin-bottom: 4px;
+      opacity: 0.9;
     }
 
     .plan-amount-row .amt{
       font-size: 36px;
-      font-weight: 1000;
+      font-weight: 1100;
       letter-spacing: -0.03em;
       color: #0b1220;
     }
@@ -732,12 +779,12 @@
     .plan-amount-row .unit{
       font-size: 16px;
       color: var(--muted-2);
-      font-weight: 700;
+      font-weight: 750;
     }
 
     .plan-divider{
       height: 1px;
-      background: rgba(245,158,11,0.28);
+      background: rgba(245,158,11,0.30);
       margin: 14px 0 18px;
     }
 
@@ -748,7 +795,6 @@
       display: grid;
       gap: 12px;
     }
-
     .plan-list li{
       position: relative;
       padding-left: 28px;
@@ -756,14 +802,13 @@
       font-size: 14px;
       line-height: 1.55;
     }
-
     .plan-list li::before{
       content:"✓";
       position:absolute;
       left: 0;
       top: 0;
-      font-weight: 900;
-      color: var(--blue-2);
+      font-weight: 1000;
+      color: var(--orange-deep);
     }
 
     .plan-cta-row{
@@ -786,8 +831,8 @@
 
     .plan-btn.outline{
       background: #ffffff;
-      color: var(--blue-2);
-      border: 1.5px solid rgba(37,99,235,0.55);
+      color: #0b1220;
+      border: 1.5px solid rgba(15,23,42,0.14);
       box-shadow: 0 10px 26px rgba(15,23,42,0.08);
     }
 
@@ -795,12 +840,12 @@
       color: #0b1220;
       border: 1px solid transparent;
       background: linear-gradient(135deg, var(--orange), var(--orange-2));
-      box-shadow: 0 18px 44px rgba(245,158,11,0.28);
+      box-shadow: 0 18px 44px rgba(245,158,11,0.25);
     }
 
     .plan-btn:hover{
       transform: translateY(-2px);
-      box-shadow: 0 22px 56px rgba(15,23,42,0.16);
+      box-shadow: 0 22px 56px rgba(245,158,11,0.26);
       filter: brightness(1.02);
     }
 
@@ -808,13 +853,11 @@
       margin-top: 18px;
       font-size: 13px;
       color: var(--muted-2);
-      line-height: 1.6;
     }
-
     .pricing-footnote a{
       color: var(--blue-2);
-      text-decoration: underline;
       font-weight: 800;
+      text-decoration: underline;
     }
 
     @media (max-width: 820px){
@@ -824,17 +867,24 @@
         border-top: 1px solid rgba(15,23,42,0.08);
       }
     }
+    @media (max-width: 640px){
+      .pricing-title{ font-size: 28px; }
+      .plan-col{ padding: 26px 22px; }
+      .plan-btn{ width: 100%; min-width: 0; }
+    }
 
     /* ---------- FAQ SECTION ---------- */
     .faq-section{
       padding:var(--section-y) 0;
-      background:#f8fafc;
+      background:
+        radial-gradient(1000px 520px at 18% 10%, rgba(245,158,11,0.10), transparent 62%),
+        #f8fafc;
       text-align:center;
       border-top:1px solid rgba(15,23,42,0.06);
     }
     .faq-section h2{
       font-size:36px;
-      font-weight:1000;
+      font-weight:1100;
       margin-bottom:8px;
       padding:0 var(--pad-x);
     }
@@ -871,9 +921,9 @@
       width:100%;
     }
     .faq-item.active{ display:block; }
-    .faq-item h3{ font-size:18px; font-weight:900; margin-bottom:10px; }
+    .faq-item h3{ font-size:18px; font-weight:1000; margin-bottom:10px; }
     .faq-item p{ font-size:15px; line-height:1.7; color:#475569; }
-    .faq-item a{ color:var(--blue-2); text-decoration:underline; }
+    .faq-item a{ color:var(--blue-2); text-decoration:underline; font-weight:800; }
 
     .faq-nav{
       border:none;
@@ -889,18 +939,13 @@
       flex:0 0 auto;
       transform: translateY(-2px);
     }
-    .faq-nav:hover{ color:var(--orange); transform:scale(1.08); }
-    .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.35); outline-offset:3px; }
+    .faq-nav:hover{ color:var(--orange-deep); transform:scale(1.08); }
+    .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.28); outline-offset:3px; }
 
     @media (max-width: 640px){
       .faq-carousel{ flex-direction:column; }
       .faq-nav{ width:100%; border-radius:14px; height:44px; }
       .faq-section h2{ font-size:28px; }
-    }
-
-    @keyframes fadeUp{
-      from{ opacity:0; transform:translateY(8px); }
-      to{ opacity:1; transform:translateY(0); }
     }
 
     /* ---------- FOOTER ---------- */
@@ -920,7 +965,8 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <img src="Browser%20Security%20Plus_Black%20(2).png" alt="Browser Security Plus logo">
+      <!-- UPDATE THIS filename if your repo name differs -->
+      <img src="Browser Security Plus_Black (2).png" alt="Browser Security Plus logo">
     </div>
 
     <nav aria-label="Primary">
@@ -933,41 +979,81 @@
   </div>
 </header>
 
-<section class="hero" id="overview">
+<section class="hero">
   <div class="container">
-    <h1>
-      <span class="hero-title-main">Secure and manage enterprise browsers</span>
-      <span class="hero-title-sub">with the right controls.</span>
-    </h1>
+    <h1>Secure and manage enterprise browsers<br/>with the right controls.</h1>
 
-    <p>
-      Get complete visibility into browsers and add-ons, harden configurations, control extensions,
-      restrict unsafe downloads, apply web access policies, and isolate risky web sessions—centrally.
-    </p>
-
-    <div class="hero-buttons" aria-label="Primary actions">
+    <div class="hero-buttons">
       <div class="hero-cta">
-        <a
-          href="https://www.manageengine.com/browser-security/download.html"
-          class="btn btn-orange"
-          target="_blank"
-          rel="noopener"
-        >Download</a>
+        <a href="https://www.manageengine.com/browser-security/download.html" target="_blank" rel="noopener" class="btn btn-orange">Download</a>
         <span class="cta-note">On-premise</span>
       </div>
 
       <div class="hero-cta">
-        <a
-          href="https://www.manageengine.com/products/desktop-central/cloud/"
-          class="btn btn-orange"
-          target="_blank"
-          rel="noopener"
-        >Sign up</a>
-        <span class="cta-note">Via Endpoint Central</span>
+        <a href="https://www.manageengine.com/products/desktop-central/cloud/" target="_blank" rel="noopener" class="btn btn-orange">Sign up</a>
+        <span class="cta-note">Cloud via Endpoint Central</span>
       </div>
     </div>
 
-    <span class="trial-line">30-day free trial · No credit card required · Free up to 25 endpoints forever</span>
+    <small>Free edition available (up to 25 computers) · No credit card required · Professional edition for full features</small>
+  </div>
+</section>
+
+<section class="browsers" aria-label="Browsers supported">
+  <div class="container">
+    <h2>Manage multiple browsers seamlessly from a single interface.</h2>
+
+    <div class="browser-grid">
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Google%20Chrome%20icon%20(February%202022).svg" alt="Google Chrome">
+        <span>Google Chrome</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft%20Edge%20logo%20(2019).svg" alt="Microsoft Edge">
+        <span>Microsoft Edge</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Firefox%20logo%2C%202019.svg" alt="Mozilla Firefox">
+        <span>Mozilla Firefox</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://www.ulaa.com/assets/images/home/ulaa_logo.svg" alt="Ulaa">
+        <span>Ulaa</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Brave%20lion%20icon.svg" alt="Brave">
+        <span>Brave</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Yandex%20Browser%20logo.svg" alt="Yandex Browser">
+        <span>Yandex</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vivaldi%20web%20browser%20logo.svg" alt="Vivaldi">
+        <span>Vivaldi</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coc%20Coc%20logo%202023.svg" alt="Cốc Cốc">
+        <span>Cốc Cốc</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://logo.wine/a/logo/Whale_(web_browser)/Whale_(web_browser)-Logo.wine.svg" alt="Naver Whale">
+        <span>Naver Whale</span>
+      </div>
+
+      <div class="browser-item">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Internet%20Explorer%2010%2B11%20logo.svg" alt="Internet Explorer">
+        <span>Internet Explorer</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -977,10 +1063,11 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <!-- Your repo uploaded trusted industry image -->
-    <img class="trusted-img" src="Screenshot%202026-02-05%20144531.png" alt="Trusted industry logos">
-
-    <div class="trust-spacer" aria-hidden="true"></div>
+    <!-- Your repo trusted-industry screenshot -->
+    <div class="trusted-image-wrap" aria-label="Trusted by industry">
+      <!-- UPDATE filename if your repo screenshot differs -->
+      <img class="trusted-image" src="Screenshot 2026-02-05 144531.png" alt="Trusted by industry logos">
+    </div>
 
     <div class="trust-metrics" aria-label="Key product metrics">
       <div class="metric">
@@ -1003,243 +1090,177 @@
   </div>
 </section>
 
-<section class="features" id="features">
-  <!-- UPDATED: remove "Manage and Secure..." and use the desired heading as the primary heading -->
-  <h2 class="feature-heading">Manage multiple browsers seamlessly from a single interface.</h2>
-
-  <!-- Browsers supported grid (icons now inline SVGs so they always render on GitHub Pages) -->
-  <div class="browsers-block" aria-label="Supported browsers">
-    <div class="browser-grid">
-      <div class="browser-item">
-        <img alt="Google Chrome" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23fff' stop-opacity='.9'/%3E%3Cstop offset='100%25' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='48' cy='48' r='46' fill='%23ffffff'/%3E%3Cpath d='M48 6a42 42 0 0 1 36.37 21H48z' fill='%23ea4335'/%3E%3Cpath d='M84.37 27A42 42 0 0 1 52 90L32 56z' fill='%2334a853'/%3E%3Cpath d='M52 90A42 42 0 0 1 11.63 33H48z' fill='%23fbbc05'/%3E%3Ccircle cx='48' cy='48' r='18' fill='%234285f4'/%3E%3Ccircle cx='48' cy='48' r='10' fill='url(%23g)'/%3E%3C/svg%3E">
-        <span>Google Chrome</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Microsoft Edge" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='e1' cx='35%25' cy='30%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%237cf2d8'/%3E%3Cstop offset='100%25' stop-color='%230a66c2'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M48 10c20 0 36 16 36 36 0 22-16 38-38 38-14 0-25-7-30-17 6 4 12 5 18 5 9 0 16-4 16-11 0-6-6-10-16-10-8 0-16 3-22 9C13 32 28 10 48 10z' fill='url(%23e1)'/%3E%3Cpath d='M14 58c4-12 18-20 34-20 18 0 28 8 28 19 0 16-16 29-36 29-12 0-22-4-26-10z' fill='%232563eb' fill-opacity='.65'/%3E%3C/svg%3E">
-        <span>Microsoft Edge</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Mozilla Firefox" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='f1' cx='40%25' cy='35%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23ffb347'/%3E%3Cstop offset='55%25' stop-color='%23ff6a00'/%3E%3Cstop offset='100%25' stop-color='%239b5cff'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='48' cy='48' r='40' fill='%232b1b5a'/%3E%3Cpath d='M66 22c10 10 14 26 6 42-7 14-22 20-36 17 11-3 18-10 18-19 0-10-8-18-18-18-6 0-11 2-15 6 2-12 8-22 17-28 10-7 20-7 28 0z' fill='url(%23f1)'/%3E%3C/svg%3E">
-        <span>Mozilla Firefox</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Ulaa" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='u1' cx='50%25' cy='40%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23ffd46b'/%3E%3Cstop offset='100%25' stop-color='%23fb923c'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='48' cy='48' r='40' fill='url(%23u1)'/%3E%3Cpath d='M30 34v18c0 10 8 18 18 18s18-8 18-18V34h-9v18c0 5-4 9-9 9s-9-4-9-9V34z' fill='%230b1220' fill-opacity='.9'/%3E%3C/svg%3E">
-        <span>Ulaa</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Brave" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='b1' cx='40%25' cy='35%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%23ffb07a'/%3E%3Cstop offset='100%25' stop-color='%23ff4d00'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M32 16h32l8 12-6 40-18 12-18-12-6-40z' fill='url(%23b1)'/%3E%3Cpath d='M36 34h24v28H36z' fill='%23fff' fill-opacity='.92'/%3E%3Cpath d='M40 40h16v16H40z' fill='%23ff4d00' fill-opacity='.25'/%3E%3C/svg%3E">
-        <span>Brave</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Yandex" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='40' fill='%23ffffff'/%3E%3Ccircle cx='48' cy='48' r='40' fill='%23e11d48' fill-opacity='.12'/%3E%3Cpath d='M48 22c9 0 16 7 16 16 0 8-5 13-12 15v21h-8V53c-7-2-12-7-12-15 0-9 7-16 16-16z' fill='%23e11d48'/%3E%3C/svg%3E">
-        <span>Yandex</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Vivaldi" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='40' fill='%23ef4444'/%3E%3Cpath d='M30 34l18 38 18-38h-9L48 58 39 34z' fill='%23fff' fill-opacity='.95'/%3E%3C/svg%3E">
-        <span>Vivaldi</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Cốc Cốc" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='c1' cx='40%25' cy='35%25' r='75%25'%3E%3Cstop offset='0%25' stop-color='%23b9f6a8'/%3E%3Cstop offset='100%25' stop-color='%2322c55e'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='48' cy='48' r='40' fill='url(%23c1)'/%3E%3Cpath d='M62 34a22 22 0 1 1-28 28' fill='none' stroke='%23fff' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M60 60l12 0' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
-        <span>Cốc Cốc</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Naver Whale" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cdefs%3E%3CradialGradient id='w1' cx='35%25' cy='30%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%236ee7ff'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='48' cy='48' r='40' fill='url(%23w1)'/%3E%3Cpath d='M28 52c6 14 26 22 40 10 7-6 9-14 4-22-4-6-12-10-20-10-14 0-26 10-24 22z' fill='%23fff' fill-opacity='.92'/%3E%3C/svg%3E">
-        <span>Naver Whale</span>
-      </div>
-
-      <div class="browser-item">
-        <img alt="Internet Explorer" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='40' fill='%230a66c2' fill-opacity='.12'/%3E%3Cpath d='M58 28c-18 0-28 10-28 20s8 20 26 20c6 0 12-1 18-4l-3-6c-5 2-9 3-14 3-12 0-17-5-17-12h34c0-14-7-21-16-21zm-18 15c2-5 7-8 14-8 6 0 10 3 11 8H40z' fill='%230a66c2'/%3E%3Cpath d='M22 50c10 8 30 10 52-2' fill='none' stroke='%232563eb' stroke-width='6' stroke-linecap='round' opacity='.65'/%3E%3C/svg%3E">
-        <span>Internet Explorer</span>
-      </div>
-    </div>
-  </div>
+<section class="features">
+  <h2 class="feature-heading">
+    <span class="highlight">Security Hardening &amp; Addon Control</span>
+  </h2>
 
   <div class="feature-grid">
     <div class="card">
-      <h3>Visibility & Insights</h3>
-      <p>Know what browsers and add-ons exist in your environment before enforcing policy.</p>
+      <h3>Visibility &amp; Insights</h3>
+      <p class="card-sub">Manage multiple browsers seamlessly from a single interface.</p>
+      <p>Get clear visibility into browser usage and configuration posture across endpoints.</p>
       <ul class="feature-list">
         <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser inventory & version insights</a></strong>
-          <span>Get visibility into browsers in your network and their versions to identify outdated/risky instances.</span>
+          <strong>Browser inventory &amp; usage visibility</strong>
+          <span>Track browsers installed, versions in use, and adoption patterns across teams.</span>
         </li>
         <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Add-on discovery</a></strong>
-          <span>Track extensions/plugins across endpoints and spot high-risk or unapproved add-ons.</span>
+          <strong>Configuration insights</strong>
+          <span>Identify risky settings and misconfigurations that increase browser-based attack surface.</span>
         </li>
         <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Usage reporting</a></strong>
-          <span>Analyze browsing trends and policy impact through centralized reports.</span>
+          <strong>Audit trail for policy actions</strong>
+          <span>Maintain traceability for changes, enforcement actions, and policy outcomes.</span>
         </li>
       </ul>
     </div>
 
     <div class="card">
-      <h3>Security Hardening & Addon Control</h3>
-      <p>Harden browser settings and control extensions to reduce browser-based attack vectors.</p>
+      <h3>Security Hardening &amp; Addon Control</h3>
+      <p class="card-sub">Manage multiple browsers seamlessly from a single interface.</p>
+      <p>Harden enterprise browsers and control extensions/add-ons to reduce web risk.</p>
       <ul class="feature-list">
         <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Secure browser configurations</a></strong>
-          <span>Apply configurations via policy to protect browsers against common security breaches.</span>
+          <strong>Policy-based browser hardening</strong>
+          <span>Enforce secure settings across browsers to reduce risk from unsafe configurations.</span>
         </li>
         <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Extension / plugin management</a></strong>
-          <span>Allowlist/blocklist add-ons to minimize exposure from malicious extensions.</span>
+          <strong>Extension/add-on governance</strong>
+          <span>Allowlist and blocklist extensions to prevent risky add-ons and shadow installs.</span>
         </li>
         <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser restriction</a></strong>
-          <span>Enforce approved browsers across your environment to keep browsing standardized.</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Web Access Controls</h3>
-      <p>Restrict unsafe browsing behavior while keeping users productive.</p>
-      <ul class="feature-list">
-        <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Web filtering</a></strong>
-          <span>Control access to websites/domains/categories based on business needs.</span>
-        </li>
-        <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Download restriction</a></strong>
-          <span>Prevent risky downloads from untrusted sources to reduce malware entry points.</span>
-        </li>
-        <li>
-          <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser isolation</a></strong>
-          <span>Isolate risky web sessions away from enterprise data to reduce web-borne threats.</span>
+          <strong>Web filtering controls</strong>
+          <span>Control access to risky categories and reduce exposure to malicious destinations.</span>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- VIDEO CAROUSEL (NO NAV ARROWS) -->
 <section class="carousel" aria-label="Product walkthrough" tabindex="0">
   <div class="carousel-shell">
     <div class="carousel-viewport">
       <div class="carousel-track">
 
-        <div class="carousel-item active" data-title="Add-on management">
+        <div class="carousel-item active" data-title="Web filtering">
           <div class="carousel-caption">
-            <strong>Add-on management</strong>
-            <p>Discover, control, and enforce policies for browser add-ons across endpoints.</p>
+            <strong>Reduce browsing risk with smart web filtering</strong>
+            <p>Control access to unsafe destinations and enforce safer web usage across your org.</p>
           </div>
           <video autoplay muted loop playsinline preload="metadata">
-            <source src="add%20on%20management.mp4" type="video/mp4">
+            <source src="web filter.mp4" type="video/mp4">
           </video>
         </div>
 
         <div class="carousel-item" data-title="Extension control">
           <div class="carousel-caption">
-            <strong>Extension control</strong>
-            <p>Allowlist or block extensions and standardize secure browsing across your organization.</p>
+            <strong>Control browser extensions &amp; add-ons</strong>
+            <p>Allow only trusted add-ons and block risky extensions to prevent data and identity abuse.</p>
           </div>
           <video muted loop playsinline preload="metadata">
-            <source src="extension%20management.mp4" type="video/mp4">
+            <source src="extension management.mp4" type="video/mp4">
           </video>
         </div>
 
-        <div class="carousel-item" data-title="Web filtering">
+        <div class="carousel-item" data-title="Add-on management">
           <div class="carousel-caption">
-            <strong>Web filtering</strong>
-            <p>Restrict unsafe access and reduce web exposure with policy-based web controls.</p>
+            <strong>Centralize add-on management</strong>
+            <p>Standardize and enforce add-on posture through centralized policy-based governance.</p>
           </div>
           <video muted loop playsinline preload="metadata">
-            <source src="web%20filter.mp4" type="video/mp4">
+            <source src="add on management.mp4" type="video/mp4">
           </video>
         </div>
 
       </div>
 
-      <!-- Dot nav only -->
       <div class="carousel-nav" aria-label="Choose a slide"></div>
     </div>
-  </div>
-</section>
 
-<!-- DEMO CTA STRIP BELOW CAROUSEL -->
-<section class="demo-strip" aria-label="Request demo">
-  <div class="demo-inner">
-    <h3>Want to see how device policies work in your environment?</h3>
-    <a class="demo-btn" href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">
-      Request a demo →
-    </a>
+    <div class="demo-strip" aria-label="Request demo strip">
+      <div class="demo-strip-inner">
+        <strong>Want to see how device policies work in your environment?</strong>
+        <a href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">
+          Request a demo →
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="pricing-compare" id="pricing">
   <div class="pricing-wrap">
-    <h2 class="pricing-title">Simple pricing to start fast</h2>
+    <h2 class="pricing-title">Pick the right plan</h2>
     <p class="pricing-sub">
-      Use Free Edition for small environments, or go Professional for complete browser security controls at scale.
+      Start free to validate policies. Upgrade when you’re ready to roll out controls at scale.
     </p>
 
-    <div class="compare-card" aria-label="Plans comparison">
-      <div class="compare-cols">
-        <div class="plan-col">
-          <h3>Free Edition</h3>
+    <div class="pricing-grid">
+      <div class="compare-card" aria-label="Plans comparison">
+        <div class="compare-cols">
 
-          <div class="plan-price">
-            <span class="plan-kicker">STARTS AT</span>
-            <div class="plan-amount-row">
-              <span class="amt">$0</span>
-              <span class="unit">for up to 25 computers</span>
+          <div class="plan-col">
+            <h3>Free Edition</h3>
+
+            <div class="plan-price">
+              <span class="plan-kicker">STARTS AT</span>
+              <div class="plan-amount-row">
+                <span class="amt">$0</span>
+                <span class="unit">up to 25 devices</span>
+              </div>
+            </div>
+
+            <div class="plan-divider" aria-hidden="true"></div>
+
+            <ul class="plan-list">
+              <li>Evaluate browser hardening policies</li>
+              <li>Test extension governance workflows</li>
+              <li>Validate enforcement without disruption</li>
+              <li>Best for pilots and small teams</li>
+              <li>Quick rollout, zero cost</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <a href="https://www.manageengine.com/browser-security/download.html" target="_blank" rel="noopener" class="plan-btn outline">Get started</a>
             </div>
           </div>
 
-          <div class="plan-divider" aria-hidden="true"></div>
+          <div class="plan-col">
+            <h3>Professional Edition</h3>
 
-          <ul class="plan-list">
-            <li>Ideal for pilots and small teams</li>
-            <li>Central visibility into browsers and add-ons</li>
-            <li>Start enforcing secure configuration policies</li>
-            <li>Validate controls before scaling org-wide</li>
-            <li>Access product resources via <a href="https://www.manageengine.com/browser-security/help.html">Documents</a></li>
-          </ul>
+            <div class="plan-price">
+              <span class="plan-kicker">STARTS AT</span>
+              <div class="plan-amount-row">
+                <span class="amt-wrap">
+                  <span class="amt-star">*</span>
+                  <span class="amt">$7</span>
+                </span>
+                <span class="unit">USD / device / year</span>
+              </div>
+            </div>
 
-          <div class="plan-cta-row">
-            <a href="https://www.manageengine.com/browser-security/get-quote.html" class="plan-btn outline">Get started</a>
-          </div>
-        </div>
+            <div class="plan-divider" aria-hidden="true"></div>
 
-        <div class="plan-col">
-          <h3>Professional Edition</h3>
+            <ul class="plan-list">
+              <li>Enforce policies at scale</li>
+              <li>Centralized browser hardening and control</li>
+              <li>Advanced extension governance</li>
+              <li>Web filtering enforcement</li>
+              <li>Audit-ready reporting</li>
+            </ul>
 
-          <div class="plan-price">
-            <span class="plan-kicker">STARTS AT</span>
-            <div class="plan-amount-row">
-              <span class="amt">$7</span>
-              <span class="unit">/ device / year</span>
+            <div class="plan-cta-row">
+              <a href="https://www.manageengine.com/browser-security/get-quote.html" target="_blank" rel="noopener" class="plan-btn solid">
+                View pricing
+              </a>
             </div>
           </div>
 
-          <div class="plan-divider" aria-hidden="true"></div>
-
-          <ul class="plan-list">
-            <li>Organization-wide policy deployment</li>
-            <li>Advanced web access controls and restrictions</li>
-            <li>Extension/plugin governance at scale</li>
-            <li>Isolation support for high-risk browsing</li>
-            <li>Central reporting for audits and compliance</li>
-          </ul>
-
-          <div class="plan-cta-row">
-            <a href="https://www.manageengine.com/browser-security/get-quote.html" class="plan-btn solid">Get quote</a>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- UPDATED FOOTNOTE + Store link -->
     <p class="pricing-footnote">
       *As the number of devices increases, the price per device decreases.<br/>
       For full pricing, visit
@@ -1261,33 +1282,31 @@
           <h3>Can I get a demo of ManageEngine Browser Security Plus?</h3>
           <p>
             Yes, you can request a personalized
-            <a href="https://www.manageengine.com/browser-security/request-demo.html">demo</a>
-            to see how browser policies, add-on controls, and isolation can be enforced in your environment.
+            <a href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">demo</a>
+            to see how Browser Security Plus helps you secure and manage enterprise browsers.
           </p>
         </div>
 
         <div class="faq-item">
-          <h3>Does ManageEngine Browser Security Plus have a free plan?</h3>
+          <h3>Does Browser Security Plus have a free plan?</h3>
+          <p>Yes. Browser Security Plus offers a Free Edition that supports up to 25 devices.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is support available during evaluation?</h3>
           <p>
-            Yes. Browser Security Plus offers a Free Edition for small environments. If you need more devices or advanced features,
-            request a <a href="https://www.manageengine.com/browser-security/get-quote.html">quote</a> for the Professional Edition.
+            Yes, you get access to
+            <a href="https://www.manageengine.com/browser-security/support.html" target="_blank" rel="noopener">support</a>
+            and product documentation while evaluating.
           </p>
         </div>
 
         <div class="faq-item">
-          <h3>Where can I find documentation and setup guides?</h3>
+          <h3>Where can I find product documentation for Browser Security Plus?</h3>
           <p>
-            You can access product help, guides, and resources in
-            <a href="https://www.manageengine.com/browser-security/help.html">Documents</a>.
-          </p>
-        </div>
-
-        <div class="faq-item">
-          <h3>How do I contact support?</h3>
-          <p>
-            For technical assistance, reach out via the
-            <a href="https://www.manageengine.com/browser-security/support.html">Support</a>
-            page.
+            You can access the
+            <a href="https://www.manageengine.com/browser-security/help.html" target="_blank" rel="noopener">documentation</a>
+            and guides to set up policies and manage browsers.
           </p>
         </div>
       </div>
@@ -1302,7 +1321,7 @@
 </footer>
 
 <script>
-  /* ================= VIDEO CAROUSEL (DOTS ONLY, NO ARROWS) ================= */
+  /* ================= CAROUSEL (NO ARROWS) ================= */
   const carouselEl = document.querySelector(".carousel");
   const slides = carouselEl.querySelectorAll(".carousel-item");
   const nav = carouselEl.querySelector(".carousel-nav");
