@@ -12,19 +12,17 @@
 
   <style>
     :root{
-      /* BSP palette (blue + orange) */
-      --blue-900:#0b2a4a;
-      --blue-800:#123b6a;
-      --blue-700:#1e5aa8;
-      --blue-600:#2a71d6;
+      /* BSP palette (blue + orange emphasis) */
+      --blue:#0a66c2;
+      --blue-2:#2563eb;
+      --blue-deep:#0f2a44;
 
       --orange:#f59e0b;
       --orange-2:#fb923c;
-      --orange-dark:#ea7a00;
 
       --dark:#0f172a;
-      --muted:#64748b;
-      --muted-2:#475569;
+      --muted:#6b7280;
+      --muted-2:#64748b;
       --border:#e5e7eb;
       --bg-light:#f8fafc;
 
@@ -58,11 +56,14 @@
     header{
       border-bottom:1px solid var(--border);
       background:#fff;
+      position:sticky;
+      top:0;
+      z-index:30;
     }
     .header-inner{
       max-width:var(--container);
       margin:0 auto;
-      padding:16px var(--pad-x);
+      padding:14px var(--pad-x);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -73,15 +74,18 @@
       display:flex;
       align-items:center;
       gap:12px;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-0.01em;
       white-space:nowrap;
     }
-    /* Reduced BSP logo size (per request) */
-    .logo img{ height:32px; width:auto; }
+    /* smaller like ACP */
+    .logo img{ height:34px; width:auto; }
 
     nav{
       display:flex;
       align-items:center;
-      gap:16px;
+      gap:14px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
@@ -91,17 +95,18 @@
       font-weight:600;
       padding:8px 10px;
       border-radius:10px;
-      transition:background .18s ease, color .18s ease;
+      transition:background .18s ease, color .18s ease, transform .18s ease;
     }
     nav a:hover{
       background:#f1f5f9;
       color:#0b1220;
+      transform: translateY(-1px);
     }
 
     @media (max-width: 820px){
       :root{ --pad-x:18px; }
       .header-inner{
-        padding:14px var(--pad-x);
+        padding:12px var(--pad-x);
         flex-direction:column;
         align-items:flex-start;
       }
@@ -120,20 +125,20 @@
     .hero{
       position:relative;
       overflow:hidden;
-      padding:64px 0 66px;
+      padding:62px 0 56px;
       text-align:center;
       background:
-        radial-gradient(1100px 520px at 10% 10%, rgba(245,158,11,0.20), transparent 60%),
-        radial-gradient(900px 420px at 90% 20%, rgba(251,146,60,0.14), transparent 62%),
-        linear-gradient(135deg, var(--blue-900), var(--blue-800), var(--blue-600));
+        radial-gradient(900px 420px at 15% 10%, rgba(245,158,11,0.28), transparent 60%),
+        radial-gradient(900px 420px at 85% 15%, rgba(251,146,60,0.18), transparent 62%),
+        linear-gradient(135deg, #0f2a44, #1e4f91, #2563eb);
     }
     .hero::before{
       content:"";
       position:absolute;
-      top:-60px;
-      left:-60px;
-      width:520px;
-      height:520px;
+      top:-70px;
+      left:-70px;
+      width:560px;
+      height:560px;
       background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);
       border-radius:50%;
       pointer-events:none;
@@ -141,10 +146,10 @@
     .hero::after{
       content:"";
       position:absolute;
-      bottom:-70px;
-      right:-70px;
-      width:440px;
-      height:440px;
+      bottom:-80px;
+      right:-80px;
+      width:480px;
+      height:480px;
       background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);
       border-radius:50%;
       pointer-events:none;
@@ -152,10 +157,10 @@
     .hero > .container{ position:relative; z-index:1; }
 
     .hero h1{
-      font-size:44px;
+      font-size:46px;
       line-height:1.12;
       max-width:1040px;
-      margin:0 auto 18px;
+      margin:0 auto 16px;
       letter-spacing:-0.035em;
       color:#fff;
       font-weight:900;
@@ -163,16 +168,17 @@
     .hero p{
       max-width:820px;
       margin:0 auto 26px;
-      color:#e7f0ff;
+      color:#e0ecff;
       font-size:16px;
+      font-weight:500;
     }
 
     .hero-buttons{
       display:flex;
       justify-content:center;
-      gap:18px;
+      gap:22px;
       flex-wrap:wrap;
-      margin-top:10px;
+      margin-top:6px;
     }
     .hero-cta{
       display:flex;
@@ -180,51 +186,52 @@
       align-items:center;
       gap:8px;
     }
-
     .btn{
-      min-width:220px;
-      padding:14px 26px;
+      min-width:210px;
+      padding:14px 28px;
       font-size:16px;
       font-weight:900;
       border-radius:14px;
       text-decoration:none;
       transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      display:inline-block;
       text-align:center;
       border:2px solid transparent;
       user-select:none;
-      cursor:pointer;
+      position:relative;
+      overflow:hidden;
     }
-
-    /* Both buttons orange + blink on hover */
     .btn-orange{
-      background:linear-gradient(180deg, #ffb341 0%, var(--orange) 55%, #f59e0b 100%);
+      background: linear-gradient(180deg, var(--orange) 0%, var(--orange-2) 100%);
       color:#0b1220;
-      box-shadow:0 14px 34px rgba(245,158,11,0.30);
+      box-shadow:0 14px 34px rgba(245,158,11,0.28);
     }
-    @keyframes blinkGlow{
-      0%,100%{ filter:brightness(1); box-shadow:0 14px 34px rgba(245,158,11,0.30); }
-      50%{ filter:brightness(1.08); box-shadow:0 18px 44px rgba(245,158,11,0.45); }
-    }
+    /* “blink” effect on hover */
     .btn-orange:hover{
       transform:translateY(-1px);
-      animation:blinkGlow .65s ease-in-out infinite;
+      box-shadow:0 20px 50px rgba(0,0,0,0.26);
+      animation: blinkGlow 0.5s linear 1;
+      filter: brightness(1.03);
     }
+    @keyframes blinkGlow{
+      0%   { box-shadow:0 14px 34px rgba(245,158,11,0.28); }
+      50%  { box-shadow:0 26px 70px rgba(245,158,11,0.55); }
+      100% { box-shadow:0 20px 50px rgba(0,0,0,0.26); }
+    }
+
     .btn:focus-visible{
-      outline:3px solid rgba(255,255,255,0.35);
+      outline:3px solid rgba(255,255,255,0.40);
       outline-offset:3px;
     }
 
     .cta-note{
       font-size:13px;
       font-weight:800;
-      color:#fff;
+      color:#ffffff;
       opacity:0.95;
     }
 
-    /* Free trial strip under buttons */
+    /* trial line (BSP-styled, but similar placement) */
     .trial-pill{
       display:inline-flex;
       align-items:center;
@@ -233,37 +240,41 @@
       margin-top:18px;
       padding:10px 16px;
       border-radius:999px;
-      background:rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.12);
       border:1px solid rgba(255,255,255,0.18);
-      color:#eaf2ff;
-      font-weight:700;
+      color:#ffffff;
+      font-weight:800;
       font-size:14px;
       backdrop-filter: blur(10px);
+      max-width: 960px;
     }
-    .trial-dot{
+    .trial-pill .dot{
       width:10px; height:10px; border-radius:999px;
-      background:rgba(245,158,11,0.95);
-      box-shadow:0 0 0 4px rgba(245,158,11,0.18);
+      background: rgba(245,158,11,0.95);
+      box-shadow: 0 8px 18px rgba(245,158,11,0.35);
+      flex:0 0 auto;
     }
 
     @media (max-width: 820px){
-      .hero{ padding:52px 0 58px; }
+      .hero{ padding:52px 0 52px; }
       .hero h1{ font-size:36px; }
+      .btn{ min-width:240px; }
+      .trial-pill{ width:100%; }
     }
     @media (max-width: 480px){
       .hero h1{ font-size:30px; }
-      .btn{ min-width: 240px; }
     }
 
     /* ---------- TRUST + CREDIBILITY ---------- */
     .trust-proof{
       position:relative;
-      padding:62px 0;
+      padding:58px 0;
       background:linear-gradient(180deg,#ffffff 0%,#f9fbff 55%,#ffffff 100%);
       border-bottom:1px solid var(--border);
       overflow:hidden;
     }
-    /* World map mandatory (use ACP asset URL) */
+
+    /* world map pulled from ACP page (no local file needed) */
     .trust-proof::before{
       content:"";
       position:absolute;
@@ -272,8 +283,8 @@
       background-repeat:no-repeat;
       background-size:contain;
       background-position:center center;
-      opacity:0.22;
-      filter:grayscale(100%) contrast(90%);
+      opacity:0.20;
+      filter:grayscale(100%) contrast(92%);
       pointer-events:none;
     }
     .trust-proof::after{
@@ -282,7 +293,7 @@
       inset:0;
       background:radial-gradient(ellipse at center,
         rgba(255,255,255,0.0) 35%,
-        rgba(255,255,255,0.75) 85%);
+        rgba(255,255,255,0.78) 86%);
       pointer-events:none;
     }
     .trust-proof > .container{ position:relative; z-index:1; }
@@ -290,28 +301,30 @@
     .trust-head{ text-align:center; margin-bottom:22px; }
     .trust-kicker{
       font-size:14px;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:0.08em;
       text-transform:uppercase;
       color:var(--muted);
     }
 
-    /* Trusted industry image (blend, no outline, no “stuck rectangle” feel) */
-    .trusted-shot{
-      max-width:1120px;
-      margin:0 auto 34px;
-      padding:0 6px;
+    /* trusted logos image (blended, no harsh box) */
+    .trusted-strip{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin: 0 auto 34px;
     }
-    .trusted-shot img{
-      width:100%;
-      height:auto;
-      border-radius:0;
-      background:transparent;
-      border:none;
-      box-shadow:none;
-      filter:drop-shadow(0 10px 22px rgba(15,23,42,0.08));
-      opacity:0.98;
-      mix-blend-mode:multiply;
+    .trusted-strip img{
+      max-width: 1100px;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      /* remove “stuck rectangle” feel */
+      box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+      filter: drop-shadow(0 10px 26px rgba(15,23,42,0.08));
+      background: transparent;
+      border: none;
+      outline: none;
     }
 
     .trust-metrics{
@@ -319,16 +332,15 @@
       grid-template-columns:repeat(4,1fr);
       gap:12px;
       text-align:center;
-      max-width:1100px;
-      margin:0 auto;
     }
-    .metric { padding: 16px 12px; }
+    .metric { padding: 14px 12px; }
+
     .metric strong{
       display:inline-block;
       font-weight:1000;
-      font-size:clamp(34px, 3.2vw, 44px);
+      font-size:clamp(32px, 3vw, 42px);
       letter-spacing:-0.05em;
-      background:linear-gradient(180deg, #0b1220, var(--blue-600));
+      background: linear-gradient(135deg, #0b1220, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       transition:transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
@@ -342,21 +354,21 @@
       font-weight:700;
     }
     .metric:hover strong{
-      transform:scale(1.14);
-      text-shadow:0 18px 36px rgba(42,113,214,0.30);
+      transform:scale(1.16);
+      text-shadow:0 18px 36px rgba(245,158,11,0.30);
     }
 
     @media (max-width: 1024px){
       .trust-metrics{ grid-template-columns:repeat(2,1fr); }
     }
     @media (max-width: 640px){
-      .trust-proof::before{ display:none; }
       .trust-metrics{ grid-template-columns:1fr; }
+      .trust-proof::before{ display:none; }
     }
 
-    /* ---------- FEATURES ---------- */
+    /* ---------- FEATURES (2 cards) ---------- */
     .features{
-      padding:var(--section-y) 0 46px;
+      padding:var(--section-y) 0 30px;
       background:var(--bg-light);
       text-align:center;
     }
@@ -371,7 +383,7 @@
       padding:0 var(--pad-x);
     }
     .feature-heading .highlight{
-      background:linear-gradient(90deg, var(--blue-600), var(--orange));
+      background: linear-gradient(135deg, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       font-weight:1000;
@@ -381,48 +393,36 @@
       max-width:var(--container);
       margin:0 auto;
       display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:20px;
+      grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
+      gap:24px;
       padding:0 var(--pad-x);
       text-align:left;
     }
     .card{
       background:#fff;
-      padding:24px 24px 22px;
+      padding:26px;
       border-radius:22px;
-      box-shadow:0 18px 44px rgba(15,23,42,0.08);
-      border:1px solid rgba(15,23,42,0.06);
-      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-      position:relative;
-      overflow:hidden;
+      box-shadow:var(--shadow-md);
+      transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
+      border:2px solid transparent;
     }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        radial-gradient(900px 320px at 20% 0%, rgba(245,158,11,0.10), transparent 60%),
-        radial-gradient(900px 320px at 90% 20%, rgba(42,113,214,0.10), transparent 60%);
-      opacity:0.9;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; z-index:1; }
-
     .card:hover{
-      transform:translateY(-3px);
-      box-shadow:0 26px 60px rgba(15,23,42,0.12);
-      border-color:rgba(245,158,11,0.28);
+      background-color:#fff7ed;
+      border-color: rgba(245,158,11,0.55);
+      box-shadow:0 28px 60px rgba(245,158,11,0.14);
+      transform:translateY(-2px);
     }
     .card h3{
       margin-bottom:10px;
-      font-size:20px;
+      font-size:22px;
       font-weight:1000;
       letter-spacing:-0.01em;
+      color:#0b1220;
     }
     .card p{
-      margin-bottom:14px;
+      margin-bottom:16px;
       color:var(--muted);
-      font-size:15px;
+      font-size:16px;
       font-weight:600;
     }
     .feature-list{ list-style:none; }
@@ -431,110 +431,104 @@
       position:relative;
       padding-left:24px;
       color:#0f172a;
-      font-weight:600;
+      font-weight:650;
     }
     .feature-list li::before{
       content:"✓";
       position:absolute;
       left:0;
       top:0;
-      color:var(--orange-dark);
+      color:var(--orange);
       font-weight:1000;
     }
-
-    @media (max-width: 920px){
-      .feature-grid{ grid-template-columns:1fr; }
+    .feature-list span{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:600;
     }
 
-    /* ---------- SUPPORTED BROWSERS (moved BELOW the 2 feature cards) ---------- */
-    .browsers{
-      padding: 0 0 64px;
+    /* ---------- Supported browsers block (below the 2 cards) ---------- */
+    .supported{
+      padding: 22px 0 68px;
       background: var(--bg-light);
     }
-    .browsers-wrap{
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 var(--pad-x);
-    }
-    .browsers-title{
+    .supported h2{
       text-align:center;
-      font-size:34px;
-      line-height:1.15;
+      font-size:38px;
+      line-height:1.18;
       font-weight:1000;
       letter-spacing:-0.03em;
-      color:#0b1220;
-      margin: 16px auto 26px;
-      max-width: 980px;
+      padding: 0 var(--pad-x);
+      margin: 20px auto 24px;
+      max-width: 1100px;
+    }
+    /* use same “nice hue” as earlier */
+    .supported h2 .highlight{
+      background: linear-gradient(135deg, #2563eb, #f59e0b);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
 
-    /* smaller, neat tiles (per request) */
     .browser-grid{
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
       display:grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 16px;
-      align-items: stretch;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
     }
     .browser-tile{
-      background:rgba(255,255,255,0.92);
+      background:#fff;
       border:1px solid rgba(15,23,42,0.06);
-      border-radius: 22px;
+      border-radius:18px;
       box-shadow: 0 14px 34px rgba(15,23,42,0.06);
-      padding: 16px 14px 14px;
+      padding: 18px 14px;
+      text-align:center;
+      transition: transform .18s ease, box-shadow .18s ease;
+      min-height: 130px;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap: 10px;
-      min-height: 124px;
-      position:relative;
-      overflow:hidden;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      gap: 12px;
     }
-    .browser-tile::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        radial-gradient(900px 280px at 25% 0%, rgba(245,158,11,0.08), transparent 60%),
-        radial-gradient(900px 280px at 80% 20%, rgba(42,113,214,0.07), transparent 60%);
-      opacity:0.95;
-      pointer-events:none;
-    }
-    .browser-tile > *{ position:relative; z-index:1; }
-
     .browser-tile:hover{
       transform: translateY(-2px);
-      border-color: rgba(245,158,11,0.28);
-      box-shadow: 0 22px 56px rgba(15,23,42,0.10);
+      box-shadow: 0 22px 52px rgba(245,158,11,0.12);
     }
+
+    /* IMPORTANT: ensure SVGs + favicons render cleanly */
     .browser-icon{
-      width: 44px;
-      height: 44px;
+      width: 54px;
+      height: 54px;
       object-fit: contain;
-      filter: drop-shadow(0 10px 18px rgba(15,23,42,0.10));
+      display:block;
     }
     .browser-name{
-      font-size: 16px;
-      font-weight: 900;
+      font-weight:900;
       color:#0b1220;
-      text-align:center;
+      font-size:16px;
+      letter-spacing:-0.01em;
     }
 
     @media (max-width: 1100px){
-      .browser-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .browser-grid{ grid-template-columns: repeat(3, 1fr); }
+      .supported h2{ font-size:32px; }
     }
     @media (max-width: 640px){
-      .browsers-title{ font-size:28px; }
-      .browser-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .browser-grid{ grid-template-columns: repeat(2, 1fr); }
+      .supported h2{ font-size:26px; }
     }
 
-    /* ---------- CAROUSEL ---------- */
+    /* ---------- CAROUSEL (videos, no arrows) ---------- */
     .carousel{
       background:
-        radial-gradient(1200px 500px at 20% 10%, rgba(245,158,11,0.18), transparent 60%),
-        radial-gradient(900px 420px at 80% 20%, rgba(42,113,214,0.12), transparent 62%),
-        linear-gradient(135deg, #fff7ed 0%, #eef6ff 48%, #ffffff 100%);
-      padding:var(--section-y) 0 30px;
+        radial-gradient(1200px 500px at 15% 10%, rgba(245,158,11,0.16), transparent 60%),
+        radial-gradient(900px 420px at 85% 20%, rgba(37,99,235,0.12), transparent 62%),
+        linear-gradient(135deg, #fff7ed 0%, #eaf2ff 52%, #ffffff 100%);
+      padding:var(--section-y) 0 34px;
     }
     .carousel-shell{
       max-width:var(--container);
@@ -546,26 +540,20 @@
     .carousel-track{ width:100%; position:relative; min-height:520px; }
 
     .carousel-item{ display:none; flex-direction:column; align-items:center; text-align:center; }
-    .carousel-item.active{ display:flex; animation:fadeUp 280ms ease both; }
+    .carousel-item.active{ display:flex; animation:fadeUp 260ms ease both; }
     @keyframes fadeUp{
       from{ opacity:0; transform:translateY(8px); }
       to{ opacity:1; transform:translateY(0); }
     }
 
-    /* Heading changed so it won't repeat later */
-    .carousel-caption{ max-width:920px; margin-bottom:16px; padding:0 12px; }
+    .carousel-caption{ max-width:920px; margin-bottom:14px; padding:0 12px; }
     .carousel-caption strong{
-      font-size:32px;
+      font-size:30px;
       font-weight:1000;
       letter-spacing:-0.035em;
       color:#0b1220;
     }
-    .carousel-caption p{
-      margin-top:10px;
-      font-size:16px;
-      color:#475569;
-      font-weight:600;
-    }
+    .carousel-caption p{ margin-top:10px; font-size:16px; color:#475569; font-weight:600; }
 
     .carousel-item video{
       width:100%;
@@ -578,21 +566,17 @@
       margin:0 auto 22px;
     }
 
-    /* No navigation arrows (per request) */
-    .carousel-btn{ display:none !important; }
-
     .carousel-nav{
       display:flex;
       justify-content:center;
       flex-wrap:wrap;
       gap:12px;
-      margin-top:0;
       padding:0 10px;
     }
     .carousel-dot{
       padding:10px 18px;
       border-radius:999px;
-      background:rgba(255,255,255,0.75);
+      background:rgba(255,255,255,0.85);
       backdrop-filter:blur(10px);
       border:1px solid rgba(148,163,184,0.55);
       color:#0f172a;
@@ -604,14 +588,14 @@
     }
     .carousel-dot:hover{
       transform:translateY(-1px);
-      background:rgba(255,255,255,0.92);
+      background:rgba(255,255,255,0.95);
       border-color:rgba(245,158,11,0.55);
     }
     .carousel-dot.active{
-      background: linear-gradient(135deg, var(--orange), var(--orange-2));
-      border-color:transparent;
+      background: linear-gradient(180deg, var(--orange) 0%, var(--orange-2) 100%);
+      border-color: transparent;
       color:#0b1220;
-      box-shadow:0 14px 34px rgba(245,158,11,0.25);
+      box-shadow:0 14px 34px rgba(245,158,11,0.22);
     }
     .carousel-dot .pill{
       width:9px;
@@ -622,136 +606,115 @@
       margin-right:8px;
       vertical-align:middle;
     }
-    .carousel-dot.active .pill{ background:rgba(11,18,32,0.85); }
-
-    .carousel-dot:focus-visible{
-      outline:3px solid rgba(245,158,11,0.35);
-      outline-offset:3px;
-    }
+    .carousel-dot.active .pill{ background:rgba(11,18,32,0.75); }
 
     @media (max-width: 900px){
       .carousel-item video{ height:320px; }
       .carousel-track{ min-height:410px; }
-      .carousel-caption strong{ font-size:28px; }
+      .carousel-caption strong{ font-size:26px; }
     }
 
-    /* ---------- DEMO STRIP (below carousel) ---------- */
-    .demo-strip{
-      padding: 22px 0 0;
-      background: transparent;
-    }
-    .demo-strip .demo-inner{
+    /* ---------- DEMO CTA BAR (below carousel) ---------- */
+    .demo-bar{
       max-width: 1240px;
-      margin: 0 auto;
-      padding: 18px 18px;
-      border-radius: 26px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(15,23,42,0.08);
-      box-shadow: 0 18px 44px rgba(15,23,42,0.06);
+      margin: 26px auto 0;
+      padding: 0 var(--pad-x);
+    }
+    .demo-inner{
+      background:#ffffff;
+      border:1px solid rgba(15,23,42,0.08);
+      border-radius: 18px;
+      box-shadow: 0 18px 44px rgba(15,23,42,0.08);
+      padding: 18px 18px 18px 22px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 18px;
+      gap: 14px;
     }
-    /* Reduce huge font (per request) */
-    .demo-strip h3{
-      font-size: 22px;
-      line-height: 1.25;
-      font-weight: 1000;
-      letter-spacing: -0.02em;
+    /* reduce huge font */
+    .demo-inner h3{
+      font-size:22px;
+      font-weight:1000;
       color:#0b1220;
-      margin:0;
+      letter-spacing:-0.02em;
+      margin: 0;
     }
     .demo-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:10px;
       padding: 12px 18px;
-      border-radius: 999px;
-      background:#fff;
-      border: 2px solid rgba(15,23,42,0.14);
-      font-weight: 1000;
+      border-radius:999px;
+      font-weight:1000;
       text-decoration:none;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      border: 2px solid rgba(15,23,42,0.18);
+      color:#0b1220;
+      background:#fff;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
       white-space:nowrap;
     }
     .demo-btn:hover{
       transform: translateY(-1px);
-      border-color: rgba(245,158,11,0.60);
-      box-shadow: 0 18px 40px rgba(15,23,42,0.10);
+      border-color: rgba(245,158,11,0.65);
+      box-shadow: 0 18px 44px rgba(245,158,11,0.14);
     }
-    @media (max-width: 720px){
-      .demo-strip .demo-inner{ flex-direction:column; align-items:stretch; }
-      .demo-btn{ width:100%; }
-      .demo-strip h3{ font-size:20px; text-align:left; }
+    @media (max-width: 820px){
+      .demo-inner{ flex-direction:column; align-items:flex-start; }
+      .demo-btn{ width:100%; justify-content:center; }
+      .demo-inner h3{ font-size:18px; }
     }
 
-    /* ---------- OUTCOMES (compact “different cards” style) ---------- */
+    /* ---------- OUTCOMES ---------- */
     .outcomes{
       padding:var(--section-y) 0;
       background:#f8fafc;
       text-align:center;
     }
     .outcomes-heading{
-      font-size:28px;
+      font-size:30px;
       font-weight:1000;
-      margin-bottom:28px;
+      margin-bottom:40px;
       color:var(--dark);
       padding:0 var(--pad-x);
+      letter-spacing:-0.02em;
     }
-
-    /* Smaller, neat cards */
     .outcomes-grid{
       display:grid;
       grid-template-columns:repeat(2, 1fr);
-      gap:18px;
-      max-width:1060px;
+      gap:24px;
+      max-width:1100px;
       margin:0 auto;
       padding:0 var(--pad-x);
       align-items:stretch;
+      text-align:left;
     }
     .outcome-card{
-      background: rgba(255,255,255,0.92);
-      padding:18px 18px 16px;
+      background:#fff;
+      padding:24px;
       border-radius:22px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.05);
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
       border:1px solid rgba(15,23,42,0.06);
-      box-shadow:0 16px 40px rgba(15,23,42,0.06);
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      text-align:left;
-      position:relative;
-      overflow:hidden;
-      min-height: 140px;
     }
-    .outcome-card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        radial-gradient(900px 280px at 15% 0%, rgba(245,158,11,0.10), transparent 60%),
-        radial-gradient(900px 280px at 85% 20%, rgba(42,113,214,0.08), transparent 60%);
-      opacity:0.95;
-      pointer-events:none;
-    }
-    .outcome-card > *{ position:relative; z-index:1; }
-
     .outcome-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 22px 56px rgba(15,23,42,0.10);
-      border-color: rgba(245,158,11,0.28);
+      transform:translateY(-3px);
+      box-shadow:0 28px 60px rgba(245,158,11,0.10);
+      border-color:rgba(245,158,11,0.25);
     }
     .outcome-card h3{
-      font-size:18px;
+      font-size:20px;
       font-weight:1000;
-      margin-bottom:10px;
+      margin-bottom:12px;
       color:var(--dark);
     }
     .outcome-card ul{ list-style:none; padding:0; }
     .outcome-card ul li{
       position:relative;
       padding-left:24px;
-      margin-bottom:8px;
-      color:var(--muted-2);
-      font-size:14px;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:15px;
       font-weight:650;
     }
     .outcome-card ul li::before{
@@ -759,19 +722,18 @@
       position:absolute;
       left:0;
       top:0;
-      color:var(--orange-dark);
+      color:var(--orange);
       font-weight:1000;
     }
     @media (max-width: 820px){
       .outcomes-grid{ grid-template-columns:1fr; }
     }
 
-    /* ---------- PRICING / QUOTE (no EC pitch) ---------- */
+    /* ---------- PRICING (no Endpoint Central pitch) ---------- */
     .pricing-compare{
-      padding: calc(var(--section-y) - 12px) 0;
+      padding: calc(var(--section-y) - 8px) 0;
       background:
-        radial-gradient(900px 380px at 25% 0%, rgba(245,158,11,0.12), transparent 60%),
-        radial-gradient(900px 380px at 80% 20%, rgba(42,113,214,0.08), transparent 65%),
+        radial-gradient(900px 380px at 25% 0%, rgba(245,158,11,0.14), transparent 60%),
         linear-gradient(180deg,#fff7ed 0%, #ffffff 70%);
     }
     .pricing-wrap{
@@ -789,17 +751,16 @@
     }
     .pricing-sub{
       max-width: 860px;
-      margin: 0 auto 26px;
+      margin: 0 auto 34px;
       font-size: 16px;
       color: var(--muted-2);
       line-height: 1.7;
       font-weight:650;
     }
-
     .compare-card{
       max-width: 980px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.94);
       border: 1px solid rgba(15,23,42,0.08);
       border-radius: 22px;
       box-shadow: 0 18px 48px rgba(15,23,42,0.10);
@@ -812,11 +773,10 @@
       position:absolute;
       inset:0;
       background:
-        radial-gradient(900px 360px at 30% 15%, rgba(245,158,11,0.10), transparent 60%),
-        radial-gradient(900px 360px at 70% 10%, rgba(42,113,214,0.08), transparent 65%);
+        radial-gradient(900px 360px at 30% 15%, rgba(245,158,11,0.12), transparent 60%),
+        radial-gradient(900px 360px at 70% 10%, rgba(37,99,235,0.08), transparent 65%);
       pointer-events:none;
     }
-
     .compare-cols{
       position: relative;
       display: grid;
@@ -828,7 +788,7 @@
     }
     .plan-col + .plan-col{
       border-left: 1px solid rgba(15,23,42,0.08);
-      background: rgba(245,158,11,0.06);
+      background: rgba(245,158,11,0.05);
     }
     .plan-col h3{
       font-size: 22px;
@@ -837,7 +797,6 @@
       margin: 6px 0 14px;
       color: #0b1220;
     }
-    .plan-price{ margin-bottom: 12px; }
     .plan-kicker{
       display: inline-block;
       font-size: 13px;
@@ -845,17 +804,16 @@
       letter-spacing: 0.06em;
       color: rgba(100,116,139,0.95);
       margin-bottom: 6px;
-      font-weight:700;
+      font-weight:800;
     }
     .plan-amount-row{
       display: flex;
       align-items: baseline;
       gap: 10px;
-      flex-wrap:wrap;
     }
     .plan-amount-row .amt{
-      font-size: 36px;
-      font-weight: 1000;
+      font-size: 40px;
+      font-weight: 1100;
       letter-spacing: -0.03em;
       color: #0b1220;
     }
@@ -864,18 +822,9 @@
       color: var(--muted-2);
       font-weight: 800;
     }
-    /* footnote star as superscript (not exponent-looking) */
-    .price-star{
-      font-size: 16px;
-      font-weight: 1000;
-      vertical-align: super;
-      margin-left: 2px;
-      color: var(--orange-dark);
-    }
-
     .plan-divider{
       height: 1px;
-      background: rgba(245,158,11,0.22);
+      background: rgba(245,158,11,0.28);
       margin: 14px 0 18px;
     }
     .plan-list{
@@ -899,11 +848,10 @@
       left: 0;
       top: 0;
       font-weight: 1000;
-      color: var(--orange-dark);
+      color: var(--orange);
     }
-
     .plan-cta-row{
-      margin-top: 18px;
+      margin-top: 22px;
       display: flex;
       justify-content: center;
     }
@@ -912,44 +860,38 @@
       align-items: center;
       justify-content: center;
       padding: 12px 20px;
-      border-radius: 14px;
+      border-radius: 12px;
       font-weight: 1000;
       text-decoration: none;
       min-width: 220px;
       transition: transform .18s ease, box-shadow .18s ease, filter .18s ease, background .18s ease, border-color .18s ease;
-      border:2px solid transparent;
-      cursor:pointer;
     }
     .plan-btn.outline{
       background: #ffffff;
       color: #0b1220;
-      border-color: rgba(15,23,42,0.14);
+      border: 1.5px solid rgba(15,23,42,0.18);
       box-shadow: 0 10px 26px rgba(15,23,42,0.08);
     }
     .plan-btn.solid{
       color: #0b1220;
-      background: linear-gradient(180deg, #ffb341 0%, var(--orange) 55%, #f59e0b 100%);
-      box-shadow: 0 18px 44px rgba(245,158,11,0.25);
+      border: 1px solid transparent;
+      background: linear-gradient(180deg, var(--orange) 0%, var(--orange-2) 100%);
+      box-shadow: 0 18px 44px rgba(245,158,11,0.22);
     }
     .plan-btn:hover{
       transform: translateY(-2px);
-      filter: brightness(1.03);
-      box-shadow: 0 22px 56px rgba(15,23,42,0.14);
-      border-color: rgba(245,158,11,0.35);
+      box-shadow: 0 22px 56px rgba(245,158,11,0.22);
+      filter: brightness(1.02);
     }
 
     .pricing-footnote{
-      margin-top: 14px;
+      margin-top: 18px;
       font-size: 13px;
       color: var(--muted-2);
       font-weight:650;
-      line-height:1.65;
+      text-align:center;
     }
-    .pricing-footnote a{
-      color: var(--blue-700);
-      font-weight: 900;
-      text-decoration: underline;
-    }
+    .pricing-footnote a{ color: var(--blue); text-decoration: underline; font-weight:900; }
 
     @media (max-width: 820px){
       .compare-cols{ grid-template-columns: 1fr; }
@@ -958,7 +900,7 @@
         border-top: 1px solid rgba(15,23,42,0.08);
       }
       .pricing-title{ font-size: 30px; }
-      .plan-btn{ width: 100%; min-width: 0; }
+      .plan-btn{ width:100%; min-width: 0; }
     }
 
     /* ---------- FAQ SECTION ---------- */
@@ -991,7 +933,7 @@
     }
     .faq-track{
       width:100%;
-      min-height:210px;
+      min-height:220px;
       position:relative;
       display:flex;
       align-items:center;
@@ -999,7 +941,7 @@
     .faq-item{
       background:#fff;
       padding:26px;
-      border-radius:20px;
+      border-radius:18px;
       text-align:left;
       box-shadow:0 20px 44px rgba(15,23,42,0.06);
       border:1px solid rgba(15,23,42,0.06);
@@ -1010,7 +952,7 @@
     .faq-item.active{ display:block; }
     .faq-item h3{ font-size:18px; font-weight:1000; margin-bottom:10px; }
     .faq-item p{ font-size:15px; line-height:1.7; color:#475569; font-weight:650; }
-    .faq-item a{ color:var(--blue-700); text-decoration:underline; font-weight:900; }
+    .faq-item a{ color:var(--blue); text-decoration:underline; font-weight:900; }
 
     .faq-nav{
       border:none;
@@ -1022,11 +964,11 @@
       color:#64748b;
       cursor:pointer;
       box-shadow:0 8px 20px rgba(15,23,42,0.12);
-      transition:transform .18s ease, color .18s ease, border-color .18s ease;
+      transition:transform .18s ease, color .18s ease;
       flex:0 0 auto;
-      border:2px solid rgba(15,23,42,0.08);
+      transform: translateY(-2px);
     }
-    .faq-nav:hover{ color:#0b1220; border-color: rgba(245,158,11,0.55); transform:scale(1.06); }
+    .faq-nav:hover{ color:var(--orange); transform:scale(1.08); }
     .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.35); outline-offset:3px; }
 
     @media (max-width: 640px){
@@ -1053,16 +995,16 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <!-- Update filename here if your repo uses a different logo name -->
+      <!-- updated logo path (as per your repo screenshot) -->
       <img src="Browser Security Plus_Black (2).png" alt="Browser Security Plus logo">
     </div>
 
     <nav aria-label="Primary">
-      <a href="https://www.manageengine.com/browser-security/features.html">Features</a>
-      <a href="https://www.manageengine.com/browser-security/request-demo.html">Demo</a>
-      <a href="https://www.manageengine.com/browser-security/help.html">Documents</a>
-      <a href="https://www.manageengine.com/browser-security/get-quote.html">Get quote</a>
-      <a href="https://www.manageengine.com/browser-security/support.html">Support</a>
+      <a href="https://www.manageengine.com/browser-security/features.html" target="_blank" rel="noopener">Features</a>
+      <a href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">Demo</a>
+      <a href="https://www.manageengine.com/browser-security/help.html" target="_blank" rel="noopener">Documents</a>
+      <a href="https://www.manageengine.com/browser-security/get-quote.html" target="_blank" rel="noopener">Get Quote</a>
+      <a href="https://www.manageengine.com/browser-security/support.html" target="_blank" rel="noopener">Support</a>
     </nav>
   </div>
 </header>
@@ -1070,32 +1012,27 @@
 <section class="hero">
   <div class="container">
     <h1>Secure and manage enterprise browsers<br/>with the right controls.</h1>
+    <p>Centralize browser policies, harden settings, and control extensions across your organization—without slowing users down.</p>
 
     <div class="hero-buttons">
       <div class="hero-cta">
-        <a
-          href="https://www.manageengine.com/browser-security/download.html"
-          class="btn btn-orange"
-          target="_blank"
-          rel="noopener"
-        >Download</a>
-        <span class="cta-note">On-premises</span>
+        <a href="https://www.manageengine.com/browser-security/download.html"
+           class="btn btn-orange"
+           target="_blank" rel="noopener">Download</a>
+        <span class="cta-note">On-premise</span>
       </div>
 
       <div class="hero-cta">
-        <a
-          href="https://www.manageengine.com/products/desktop-central/cloud/"
-          class="btn btn-orange"
-          target="_blank"
-          rel="noopener"
-        >Sign up</a>
+        <a href="https://www.manageengine.com/products/desktop-central/cloud/"
+           class="btn btn-orange"
+           target="_blank" rel="noopener">Sign up</a>
         <span class="cta-note">via Endpoint Central</span>
       </div>
     </div>
 
-    <div class="trial-pill" aria-label="Trial note">
-      <span class="trial-dot" aria-hidden="true"></span>
-      Free trial for 25 devices · No credit card needed
+    <div class="trial-pill" aria-label="Trial info">
+      <span class="dot" aria-hidden="true"></span>
+      <span>30-day free trial for 25 devices · No credit card needed</span>
     </div>
   </div>
 </section>
@@ -1106,10 +1043,9 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <!-- Trusted industry screenshot from repo (blended) -->
-    <div class="trusted-shot" aria-label="Trusted industry logos image">
-      <!-- Update filename here if your repo uses a different screenshot name -->
-      <img src="Screenshot 2026-02-05 144531.png" alt="Trusted by industry logos">
+    <!-- Use the trusted industry screenshot file in your repo -->
+    <div class="trusted-strip" aria-label="Customer logos">
+      <img src="Screenshot 2026-02-05 144531.png" alt="Trusted by leading organizations">
     </div>
 
     <div class="trust-metrics" aria-label="Key product metrics">
@@ -1140,83 +1076,117 @@
 
   <div class="feature-grid">
     <div class="card">
-      <h3>Visibility & insights</h3>
-      <p>See how browsers are used across the organization and track policy impact.</p>
+      <h3>Visibility &amp; insights</h3>
+      <p>Know what’s happening across browsers—before you enforce controls.</p>
       <ul class="feature-list">
-        <li>Audit configurations and browser posture</li>
-        <li>Track policy changes with clear accountability</li>
-        <li>Report on browser usage and control coverage</li>
+        <li>Get visibility into browser usage and configuration drift <span>Identify deviations and risky settings across managed browsers.</span></li>
+        <li>Track policy impact and configuration changes <span>Maintain audit-friendly visibility for security and compliance reviews.</span></li>
       </ul>
     </div>
 
     <div class="card">
-      <h3>Security hardening & add-on control</h3>
-      <p>Harden browser settings and control extensions to minimize web-based risk.</p>
+      <h3>Security hardening &amp; add-on control</h3>
+      <p>Harden browsers and control extensions to reduce modern web risk.</p>
       <ul class="feature-list">
-        <li>Enforce secure configurations centrally</li>
-        <li>Restrict risky add-ons and shadow extensions</li>
-        <li>Apply consistent controls across multiple browsers</li>
+        <li>Lock down key browser settings with policies <span>Reduce misconfigurations and risky user behaviors.</span></li>
+        <li>Control extensions and add-ons centrally <span>Prevent shadow add-ons, abuse, and unapproved installs.</span></li>
       </ul>
+
+      <!-- Place this line right below the 2nd card content (as requested) -->
+      <p style="margin-top:16px; font-weight:900;">
+        <span style="background: linear-gradient(135deg, #2563eb, #f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+          Manage multiple browsers seamlessly from a single interface.
+        </span>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- MOVED HERE (below the 2 feature cards, per request) -->
-<section class="browsers" aria-label="Supported browsers">
-  <div class="browsers-wrap">
-    <h2 class="browsers-title">Manage multiple browsers seamlessly from a single interface.</h2>
+<section class="supported" aria-label="Supported browsers">
+  <div class="container">
+    <h2>
+      <span class="highlight">Manage multiple browsers seamlessly from a single interface.</span>
+    </h2>
 
+    <!-- Browser icons fixed: reliable SVG sources + favicon fallback -->
     <div class="browser-grid" aria-label="Browser tiles">
-      <!-- Real browser logos via Wikimedia / official sources (no repo assets needed) -->
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Google Chrome">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:chrome.svg"
+             alt="Google Chrome"
+             onerror="this.onerror=null;this.src='https://www.google.com/favicon.ico';">
         <div class="browser-name">Google Chrome</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg" alt="Microsoft Edge">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:microsoft-edge.svg"
+             alt="Microsoft Edge"
+             onerror="this.onerror=null;this.src='https://www.microsoft.com/favicon.ico';">
         <div class="browser-name">Microsoft Edge</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg" alt="Mozilla Firefox">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:firefox.svg"
+             alt="Mozilla Firefox"
+             onerror="this.onerror=null;this.src='https://www.mozilla.org/favicon.ico';">
         <div class="browser-name">Mozilla Firefox</div>
       </div>
 
       <div class="browser-tile">
-        <!-- Ulaa logo from Seeklogo (external) -->
-        <img class="browser-icon" src="https://seeklogo.com/images/U/ulaa-browser-logo-1B4C3D2D7D-seeklogo.com.png" alt="Ulaa">
+        <img class="browser-icon"
+             src="https://www.zoho.com/ulaa/images/favicon/apple-touch-icon.png"
+             alt="Ulaa"
+             onerror="this.onerror=null;this.src='https://www.zoho.com/favicon.ico';">
         <div class="browser-name">Ulaa</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_icon.svg" alt="Brave">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:brave.svg"
+             alt="Brave"
+             onerror="this.onerror=null;this.src='https://brave.com/favicon.ico';">
         <div class="browser-name">Brave</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Yandex_Browser_icon.svg" alt="Yandex">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:yandex.svg"
+             alt="Yandex"
+             onerror="this.onerror=null;this.src='https://yandex.com/favicon.ico';">
         <div class="browser-name">Yandex</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Vivaldi_web_browser_logo.svg" alt="Vivaldi">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:vivaldi.svg"
+             alt="Vivaldi"
+             onerror="this.onerror=null;this.src='https://vivaldi.com/favicon.ico';">
         <div class="browser-name">Vivaldi</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/C%E1%BB%91c_C%E1%BB%91c_logo.svg" alt="Cốc Cốc">
+        <img class="browser-icon"
+             src="https://coccoc.com/favicon.ico"
+             alt="Cốc Cốc"
+             onerror="this.onerror=null;this.src='https://coccoc.com/favicon.ico';">
         <div class="browser-name">Cốc Cốc</div>
       </div>
 
       <div class="browser-tile">
-        <!-- Naver Whale logo (external) -->
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Naver_Whale_logo.png" alt="Naver Whale" onerror="this.src='https://logos.fandom.com/wiki/Special:FilePath/Naver%20Whale%20icon.svg';">
+        <img class="browser-icon"
+             src="https://whale.naver.com/static/img/favicon.ico"
+             alt="Naver Whale"
+             onerror="this.onerror=null;this.src='https://whale.naver.com/static/img/favicon.ico';">
         <div class="browser-name">Naver Whale</div>
       </div>
 
       <div class="browser-tile">
-        <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Internet_Explorer_9_icon.svg" alt="Internet Explorer">
+        <img class="browser-icon"
+             src="https://api.iconify.design/logos:internetexplorer.svg"
+             alt="Internet Explorer"
+             onerror="this.onerror=null;this.src='https://support.microsoft.com/favicon.ico';">
         <div class="browser-name">Internet Explorer</div>
       </div>
     </div>
@@ -1229,8 +1199,8 @@
       <div class="carousel-track">
         <div class="carousel-item active" data-title="Web filtering">
           <div class="carousel-caption">
-            <strong>Policy-driven web access</strong>
-            <p>Control risky categories and enforce browsing rules across managed browsers.</p>
+            <strong>Web filtering &amp; safe browsing controls</strong>
+            <p>Reduce exposure to risky sites with centralized web access controls.</p>
           </div>
           <video autoplay muted loop playsinline preload="metadata">
             <source src="web filter.mp4" type="video/mp4">
@@ -1239,18 +1209,18 @@
 
         <div class="carousel-item" data-title="Extension control">
           <div class="carousel-caption">
-            <strong>Extension governance</strong>
-            <p>Approve, restrict, and audit extensions to prevent shadow add-ons and abuse.</p>
+            <strong>Extension &amp; add-on management</strong>
+            <p>Approve, block, and monitor extensions to prevent shadow add-ons and abuse.</p>
           </div>
           <video muted loop playsinline preload="metadata">
             <source src="extension management.mp4" type="video/mp4">
           </video>
         </div>
 
-        <div class="carousel-item" data-title="Add-on management">
+        <div class="carousel-item" data-title="Hardening">
           <div class="carousel-caption">
-            <strong>Centralized add-on management</strong>
-            <p>Standardize and enforce add-on behavior with consistent, organization-wide controls.</p>
+            <strong>Security hardening policies</strong>
+            <p>Standardize secure browser configurations across users and devices.</p>
           </div>
           <video muted loop playsinline preload="metadata">
             <source src="add on management.mp4" type="video/mp4">
@@ -1261,8 +1231,8 @@
       <div class="carousel-nav" aria-label="Choose a slide"></div>
     </div>
 
-    <!-- Demo strip below carousel (smaller font) -->
-    <div class="demo-strip" aria-label="Request a demo strip">
+    <!-- Demo bar below carousel (as per screenshot) -->
+    <div class="demo-bar" aria-label="Request demo">
       <div class="demo-inner">
         <h3>Want to see how device policies work in your environment?</h3>
         <a class="demo-btn" href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">
@@ -1315,13 +1285,14 @@
 
 <section class="pricing-compare" id="pricing">
   <div class="pricing-wrap">
-    <h2 class="pricing-title">Get the right plan for your rollout</h2>
+    <h2 class="pricing-title">Pricing that scales with you</h2>
     <p class="pricing-sub">
-      Start small to validate policies, then scale enforcement across all endpoints.
+      Start free to validate policies, then scale browser security across your environment.
     </p>
 
     <div class="compare-card" aria-label="Plans comparison">
       <div class="compare-cols">
+        <!-- Free -->
         <div class="plan-col">
           <h3>Free Edition</h3>
 
@@ -1336,24 +1307,24 @@
           <div class="plan-divider" aria-hidden="true"></div>
 
           <ul class="plan-list">
-            <li>Test policies safely before broad enforcement</li>
-            <li>Standardize browser configurations</li>
-            <li>Get visibility into policy impact and usage</li>
-            <li>Ideal for pilots and small teams</li>
+            <li>Validate policies before wider rollout</li>
+            <li>Get visibility into browser settings and extensions</li>
+            <li>Ideal for small teams and pilots</li>
           </ul>
 
           <div class="plan-cta-row">
-            <a href="https://www.manageengine.com/browser-security/download.html" class="plan-btn outline" target="_blank" rel="noopener">Get started</a>
+            <a href="https://www.manageengine.com/browser-security/download.html" target="_blank" rel="noopener" class="plan-btn outline">Get started</a>
           </div>
         </div>
 
+        <!-- Professional -->
         <div class="plan-col">
           <h3>Professional Edition</h3>
 
           <div class="plan-price">
             <span class="plan-kicker">STARTS AT</span>
             <div class="plan-amount-row">
-              <span class="amt">$7<span class="price-star">*</span></span>
+              <span class="amt">$<sup style="font-size:18px; font-weight:1000; position:relative; top:-10px;">*</sup>7</span>
               <span class="unit">/ device / year</span>
             </div>
           </div>
@@ -1361,15 +1332,13 @@
           <div class="plan-divider" aria-hidden="true"></div>
 
           <ul class="plan-list">
-            <li>Enforce controls at scale across browsers</li>
-            <li>Centralized policy management & auditing</li>
-            <li>Extension governance and hardening policies</li>
-            <li>Audit-ready reporting and change trail</li>
+            <li>Centralize browser security policies at scale</li>
+            <li>Enforce hardening and extension controls</li>
+            <li>Maintain audit-ready configuration trails</li>
           </ul>
 
           <div class="plan-cta-row">
-            <!-- Change “View pricing” to “Get quote” -->
-            <a href="https://www.manageengine.com/browser-security/get-quote.html" class="plan-btn solid" target="_blank" rel="noopener">
+            <a href="https://www.manageengine.com/browser-security/get-quote.html" target="_blank" rel="noopener" class="plan-btn solid">
               Get quote
             </a>
           </div>
@@ -1399,7 +1368,7 @@
           <p>
             Yes, you can request a personalized
             <a href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">demo</a>
-            to see how centralized browser security and policy enforcement works in your environment.
+            to see how centralized browser policies work in your environment.
           </p>
         </div>
 
@@ -1411,18 +1380,16 @@
         <div class="faq-item">
           <h3>Is support available during evaluation?</h3>
           <p>
-            Yes, you get access to
-            <a href="https://www.manageengine.com/browser-security/support.html" target="_blank" rel="noopener">support</a>
-            and product documentation during evaluation.
+            Yes, you can access product documentation and support resources via
+            <a href="https://www.manageengine.com/browser-security/support.html" target="_blank" rel="noopener">Support</a>.
           </p>
         </div>
 
         <div class="faq-item">
-          <h3>Where can I find product documentation?</h3>
+          <h3>Where can I find documentation for Browser Security Plus?</h3>
           <p>
-            You can access the
-            <a href="https://www.manageengine.com/browser-security/help.html" target="_blank" rel="noopener">Browser Security Plus help documentation</a>
-            for setup, policy configuration, and administration details.
+            You can view the complete product documentation here:
+            <a href="https://www.manageengine.com/browser-security/help.html" target="_blank" rel="noopener">Documents</a>.
           </p>
         </div>
       </div>
@@ -1437,7 +1404,7 @@
 </footer>
 
 <script>
-  /* ================= CAROUSEL (NO ARROWS, DOT NAV ONLY) ================= */
+  /* ================= CAROUSEL (NO ARROWS) ================= */
   const carouselEl = document.querySelector(".carousel");
   const slides = carouselEl.querySelectorAll(".carousel-item");
   const nav = carouselEl.querySelector(".carousel-nav");
@@ -1483,6 +1450,11 @@
       nav.appendChild(btn);
     });
   }
+
+  carouselEl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") setActive(currentIndex - 1);
+    if (e.key === "ArrowRight") setActive(currentIndex + 1);
+  });
 
   buildNav();
   setActive(0);
