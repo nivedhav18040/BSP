@@ -8,15 +8,18 @@
   <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* BSP palette (blue + orange) */
-      --blue:#0a66c2;
-      --blue-2:#2563eb;
-      --orange:#f59e0b;
-      --orange-2:#fb923c;
+      /* BSP palette: deep blue + orange accent */
+      --blue-900:#0b2a55;
+      --blue-800:#0f3a77;
+      --blue-700:#1b57a6;
+
+      --orange:#f59e0b;      /* main */
+      --orange-2:#fb923c;    /* warm hue */
+      --orange-deep:#ea580c; /* hover */
 
       --dark:#0f172a;
       --muted:#6b7280;
@@ -44,12 +47,7 @@
     }
     img,video{ max-width:100%; height:auto; display:block; }
     a{ color:inherit; }
-
-    .container{
-      max-width:var(--container);
-      margin:0 auto;
-      padding:0 var(--pad-x);
-    }
+    .container{ max-width:var(--container); margin:0 auto; padding:0 var(--pad-x); }
 
     /* ---------- HEADER ---------- */
     header{
@@ -70,9 +68,12 @@
       display:flex;
       align-items:center;
       gap:12px;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-0.01em;
       white-space:nowrap;
     }
-    /* reduced logo size (ACP-like) */
+    /* Reduce BSP logo size */
     .logo img{ height:32px; width:auto; }
 
     nav{
@@ -85,7 +86,7 @@
     nav a{
       text-decoration:none;
       color:var(--dark);
-      font-weight:500;
+      font-weight:600;
       padding:8px 10px;
       border-radius:10px;
       transition:background .18s ease, color .18s ease;
@@ -102,11 +103,7 @@
         flex-direction:column;
         align-items:flex-start;
       }
-      nav{
-        width:100%;
-        justify-content:flex-start;
-        gap:8px;
-      }
+      nav{ width:100%; justify-content:flex-start; gap:8px; }
       nav a{
         background:#f8fafc;
         border:1px solid rgba(15,23,42,0.06);
@@ -117,12 +114,12 @@
     .hero{
       position:relative;
       overflow:hidden;
-      padding:64px 0 66px;
+      padding:64px 0 64px;
       text-align:center;
       background:
-        radial-gradient(900px 380px at 25% 0%, rgba(245,158,11,0.20), transparent 55%),
-        radial-gradient(900px 380px at 80% 20%, rgba(251,146,60,0.18), transparent 60%),
-        linear-gradient(135deg,#0f2a44,#1e4f91,#2563eb);
+        radial-gradient(1100px 520px at 10% 15%, rgba(245,158,11,0.22), transparent 62%),
+        radial-gradient(900px 460px at 92% 20%, rgba(251,146,60,0.18), transparent 60%),
+        linear-gradient(135deg, var(--blue-900), var(--blue-800), var(--blue-700));
     }
     .hero::before{
       content:"";
@@ -142,7 +139,7 @@
       right:-70px;
       width:440px;
       height:440px;
-      background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);
+      background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%);
       border-radius:50%;
       pointer-events:none;
     }
@@ -152,81 +149,82 @@
       font-size:46px;
       line-height:1.12;
       max-width:1040px;
-      margin:0 auto 20px;
+      margin:0 auto 22px;
       letter-spacing:-0.035em;
+      color:#fff;
+      font-weight:900;
     }
-    .hero-title-main{ color:#fff; font-weight:800; }
 
     .hero-buttons{
       display:flex;
       justify-content:center;
-      gap:24px;
+      gap:22px;
       flex-wrap:wrap;
-      margin-top:8px;
+      margin-top:10px;
     }
     .hero-cta{
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:10px;
-      min-width:220px;
     }
+
     .btn{
-      min-width:220px;
+      min-width:210px;
       padding:14px 28px;
       font-size:16px;
-      font-weight:800;
+      font-weight:900;
       border-radius:14px;
       text-decoration:none;
-      transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
       display:inline-block;
       text-align:center;
       border:2px solid transparent;
       user-select:none;
     }
-    /* BSP orange buttons */
-    .btn-primary{
-      background:linear-gradient(135deg,var(--orange),var(--orange-2));
+    /* Orange buttons (both Download & Sign up) */
+    .btn-orange{
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
       color:#0b1220;
-      box-shadow:0 14px 34px rgba(245,158,11,0.30);
+      box-shadow:0 16px 34px rgba(245,158,11,0.26);
     }
-    /* blink effect on hover */
-    .btn-primary:hover{
-      transform:translateY(-1px);
-      box-shadow:0 18px 44px rgba(0,0,0,0.24);
-      filter:brightness(1.03);
-      animation:blinkGlow 0.8s ease-in-out infinite;
+
+    /* "blink" hover */
+    @keyframes blinkPulse{
+      0%{ filter:brightness(1); }
+      50%{ filter:brightness(1.12); }
+      100%{ filter:brightness(1); }
     }
-    @keyframes blinkGlow{
-      0%,100%{ box-shadow:0 18px 44px rgba(245,158,11,0.34); }
-      50%{ box-shadow:0 22px 56px rgba(251,146,60,0.52); }
+    .btn-orange:hover{
+      transform:translateY(-2px);
+      box-shadow:0 22px 52px rgba(0,0,0,0.22);
+      animation: blinkPulse 0.6s ease-in-out 1;
     }
     .btn:focus-visible{
       outline:3px solid rgba(255,255,255,0.35);
       outline-offset:3px;
     }
     .cta-note{
-      font-size:14px;
-      font-weight:700;
-      color:#fff;
+      font-size:13px;
+      font-weight:800;
+      color:#ffffff;
       opacity:0.95;
     }
 
-    /* exact sentence per your requirement */
     .hero small{
       display:block;
       margin-top:22px;
       color:#dbeafe;
       font-size:14px;
-      font-weight:600;
+      font-weight:700;
     }
 
     @media (max-width: 820px){
-      .hero{ padding:52px 0 58px; }
-      .hero h1{ font-size:38px; }
+      .hero{ padding:54px 0 58px; }
+      .hero h1{ font-size:36px; }
     }
     @media (max-width: 480px){
-      .hero h1{ font-size:32px; }
+      .hero h1{ font-size:30px; }
       .btn{ min-width: 240px; }
     }
 
@@ -237,8 +235,7 @@
       background:linear-gradient(180deg,#ffffff 0%,#f9fbff 55%,#ffffff 100%);
       border-bottom:1px solid var(--border);
     }
-
-    /* world map (from ACP page) */
+    /* World map from ACP page */
     .trust-proof::before{
       content:"";
       position:absolute;
@@ -248,7 +245,7 @@
       background-size:contain;
       background-position:center center;
       opacity:0.22;
-      filter:grayscale(100%) contrast(90%);
+      filter:grayscale(100%) contrast(92%);
       pointer-events:none;
     }
     .trust-proof::after{
@@ -257,16 +254,16 @@
       inset:0;
       background:radial-gradient(ellipse at center,
         rgba(255,255,255,0.0) 35%,
-        rgba(255,255,255,0.80) 88%);
+        rgba(255,255,255,0.78) 85%);
       pointer-events:none;
     }
     .trust-proof > .container{ position:relative; z-index:1; }
 
-    .trust-head{ text-align:center; margin-bottom:22px; }
+    .trust-head{ text-align:center; margin-bottom:28px; }
     .trust-kicker{
       font-size:14px;
-      font-weight:800;
-      letter-spacing:0.08em;
+      font-weight:900;
+      letter-spacing:0.10em;
       text-transform:uppercase;
       color:var(--muted);
     }
@@ -279,28 +276,28 @@
       align-items:stretch;
     }
     .logo-tile{
-      height:88px;
+      height:76px;
       padding:10px 16px;
       border-radius:16px;
-      background:rgba(255,255,255,0.92);
-      box-shadow:0 8px 20px rgba(15,23,42,0.06);
+      background:rgba(255,255,255,0.78);
+      box-shadow:0 10px 26px rgba(15,23,42,0.08);
       display:flex;
       align-items:center;
       justify-content:center;
-      border:1px solid rgba(15,23,42,0.06);
+      border:none;                 /* remove outline feel */
+      backdrop-filter: blur(10px); /* blend with bg */
       overflow:hidden;
     }
-    /* make the trusted industry image blend — no “stuck rectangle” feel */
     .logo-tile img{
-      max-height:56px;
-      width:auto;
+      max-height:34px;
+      max-width:100%;
       object-fit:contain;
-      opacity:0.98;
-      filter: drop-shadow(0 10px 18px rgba(15,23,42,0.10));
-      background:transparent;
+      opacity:0.95;
+      mix-blend-mode:multiply;
+      filter:saturate(1.05);
     }
 
-    .trust-spacer{ height:40px; }
+    .trust-spacer{ height:44px; }
 
     .trust-metrics{
       display:grid;
@@ -308,17 +305,17 @@
       gap:12px;
       text-align:center;
     }
-    .metric { padding: 16px 12px; }
+    .metric{ padding: 16px 12px; }
     .metric strong{
       display:inline-block;
-      font-weight:900;
+      font-weight:1000;
       font-size:clamp(34px, 3.2vw, 44px);
       letter-spacing:-0.05em;
-      background:linear-gradient(90deg, var(--blue-2), var(--orange));
+      background:linear-gradient(90deg, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       transition:transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-                text-shadow 0.32s ease;
+                 text-shadow 0.32s ease;
     }
     .metric span{
       display:block;
@@ -329,7 +326,7 @@
     }
     .metric:hover strong{
       transform:scale(1.14);
-      text-shadow:0 18px 36px rgba(245,158,11,0.25);
+      text-shadow:0 18px 36px rgba(245,158,11,0.28);
     }
 
     @media (max-width: 1024px){
@@ -353,16 +350,16 @@
       line-height:1.35;
       max-width:1040px;
       margin:0 auto 44px;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:-0.02em;
       color:#0b1220;
       padding:0 var(--pad-x);
     }
     .feature-heading .highlight{
-      background:linear-gradient(90deg, var(--blue-2), var(--orange));
+      background:linear-gradient(90deg, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
-      font-weight:900;
+      font-weight:1000;
     }
 
     .feature-grid{
@@ -372,7 +369,9 @@
       grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
       gap:24px;
       padding:0 var(--pad-x);
+      align-items:start;
     }
+
     .card{
       background:#fff;
       padding:26px;
@@ -381,26 +380,26 @@
       text-align:left;
       transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
       border:2px solid transparent;
-      position:relative;
     }
     .card:hover{
-      background-color:#fff7ed; /* subtle orange tint */
+      background-color:#fff7ed;
       border-color:rgba(245,158,11,0.55);
-      box-shadow:0 28px 60px rgba(245,158,11,0.16);
+      box-shadow:0 28px 60px rgba(245,158,11,0.18);
       transform:translateY(-2px);
     }
     .card h3{
       margin-bottom:12px;
       font-size:22px;
-      font-weight:900;
+      font-weight:1000;
       letter-spacing:-0.01em;
     }
     .card p{
       margin-bottom:18px;
       color:var(--muted);
       font-size:16px;
-      font-weight:500;
+      font-weight:600;
     }
+
     .feature-list{ list-style:none; }
     .feature-list li{
       margin-bottom:16px;
@@ -412,134 +411,85 @@
       position:absolute;
       left:0;
       top:0;
-      color:var(--orange);
-      font-weight:900;
+      color:var(--orange-deep);
+      font-weight:1000;
     }
     .feature-list strong{
       display:block;
-      font-weight:800;
+      font-weight:900;
       color:var(--dark);
     }
     .feature-list span{
       display:block;
       margin-top:6px;
-      max-height:0;
-      overflow:hidden;
-      opacity:0;
       font-size:14px;
       color:var(--muted);
-      transition:max-height .35s ease, opacity .25s ease;
+      font-weight:600;
     }
-    .card:hover .feature-list span{ max-height:120px; opacity:1; }
     .feature-list a{ text-decoration:none; }
-    .feature-list a:hover{ color:var(--blue-2); text-decoration:underline; }
+    .feature-list a:hover{ color:var(--blue-700); text-decoration:underline; }
 
-    /* the gradient sentence that sits inside the card (kept) */
-    .card .micro-gradient{
-      margin-top:10px;
-      font-weight:900;
-      font-size:16px;
-      background:linear-gradient(90deg, var(--blue-2), var(--orange));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+    /* Sentence + browser logos (separate BELOW the card) */
+    .below-card{
+      margin-top:14px;
+      padding:0 6px;
     }
-
-    /* ---------- NEW: SUPPORTED BROWSERS (moved OUT of the card) ---------- */
-    .supported-browsers{
-      padding:36px 0 0;
-      background:var(--bg-light);
-    }
-    .supported-wrap{
-      max-width:var(--container);
-      margin:0 auto;
-      padding:0 var(--pad-x);
-    }
-    .supported-title{
-      text-align:center;
-      font-size:34px;
+    .below-card .below-title{
+      font-size:18px;
       font-weight:1000;
-      letter-spacing:-0.03em;
-      margin:12px auto 22px;
-      max-width:980px;
-      background:linear-gradient(90deg, var(--blue-2), var(--orange));
+      margin:10px 0 14px;
+      background:linear-gradient(90deg, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
     }
+
     .browser-grid{
-      max-width:1050px;
-      margin:0 auto;
       display:grid;
-      grid-template-columns:repeat(5, 1fr);
-      gap:16px;
-      padding-bottom:6px;
+      grid-template-columns:repeat(5, minmax(120px, 1fr));
+      gap:14px;
+      align-items:stretch;
     }
     .browser-tile{
-      background:rgba(255,255,255,0.92);
+      background:#ffffff;
       border:1px solid rgba(15,23,42,0.06);
-      border-radius:18px;
-      padding:16px 14px 14px;
-      box-shadow:0 10px 26px rgba(15,23,42,0.06);
+      border-radius:16px;
+      padding:14px 12px;
+      box-shadow:0 12px 30px rgba(15,23,42,0.06);
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:108px;
-      transition:transform .18s ease, box-shadow .18s ease;
+      min-height:110px;
     }
-    .browser-tile:hover{
-      transform:translateY(-2px);
-      box-shadow:0 18px 40px rgba(245,158,11,0.12);
-    }
-    .browser-ico{
+    .browser-tile img{
       width:44px;
       height:44px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      background:#fff;
-      border:1px solid rgba(15,23,42,0.06);
-    }
-    .browser-ico img{
-      width:34px;
-      height:34px;
       object-fit:contain;
+      filter: drop-shadow(0 6px 14px rgba(15,23,42,0.10));
     }
-    .browser-name{
-      font-weight:800;
-      font-size:14px;
-      color:#0b1220;
+    .browser-tile span{
+      font-weight:900;
       text-align:center;
-      line-height:1.2;
-    }
-    .fallback-ico{
-      width:34px; height:34px;
-      border-radius:10px;
-      background:linear-gradient(135deg, rgba(37,99,235,0.10), rgba(245,158,11,0.12));
-      display:grid;
-      place-items:center;
+      font-size:14px;
+      line-height:1.25;
       color:#0b1220;
-      font-weight:1000;
-      font-size:13px;
     }
 
-    @media (max-width: 1024px){
+    @media (max-width: 1100px){
       .browser-grid{ grid-template-columns:repeat(3, 1fr); }
-      .supported-title{ font-size:30px; }
     }
     @media (max-width: 640px){
       .browser-grid{ grid-template-columns:repeat(2, 1fr); }
-      .supported-title{ font-size:26px; }
     }
 
     /* ---------- CAROUSEL ---------- */
     .carousel{
       background:
-        radial-gradient(1200px 500px at 20% 10%, rgba(245,158,11,0.16), transparent 60%),
-        radial-gradient(900px 420px at 80% 20%, rgba(37,99,235,0.12), transparent 62%),
-        linear-gradient(135deg, #fff7ed 0%, #eaf2ff 50%, #f8fafc 100%);
-      padding:var(--section-y) 0 46px;
+        radial-gradient(1200px 520px at 15% 10%, rgba(245,158,11,0.18), transparent 60%),
+        radial-gradient(900px 420px at 80% 20%, rgba(37,99,235,0.10), transparent 62%),
+        linear-gradient(135deg, #fff7ed 0%, #eaf2ff 55%, #f8fafc 100%);
+      padding:var(--section-y) 0 40px;
     }
     .carousel-shell{
       max-width:var(--container);
@@ -564,7 +514,7 @@
       letter-spacing:-0.035em;
       color:#0b1220;
     }
-    .carousel-caption p{ margin-top:10px; font-size:16px; color:#475569; font-weight:500; }
+    .carousel-caption p{ margin-top:10px; font-size:16px; color:#475569; font-weight:600; }
 
     .carousel-item img,
     .carousel-item video{
@@ -578,9 +528,7 @@
       margin:0 auto 22px;
     }
 
-    /* NO navigation arrows (per requirement) */
-    .carousel-btn{ display:none !important; }
-
+    /* No navigation arrows (per request) */
     .carousel-nav{
       display:flex;
       justify-content:center;
@@ -592,26 +540,26 @@
     .carousel-dot{
       padding:10px 18px;
       border-radius:999px;
-      background:rgba(255,255,255,0.78);
+      background:rgba(255,255,255,0.75);
       backdrop-filter:blur(10px);
       border:1px solid rgba(148,163,184,0.55);
       color:#0f172a;
       font-size:13px;
-      font-weight:850;
+      font-weight:900;
       letter-spacing:-0.01em;
       transition:transform .16s ease, background .16s ease, border-color .16s ease;
       cursor:pointer;
     }
     .carousel-dot:hover{
       transform:translateY(-1px);
-      background:rgba(255,255,255,0.95);
+      background:rgba(255,255,255,0.92);
       border-color:rgba(245,158,11,0.55);
     }
     .carousel-dot.active{
-      background:linear-gradient(135deg,var(--orange),var(--orange-2));
+      background:linear-gradient(135deg, var(--orange), var(--orange-2));
       border-color:transparent;
       color:#0b1220;
-      box-shadow:0 14px 34px rgba(245,158,11,0.22);
+      box-shadow:0 14px 34px rgba(245,158,11,0.24);
     }
     .carousel-dot .pill{
       width:9px;
@@ -622,77 +570,75 @@
       margin-right:8px;
       vertical-align:middle;
     }
-    .carousel-dot.active .pill{ background:rgba(15,23,42,0.75); }
-
+    .carousel-dot.active .pill{ background:rgba(15,23,42,0.95); }
     .carousel-dot:focus-visible{
-      outline:3px solid rgba(245,158,11,0.35);
+      outline:3px solid rgba(245,158,11,0.30);
       outline-offset:3px;
     }
 
     @media (max-width: 900px){
       .carousel-item img, .carousel-item video{ height:320px; }
-      .carousel-track{ min-height:400px; }
+      .carousel-track{ min-height:410px; }
       .carousel-caption strong{ font-size:28px; }
     }
 
-    /* ---------- DEMO STRIP (below carousel) ---------- */
+    /* Demo strip below carousel */
     .demo-strip{
-      padding:18px 0 0;
-      background:transparent;
+      max-width:1240px;
+      margin:26px auto 0;
+      padding:0 12px;
     }
-    .demo-strip .container{
-      max-width:var(--container);
-      margin:0 auto;
-      padding:0 var(--pad-x);
-    }
-    .demo-box{
-      background:#fff;
+    .demo-strip-inner{
+      background:#ffffff;
+      border-radius:22px;
       border:1px solid rgba(15,23,42,0.08);
-      border-radius:18px;
-      box-shadow:0 18px 44px rgba(15,23,42,0.10);
-      padding:18px 20px;
+      box-shadow:0 18px 44px rgba(15,23,42,0.08);
+      padding:20px 22px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
     }
-    .demo-box h3{
+    .demo-strip h3{
       font-size:22px;
       font-weight:1000;
       letter-spacing:-0.02em;
       color:#0b1220;
+      margin:0;
     }
-    .demo-btn{
+    .demo-strip a{
+      text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       padding:12px 18px;
       border-radius:999px;
-      border:2px solid rgba(15,23,42,0.16);
-      background:#fff;
-      text-decoration:none;
-      font-weight:900;
+      border:2px solid rgba(15,23,42,0.18);
+      font-weight:1000;
       color:#0b1220;
+      background:#fff;
       transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
       white-space:nowrap;
     }
-    .demo-btn:hover{
+    .demo-strip a:hover{
       transform:translateY(-1px);
       border-color:rgba(245,158,11,0.55);
-      box-shadow:0 14px 34px rgba(245,158,11,0.14);
+      box-shadow:0 14px 34px rgba(245,158,11,0.16);
     }
-    @media (max-width: 720px){
-      .demo-box{ flex-direction:column; align-items:flex-start; }
-      .demo-btn{ width:100%; justify-content:center; }
-      .demo-box h3{ font-size:18px; }
+    .demo-strip a span{ margin-left:8px; }
+
+    @media (max-width: 640px){
+      .demo-strip-inner{ flex-direction:column; align-items:flex-start; }
+      .demo-strip a{ width:100%; justify-content:center; }
+      .demo-strip h3{ font-size:18px; }
     }
 
-    /* ---------- PRICING / EVALUATION (ACP pattern) ---------- */
+    /* ---------- PRICING / EVALUATION SECTION ---------- */
     .pricing-compare{
       padding: calc(var(--section-y) - 12px) 0;
       background:
-        radial-gradient(900px 380px at 25% 0%, rgba(245,158,11,0.16), transparent 60%),
-        linear-gradient(180deg,#f7faff 0%, #ffffff 65%);
+        radial-gradient(900px 380px at 25% 0%, rgba(245,158,11,0.14), transparent 60%),
+        linear-gradient(180deg,#fff7ed 0%, #ffffff 65%);
     }
     .pricing-wrap{
       max-width: var(--container);
@@ -702,7 +648,7 @@
     }
     .pricing-title{
       font-size: 36px;
-      font-weight: 800;
+      font-weight: 1000;
       letter-spacing: -0.02em;
       color: #0b1220;
       margin-bottom: 10px;
@@ -713,15 +659,18 @@
       font-size: 16px;
       color: var(--muted-2);
       line-height: 1.7;
-      font-weight:500;
+      font-weight:600;
     }
+
     .pricing-grid{
       display: grid;
       grid-template-columns: 1fr;
       gap: 24px;
       align-items: stretch;
-      justify-content:center;
+      max-width: 980px;
+      margin: 0 auto;
     }
+
     .compare-card{
       background: rgba(255,255,255,0.92);
       border: 1px solid rgba(15,23,42,0.08);
@@ -729,8 +678,6 @@
       box-shadow: 0 18px 48px rgba(15,23,42,0.10);
       overflow: hidden;
       position: relative;
-      max-width: 980px;
-      margin: 0 auto;
     }
     .compare-card::before{
       content:"";
@@ -738,9 +685,10 @@
       inset:0;
       background:
         radial-gradient(900px 360px at 30% 15%, rgba(245,158,11,0.12), transparent 60%),
-        radial-gradient(900px 360px at 70% 10%, rgba(37,99,235,0.08), transparent 65%);
+        radial-gradient(900px 360px at 70% 10%, rgba(37,99,235,0.10), transparent 65%);
       pointer-events:none;
     }
+
     .compare-cols{
       position: relative;
       display: grid;
@@ -753,15 +701,17 @@
     }
     .plan-col + .plan-col{
       border-left: 1px solid rgba(15,23,42,0.08);
-      background: rgba(245,158,11,0.05);
+      background: rgba(245,158,11,0.06);
     }
+
     .plan-col h3{
       font-size: 22px;
-      font-weight: 900;
+      font-weight: 1000;
       letter-spacing: -0.01em;
       margin: 6px 0 14px;
       color: #0b1220;
     }
+
     .plan-kicker{
       display: inline-block;
       font-size: 13px;
@@ -775,12 +725,21 @@
       display: flex;
       align-items: baseline;
       gap: 10px;
-      flex-wrap:wrap;
     }
     .plan-amount-row .amt{
       font-size: 36px;
       font-weight: 1000;
       letter-spacing: -0.03em;
+      color: #0b1220;
+      line-height:1;
+    }
+    /* star AFTER 7 */
+    .plan-amount-row .amt .star{
+      font-size: 18px;
+      font-weight: 1000;
+      position: relative;
+      top: -10px;
+      margin-left: 2px;
       color: #0b1220;
     }
     .plan-amount-row .unit{
@@ -790,9 +749,10 @@
     }
     .plan-divider{
       height: 1px;
-      background: rgba(245,158,11,0.20);
+      background: rgba(245,158,11,0.22);
       margin: 14px 0 18px;
     }
+
     .plan-list{
       list-style: none;
       padding: 0;
@@ -814,8 +774,9 @@
       left: 0;
       top: 0;
       font-weight: 1000;
-      color: var(--orange);
+      color: var(--orange-deep);
     }
+
     .plan-cta-row{
       margin-top: 22px;
       display: flex;
@@ -831,25 +792,25 @@
       text-decoration: none;
       min-width: 220px;
       transition: transform .18s ease, box-shadow .18s ease, filter .18s ease, background .18s ease, border-color .18s ease;
-      white-space:nowrap;
     }
     .plan-btn.outline{
       background: #ffffff;
-      color: #0b1220;
-      border: 1.5px solid rgba(15,23,42,0.18);
+      color: var(--blue-700);
+      border: 1.5px solid rgba(27,87,166,0.55);
       box-shadow: 0 10px 26px rgba(15,23,42,0.08);
     }
     .plan-btn.solid{
       color: #0b1220;
       border: 1px solid transparent;
-      background: linear-gradient(135deg,var(--orange),var(--orange-2));
-      box-shadow: 0 18px 44px rgba(245,158,11,0.25);
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      box-shadow: 0 18px 44px rgba(245,158,11,0.22);
     }
     .plan-btn:hover{
       transform: translateY(-2px);
-      box-shadow: 0 22px 56px rgba(245,158,11,0.22);
+      box-shadow: 0 22px 56px rgba(245,158,11,0.20);
       filter: brightness(1.02);
     }
+
     .pricing-footnote{
       margin-top: 18px;
       font-size: 13px;
@@ -857,7 +818,7 @@
       font-weight:600;
     }
     .pricing-footnote a{
-      color: var(--blue-2);
+      color: var(--blue-700);
       text-decoration: underline;
       font-weight:800;
     }
@@ -868,11 +829,14 @@
         border-left: none;
         border-top: 1px solid rgba(15,23,42,0.08);
       }
+    }
+    @media (max-width: 640px){
       .pricing-title{ font-size: 30px; }
-      .plan-btn{ width:100%; min-width:0; }
+      .plan-col{ padding: 26px 22px; }
+      .plan-btn{ width: 100%; min-width: 0; }
     }
 
-    /* ---------- FAQ SECTION (ACP same) ---------- */
+    /* ---------- FAQ SECTION ---------- */
     .faq-section{
       padding:var(--section-y) 0;
       background:#f8fafc;
@@ -890,7 +854,7 @@
       color:var(--muted-2);
       margin-bottom:32px;
       padding:0 var(--pad-x);
-      font-weight:500;
+      font-weight:600;
     }
     .faq-carousel{
       max-width:1040px;
@@ -919,9 +883,9 @@
       width:100%;
     }
     .faq-item.active{ display:block; }
-    .faq-item h3{ font-size:18px; font-weight:900; margin-bottom:10px; }
-    .faq-item p{ font-size:15px; line-height:1.7; color:#475569; font-weight:500; }
-    .faq-item a{ color:var(--blue-2); text-decoration:underline; font-weight:800; }
+    .faq-item h3{ font-size:18px; font-weight:1000; margin-bottom:10px; }
+    .faq-item p{ font-size:15px; line-height:1.7; color:#475569; font-weight:600; }
+    .faq-item a{ color:var(--blue-700); text-decoration:underline; font-weight:900; }
 
     .faq-nav{
       border:none;
@@ -937,8 +901,8 @@
       flex:0 0 auto;
       transform: translateY(-2px);
     }
-    .faq-nav:hover{ color:var(--orange); transform:scale(1.08); }
-    .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.35); outline-offset:3px; }
+    .faq-nav:hover{ color:var(--orange-deep); transform:scale(1.08); }
+    .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.28); outline-offset:3px; }
 
     @media (max-width: 640px){
       .faq-carousel{ flex-direction:column; }
@@ -964,8 +928,8 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <!-- updated BSP logo filename per your repo -->
-      <img src="Browser%20Security%20Plus_Black%20(2).png" alt="Browser Security Plus logo">
+      <!-- Update this filename if your repo name differs -->
+      <img src="Browser Security Plus_Black (2).png" alt="Browser Security Plus logo">
     </div>
 
     <nav aria-label="Primary">
@@ -980,23 +944,20 @@
 
 <section class="hero">
   <div class="container">
-    <h1>
-      <span class="hero-title-main">Secure and manage enterprise browsers<br/>with the right controls.</span>
-    </h1>
+    <h1>Secure and manage enterprise browsers<br/>with the right controls.</h1>
 
     <div class="hero-buttons">
       <div class="hero-cta">
-        <a target="_blank" rel="noopener" href="https://www.manageengine.com/browser-security/download.html" class="btn btn-primary">Download</a>
+        <a target="_blank" rel="noopener" href="https://www.manageengine.com/browser-security/download.html" class="btn btn-orange">Download</a>
         <span class="cta-note">On-premise</span>
       </div>
 
       <div class="hero-cta">
-        <a target="_blank" rel="noopener" href="https://www.manageengine.com/products/desktop-central/cloud/" class="btn btn-primary">Sign up</a>
+        <a target="_blank" rel="noopener" href="https://www.manageengine.com/products/desktop-central/cloud/" class="btn btn-orange">Sign up</a>
         <span class="cta-note">via Endpoint Central</span>
       </div>
     </div>
 
-    <!-- exact sentence you specified -->
     <small>30-day free trial · No credit card required · Free up to 25 endpoints forever</small>
   </div>
 </section>
@@ -1007,23 +968,13 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <!-- trusted industry logos (using your repo screenshot file) -->
+    <!-- Sourced from the BSP page links (individual logos) -->
     <div class="trust-logos" aria-label="Customer logos">
-      <div class="logo-tile">
-        <img src="Screenshot%202026-02-05%20144531.png" alt="Trusted by leading organizations">
-      </div>
-      <div class="logo-tile">
-        <img src="Screenshot%202026-02-05%20144531.png" alt="Trusted by leading organizations">
-      </div>
-      <div class="logo-tile">
-        <img src="Screenshot%202026-02-05%20144531.png" alt="Trusted by leading organizations">
-      </div>
-      <div class="logo-tile">
-        <img src="Screenshot%202026-02-05%20144531.png" alt="Trusted by leading organizations">
-      </div>
-      <div class="logo-tile">
-        <img src="Screenshot%202026-02-05%20144531.png" alt="Trusted by leading organizations">
-      </div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-detroi.png" alt="City of Detroit"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/doitt.png" alt="DOITT"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/st-clair-country.png" alt="St. Clair County State Bank"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/erh.png" alt="ERH"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-dallas.png" alt="City of Dallas"></div>
     </div>
 
     <div class="trust-spacer" aria-hidden="true"></div>
@@ -1049,197 +1000,162 @@
   </div>
 </section>
 
-<section class="features" id="features">
+<section class="features">
   <h2 class="feature-heading">
-    <span class="highlight">Manage and Secure every browser in your organization</span>
+    Get <span class="highlight">enterprise browser security</span> with
+    <span class="highlight">policy-based controls</span>—without slowing users down.
   </h2>
 
   <div class="feature-grid">
-    <div class="card">
-      <h3>Visibility & Insights</h3>
-      <p>Get clarity into browser usage, configurations, and policy posture across endpoints.</p>
-      <ul class="feature-list">
-        <li>
-          <strong>Audit browser settings and configurations</strong>
-          <span>Identify risky settings and configuration drift across browsers and devices.</span>
-        </li>
-        <li>
-          <strong>Track policy status and changes</strong>
-          <span>Maintain a clear view of policy application and configuration changes over time.</span>
-        </li>
-      </ul>
+    <!-- Column 1 -->
+    <div>
+      <div class="card">
+        <h3>Security Hardening &amp; Addon Control</h3>
+        <p>Lock down browsers with the right settings, extensions, and controls.</p>
+        <ul class="feature-list">
+          <li>
+            <strong><a href="https://www.manageengine.com/browser-security/features.html">Browser hardening policies</a></strong>
+            <span>Standardize secure settings and reduce risky misconfigurations.</span>
+          </li>
+          <li>
+            <strong><a href="https://www.manageengine.com/browser-security/features.html">Extension &amp; add-on management</a></strong>
+            <span>Allowlist trusted extensions and block shadow add-ons.</span>
+          </li>
+          <li>
+            <strong><a href="https://www.manageengine.com/browser-security/features.html">Policy-based enforcement</a></strong>
+            <span>Apply consistent controls across different browsers—centrally.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- REQUIRED: sentence + browser logos OUTSIDE the card -->
+      <div class="below-card" aria-label="Supported browsers">
+        <div class="below-title">Manage multiple browsers seamlessly from a single interface.</div>
+
+        <div class="browser-grid" id="browserGrid">
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Google%20Chrome%20icon%20(March%202011).svg" alt="Google Chrome" loading="lazy" />
+            <span>Google Chrome</span>
+          </div>
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft%20Edge%20logo%20(2019).svg" alt="Microsoft Edge" loading="lazy" />
+            <span>Microsoft Edge</span>
+          </div>
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Firefox%20logo,%202019.svg" alt="Mozilla Firefox" loading="lazy" />
+            <span>Mozilla Firefox</span>
+          </div>
+          <div class="browser-tile">
+            <!-- Ulaa logo from Zoho/ManageEngine asset -->
+            <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy" />
+            <span>Ulaa</span>
+          </div>
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Brave%20Lion%20Icon.svg" alt="Brave" loading="lazy" />
+            <span>Brave</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Yandex%20Browser%20icon.svg" alt="Yandex" loading="lazy" />
+            <span>Yandex</span>
+          </div>
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vivaldi%20web%20browser%20logo.svg" alt="Vivaldi" loading="lazy" />
+            <span>Vivaldi</span>
+          </div>
+          <div class="browser-tile">
+            <img src="https://coccoc.com/assets/images/coccoc-icon.png" alt="Cốc Cốc" loading="lazy" />
+            <span>Cốc Cốc</span>
+          </div>
+          <div class="browser-tile">
+            <!-- Naver Whale: use official favicon as colored icon -->
+            <img src="https://whale.naver.com/favicon.ico" alt="Naver Whale" loading="lazy" />
+            <span>Naver Whale</span>
+          </div>
+          <div class="browser-tile">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Internet%20Explorer%2010%20logo.svg" alt="Internet Explorer" loading="lazy" />
+            <span>Internet Explorer</span>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Column 2 -->
     <div class="card">
-      <h3>Security Hardening & Addon Control</h3>
-      <p>Lock down browsers with the right settings, extensions, and controls.</p>
-      <!-- we keep this sentence (you wanted the hue) BUT we moved the logos OUT of the card -->
-      <div class="micro-gradient">Manage multiple browsers seamlessly from a single interface.</div>
-    </div>
-
-    <div class="card">
-      <h3>Web Filtering & Threat Defense</h3>
+      <h3>Web Filtering &amp; Threat Defense</h3>
       <p>Reduce web risk with safer browsing controls and policy-driven protection.</p>
       <ul class="feature-list">
         <li>
-          <strong>Website access controls</strong>
-          <span>Allow or block categories/domains to reduce exposure to risky destinations.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Website access controls</a></strong>
+          <span>Block risky categories and enforce safe access rules.</span>
         </li>
         <li>
-          <strong>Consistent policy enforcement</strong>
-          <span>Apply unified web controls across supported browsers.</span>
+          <strong><a href="https://www.manageengine.com/browser-security/features.html">Consistent policy enforcement</a></strong>
+          <span>Maintain visibility and control across browsers and endpoints.</span>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- MOVED OUTSIDE THE CARD: Supported browsers block (separate below the cards) -->
-<section class="supported-browsers" aria-label="Supported browsers">
-  <div class="supported-wrap">
-    <h2 class="supported-title">Manage multiple browsers seamlessly from a single interface.</h2>
-
-    <div class="browser-grid" id="browserGrid">
-      <!-- Use reliable icon sources where possible + fallback for any that fail -->
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <img src="https://cdn.simpleicons.org/googlechrome" alt="Google Chrome" onerror="this.replaceWith(makeFallback('GC'));">
-        </div>
-        <div class="browser-name">Google Chrome</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <img src="https://cdn.simpleicons.org/microsoftedge" alt="Microsoft Edge" onerror="this.replaceWith(makeFallback('ME'));">
-        </div>
-        <div class="browser-name">Microsoft Edge</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <img src="https://cdn.simpleicons.org/firefoxbrowser" alt="Mozilla Firefox" onerror="this.replaceWith(makeFallback('FX'));">
-        </div>
-        <div class="browser-name">Mozilla Firefox</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <!-- Ulaa (fallback guaranteed) -->
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Ulaa_browser_logo.svg/64px-Ulaa_browser_logo.svg.png"
-               alt="Ulaa" onerror="this.replaceWith(makeFallback('U'));">
-        </div>
-        <div class="browser-name">Ulaa</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <img src="https://cdn.simpleicons.org/brave" alt="Brave" onerror="this.replaceWith(makeFallback('BV'));">
-        </div>
-        <div class="browser-name">Brave</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <img src="https://cdn.simpleicons.org/yandex" alt="Yandex" onerror="this.replaceWith(makeFallback('Y'));">
-        </div>
-        <div class="browser-name">Yandex</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <img src="https://cdn.simpleicons.org/vivaldi" alt="Vivaldi" onerror="this.replaceWith(makeFallback('V'));">
-        </div>
-        <div class="browser-name">Vivaldi</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <!-- Cốc Cốc (fallback guaranteed) -->
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/CocCoc_logo.svg/64px-CocCoc_logo.svg.png"
-               alt="Cốc Cốc" onerror="this.replaceWith(makeFallback('CC'));">
-        </div>
-        <div class="browser-name">Cốc Cốc</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <!-- Naver Whale (fix: use stable wiki image + fallback) -->
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Naver_Whale_logo.svg/64px-Naver_Whale_logo.svg.png"
-               alt="Naver Whale" onerror="this.replaceWith(makeFallback('NW'));">
-        </div>
-        <div class="browser-name">Naver Whale</div>
-      </div>
-
-      <div class="browser-tile">
-        <div class="browser-ico">
-          <!-- Internet Explorer (fallback if icon fails) -->
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Internet_Explorer_11_logo.svg/64px-Internet_Explorer_11_logo.svg.png"
-               alt="Internet Explorer" onerror="this.replaceWith(makeFallback('IE'));">
-        </div>
-        <div class="browser-name">Internet Explorer</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="carousel" aria-label="Product walkthrough" tabindex="0" id="walkthrough">
+<section class="carousel" aria-label="Product walkthrough" tabindex="0">
   <div class="carousel-shell">
-
     <div class="carousel-viewport">
       <div class="carousel-track">
         <div class="carousel-item active" data-title="Add-on control">
           <div class="carousel-caption">
-            <strong>Add-on control</strong>
-            <p>Control extensions and add-ons to reduce shadow IT and prevent risky browser behavior.</p>
+            <strong>Control extensions and add-ons</strong>
+            <p>Allow trusted add-ons and block risky or unauthorized extensions—centrally.</p>
           </div>
           <video autoplay muted loop playsinline preload="metadata">
-            <source src="add%20on%20management.mp4" type="video/mp4">
+            <source src="add on management.mp4" type="video/mp4">
           </video>
         </div>
 
         <div class="carousel-item" data-title="Extension management">
           <div class="carousel-caption">
-            <strong>Extension management</strong>
-            <p>Approve, block, and monitor extensions across supported browsers with centralized policies.</p>
+            <strong>Standardize browser policies at scale</strong>
+            <p>Apply consistent browser settings across teams and locations in minutes.</p>
           </div>
           <video muted loop playsinline preload="metadata">
-            <source src="extension%20management.mp4" type="video/mp4">
+            <source src="extension management.mp4" type="video/mp4">
           </video>
         </div>
 
         <div class="carousel-item" data-title="Web filtering">
           <div class="carousel-caption">
-            <strong>Web filtering</strong>
-            <p>Enforce website access controls to improve browsing safety and reduce web-borne risk.</p>
+            <strong>Enforce safe browsing</strong>
+            <p>Reduce exposure to risky sites using policy-driven web access controls.</p>
           </div>
           <video muted loop playsinline preload="metadata">
-            <source src="web%20filter.mp4" type="video/mp4">
+            <source src="web filter.mp4" type="video/mp4">
           </video>
         </div>
       </div>
 
       <div class="carousel-nav" aria-label="Choose a slide"></div>
-    </div>
-  </div>
 
-  <!-- Demo strip below carousel -->
-  <div class="demo-strip">
-    <div class="container">
-      <div class="demo-box">
-        <h3>Want to see how device policies work in your environment?</h3>
-        <a class="demo-btn" href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">
-          Request a demo &nbsp;→
-        </a>
+      <!-- Demo strip below carousel -->
+      <div class="demo-strip" aria-label="Demo prompt">
+        <div class="demo-strip-inner">
+          <h3>Want to see how device policies work in your environment?</h3>
+          <a href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">
+            Request a demo <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <section class="pricing-compare" id="pricing">
   <div class="pricing-wrap">
-    <!-- ACP-style heading pattern -->
+    <!-- Follow ACP wording -->
     <h2 class="pricing-title">Pick the right path to control</h2>
-    <p class="pricing-sub">Start free to validate policies. Upgrade when you’re ready to roll out controls at scale.</p>
+    <p class="pricing-sub">
+      Start free to validate policies. Upgrade when you are ready to roll out controls at scale.
+    </p>
 
     <div class="pricing-grid">
       <div class="compare-card" aria-label="Plans comparison">
@@ -1259,16 +1175,15 @@
             <div class="plan-divider" aria-hidden="true"></div>
 
             <ul class="plan-list">
-              <li>Try core browser controls with centralized policies</li>
-              <li>Validate configurations before rolling out broadly</li>
-              <li>Get visibility into policy status and changes</li>
-              <li>Perfect for small teams and pilot rollouts</li>
+              <li>Start with baseline controls and centralized visibility</li>
+              <li>Validate policies before scaling enforcement</li>
+              <li>Standardize browser settings and reduce drift</li>
+              <li>Ideal for small teams and pilot rollouts</li>
+              <li>No credit card required</li>
             </ul>
 
             <div class="plan-cta-row">
-              <a href="https://www.manageengine.com/browser-security/download.html"
-                 target="_blank" rel="noopener"
-                 class="plan-btn outline">Get started</a>
+              <a href="https://www.manageengine.com/browser-security/download.html" target="_blank" rel="noopener" class="plan-btn outline">Get started</a>
             </div>
           </div>
 
@@ -1279,35 +1194,36 @@
             <div class="plan-price">
               <span class="plan-kicker">STARTS AT</span>
               <div class="plan-amount-row">
-                <span class="amt">$7*</span>
-                <span class="unit">/ device / year</span>
+                <span class="amt">$7<span class="star">*</span></span>
+                <span class="unit">/ device per year</span>
               </div>
             </div>
 
             <div class="plan-divider" aria-hidden="true"></div>
 
             <ul class="plan-list">
-              <li>Enforce browser hardening across the organization</li>
-              <li>Policy-driven extension and add-on control</li>
-              <li>Web filtering and safer browsing controls</li>
-              <li>Audit-ready visibility and reporting</li>
+              <li>Enforce security hardening policies at scale</li>
+              <li>Centralized add-on and extension control</li>
+              <li>Policy-driven web filtering and protection</li>
+              <li>Audit-ready policy visibility and reporting</li>
+              <li>Designed for enterprise environments</li>
             </ul>
 
             <div class="plan-cta-row">
-              <a href="https://www.manageengine.com/browser-security/get-quote.html"
-                 target="_blank" rel="noopener"
-                 class="plan-btn solid">Get Quote</a>
+              <a href="https://www.manageengine.com/browser-security/get-quote.html" target="_blank" rel="noopener" class="plan-btn solid">
+                Get quote
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <p class="pricing-footnote">
-      *As the number of devices increases, the price per device decreases.<br/>
-      For full pricing, visit
-      <a href="https://store.manageengine.com/secure-browser/" target="_blank" rel="noopener">ManageEngine Store</a>
-    </p>
+      <p class="pricing-footnote">
+        *As the number of devices increases, the price per device decreases.<br/>
+        For full pricing, visit
+        <a href="https://store.manageengine.com/secure-browser/" target="_blank" rel="noopener">ManageEngine Store</a>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -1325,30 +1241,28 @@
           <p>
             Yes, you can request a personalized
             <a href="https://www.manageengine.com/browser-security/request-demo.html" target="_blank" rel="noopener">demo</a>
-            to see how browser security policies can be enforced in your environment.
+            to see how browser policies can be enforced in your environment.
           </p>
         </div>
 
         <div class="faq-item">
           <h3>Does ManageEngine Browser Security Plus have a free plan?</h3>
-          <p>Yes. Browser Security Plus offers a Free Edition that supports up to 25 endpoints.</p>
+          <p>Yes. Browser Security Plus offers a Free Edition that supports up to 25 devices.</p>
         </div>
 
         <div class="faq-item">
           <h3>Is support available for the Free Edition?</h3>
           <p>
-            Yes, Browser Security Plus provides support resources and documentation. For more details, visit the
-            <a href="https://www.manageengine.com/browser-security/support.html" target="_blank" rel="noopener">Support</a>
-            page.
+            Yes, Browser Security Plus provides technical support along with access to
+            <a href="https://www.manageengine.com/browser-security/help.html" target="_blank" rel="noopener">product documentation</a>.
           </p>
         </div>
 
         <div class="faq-item">
-          <h3>Where can I find product documentation?</h3>
+          <h3>Where can I learn more about features and capabilities?</h3>
           <p>
-            You can access the product documentation and guides from the
-            <a href="https://www.manageengine.com/browser-security/help.html" target="_blank" rel="noopener">Documents</a>
-            page.
+            You can explore the full feature set on the
+            <a href="https://www.manageengine.com/browser-security/features.html" target="_blank" rel="noopener">features page</a>.
           </p>
         </div>
       </div>
@@ -1363,15 +1277,7 @@
 </footer>
 
 <script>
-  /* ---------- Supported browsers fallback creator ---------- */
-  function makeFallback(text){
-    const d = document.createElement('div');
-    d.className = 'fallback-ico';
-    d.textContent = text;
-    return d;
-  }
-
-  /* ---------- Carousel (NO auto scroll, NO arrows) ---------- */
+  /* ================= CAROUSEL (NO ARROWS, NO AUTOSCROLL) ================= */
   const carouselEl = document.querySelector(".carousel");
   const slides = carouselEl.querySelectorAll(".carousel-item");
   const nav = carouselEl.querySelector(".carousel-nav");
@@ -1383,7 +1289,6 @@
       if (v) { try { v.pause(); } catch (_) {} }
     });
   }
-
   function playActiveMedia() {
     const active = slides[currentIndex];
     const v = active.querySelector("video");
@@ -1418,10 +1323,16 @@
     });
   }
 
+  // Keyboard navigation still allowed
+  carouselEl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") setActive(currentIndex - 1);
+    if (e.key === "ArrowRight") setActive(currentIndex + 1);
+  });
+
   buildNav();
   setActive(0);
 
-  /* ---------- FAQ carousel ---------- */
+  /* ================= FAQ CAROUSEL ================= */
   const faqItems = document.querySelectorAll(".faq-item");
   const faqPrev = document.querySelector(".faq-nav.prev");
   const faqNext = document.querySelector(".faq-nav.next");
@@ -1436,6 +1347,26 @@
   faqNext.addEventListener("click", () => showFaq(faqIndex + 1));
   faqPrev.addEventListener("click", () => showFaq(faqIndex - 1));
   showFaq(0);
+
+  /* ================= Browser logos: fail-safe fallback (prevents broken icons) ================= */
+  const FALLBACK_SVG = encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2563eb"/>
+          <stop offset="1" stop-color="#f59e0b"/>
+        </linearGradient>
+      </defs>
+      <rect x="3" y="3" width="38" height="38" rx="12" fill="url(#g)"/>
+      <path d="M14 23.5c0-4.7 3.6-8.5 8-8.5 2.2 0 4.2.9 5.7 2.4l-2 2.1A5.5 5.5 0 0 0 22 17.6c-3 0-5.4 2.6-5.4 5.9S19 29.4 22 29.4c2.4 0 4.4-1.7 5.1-4.1H22v-2.6h8c.1.5.1 1 .1 1.6 0 5-3.5 8.7-8.1 8.7-4.4 0-8-3.8-8-8.5z" fill="#0b1220" opacity="0.9"/>
+    </svg>
+  `);
+
+  document.querySelectorAll("#browserGrid img").forEach(img => {
+    img.addEventListener("error", () => {
+      img.src = "data:image/svg+xml;charset=utf-8," + FALLBACK_SVG;
+    }, { once: true });
+  });
 </script>
 
 </body>
