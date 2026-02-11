@@ -929,6 +929,80 @@
       background:#fff;
       font-weight:600;
     }
+    /* ===== Supported Browsers (full width, centered like live page) ===== */
+.supported-browsers {
+  padding: 56px 0;
+  background: #ffffff;
+}
+ 
+.supported-browsers .container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  text-align: center;
+}
+ 
+.supported-title {
+  font-size: 20px;
+  font-weight: 1000;
+  margin: 0 auto 18px;
+  max-width: 900px;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #2563eb, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+ 
+.browser-grid {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(120px, 1fr));
+  gap: 14px;
+  justify-items: center;
+  align-items: stretch;
+}
+ 
+.browser-tile {
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 16px;
+  padding: 14px 10px;
+  box-shadow: 0 12px 28px rgba(15,23,42,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 108px;
+}
+ 
+.browser-tile img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+ 
+.browser-tile span {
+  font-weight: 900;
+  font-size: 13px;
+  color: #0b1220;
+  text-align: center;
+  line-height: 1.2;
+}
+ 
+@media (max-width: 1100px) {
+  .browser-grid { grid-template-columns: repeat(4, minmax(130px, 1fr)); }
+}
+@media (max-width: 820px) {
+  .browser-grid { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
+}
+@media (max-width: 520px) {
+  .browser-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+}
+    
   </style>
 </head>
 
@@ -1038,55 +1112,7 @@
       </div>
 
       <!-- ✅ Supported browsers centered + responsive -->
-      <div class="below-card" aria-label="Supported browsers">
-        <div class="below-title">Manage multiple browsers seamlessly from a single interface.</div>
-
-        <div class="browser-grid" id="browserGrid">
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Google%20Chrome%20icon%20(March%202011).svg" alt="Google Chrome" loading="lazy" />
-            <span>Google Chrome</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft%20Edge%20logo%20(2019).svg" alt="Microsoft Edge" loading="lazy" />
-            <span>Microsoft Edge</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Firefox%20logo,%202019.svg" alt="Mozilla Firefox" loading="lazy" />
-            <span>Mozilla Firefox</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy" />
-            <span>Ulaa</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Brave%20Lion%20Icon.svg" alt="Brave" loading="lazy" />
-            <span>Brave</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Yandex%20Browser%20icon.svg" alt="Yandex" loading="lazy" />
-            <span>Yandex</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vivaldi%20web%20browser%20logo.svg" alt="Vivaldi" loading="lazy" />
-            <span>Vivaldi</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://coccoc.com/assets/images/coccoc-icon.png" alt="Cốc Cốc" loading="lazy" />
-            <span>Cốc Cốc</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://whale.naver.com/favicon.ico" alt="Naver Whale" loading="lazy" />
-            <span>Naver Whale</span>
-          </div>
-          <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Internet%20Explorer%2010%20logo.svg" alt="Internet Explorer" loading="lazy" />
-            <span>Internet Explorer</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
+     
     <!-- Column 2 -->
     <div class="card">
       <h3>Web Filtering &amp; Threat Defense</h3>
@@ -1101,6 +1127,63 @@
           <span>Maintain visibility and control across browsers and endpoints.</span>
         </li>
       </ul>
+    </div>
+  </div>
+</section>
+  <section class="supported-browsers" aria-label="Supported browsers">
+  <div class="container">
+    <div class="supported-title">Manage multiple browsers seamlessly from a single interface.</div>
+ 
+    <div class="browser-grid">
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/googlechrome.svg" alt="Google Chrome" loading="lazy">
+        <span>Google Chrome</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/microsoftedge.svg" alt="Microsoft Edge" loading="lazy">
+        <span>Microsoft Edge</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/firefoxbrowser.svg" alt="Mozilla Firefox" loading="lazy">
+        <span>Mozilla Firefox</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://www.manageengine.com/ems/images/logo/ulaa-logo.png" alt="Ulaa" loading="lazy">
+        <span>Ulaa</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/brave.svg" alt="Brave" loading="lazy">
+        <span>Brave</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/yandexbrowser.svg" alt="Yandex Browser" loading="lazy">
+        <span>Yandex</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/vivaldi.svg" alt="Vivaldi" loading="lazy">
+        <span>Vivaldi</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/coccoc.svg" alt="Cốc Cốc" loading="lazy">
+        <span>Cốc Cốc</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/naver.svg" alt="Naver Whale" loading="lazy">
+        <span>Naver Whale</span>
+      </div>
+ 
+      <div class="browser-tile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/internetexplorer.svg" alt="Internet Explorer" loading="lazy">
+        <span>Internet Explorer</span>
+      </div>
     </div>
   </div>
 </section>
