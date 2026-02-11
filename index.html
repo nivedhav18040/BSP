@@ -363,15 +363,20 @@
     }
 
     .feature-grid{
-      max-width:var(--container);
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
-      gap:24px;
-      padding:0 var(--pad-x);
-      align-items:start;
-    }
-
+  max-width:var(--container);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* ✅ 2 columns desktop */
+  gap:24px;
+  padding:0 var(--pad-x);
+  align-items:stretch;
+}
+ 
+@media (max-width: 980px){
+  .feature-grid{
+    grid-template-columns: 1fr; /* ✅ stack only on small screens */
+  }
+}
     .card{
       background:#fff;
       padding:26px;
@@ -381,6 +386,35 @@
       transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
       border:2px solid transparent;
     }
+    /* ACP-like subtle graphics on feature cards */
+.card{
+  position: relative;
+  overflow: hidden;
+}
+ 
+.card::after{
+  content:"";
+  position:absolute;
+  right:-60px;
+  top:-60px;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.22), transparent 65%);
+  pointer-events:none;
+}
+ 
+.card::before{
+  content:"";
+  position:absolute;
+  left:-70px;
+  bottom:-70px;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.16), transparent 65%);
+  pointer-events:none;
+}
     .card:hover{
       background-color:#fff7ed;
       border-color:rgba(245,158,11,0.55);
@@ -1135,57 +1169,56 @@
     <div class="supported-title">Manage multiple browsers seamlessly from a single interface.</div>
  
     <div class="browser-grid">
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/googlechrome.svg" alt="Google Chrome" loading="lazy">
-        <span>Google Chrome</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/microsoftedge.svg" alt="Microsoft Edge" loading="lazy">
-        <span>Microsoft Edge</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/firefoxbrowser.svg" alt="Mozilla Firefox" loading="lazy">
-        <span>Mozilla Firefox</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://www.manageengine.com/ems/images/logo/ulaa-logo.png" alt="Ulaa" loading="lazy">
-        <span>Ulaa</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/brave.svg" alt="Brave" loading="lazy">
-        <span>Brave</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/yandexbrowser.svg" alt="Yandex Browser" loading="lazy">
-        <span>Yandex</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/vivaldi.svg" alt="Vivaldi" loading="lazy">
-        <span>Vivaldi</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/coccoc.svg" alt="Cốc Cốc" loading="lazy">
-        <span>Cốc Cốc</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/naver.svg" alt="Naver Whale" loading="lazy">
-        <span>Naver Whale</span>
-      </div>
- 
-      <div class="browser-tile">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/internetexplorer.svg" alt="Internet Explorer" loading="lazy">
-        <span>Internet Explorer</span>
-      </div>
-    </div>
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Google%20Chrome%20icon%20(March%202011).svg" alt="Google Chrome" loading="lazy">
+    <span>Google Chrome</span>
   </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft%20Edge%20logo%20(2019).svg" alt="Microsoft Edge" loading="lazy">
+    <span>Microsoft Edge</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Firefox%20logo,%202019.svg" alt="Mozilla Firefox" loading="lazy">
+    <span>Mozilla Firefox</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://www.manageengine.com/ems/images/logo/ulaa-logo.png" alt="Ulaa" loading="lazy">
+    <span>Ulaa</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Brave%20lion%20icon.svg" alt="Brave" loading="lazy">
+    <span>Brave</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Yandex.Browser%20icon.svg" alt="Yandex Browser" loading="lazy">
+    <span>Yandex</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vivaldi%20web%20browser%20logo.svg" alt="Vivaldi" loading="lazy">
+    <span>Vivaldi</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/C%C3%B4%CC%81c%20C%C3%B4%CC%81c%20logo.svg" alt="Cốc Cốc" loading="lazy">
+    <span>Cốc Cốc</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://openiconlibrary.com/image2svg.php?svg=naver-whale.svg&size=64" alt="Naver Whale" loading="lazy">
+    <span>Naver Whale</span>
+  </div>
+ 
+  <div class="browser-tile">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Internet%20Explorer%2010%2B11%20logo.svg" alt="Internet Explorer" loading="lazy">
+    <span>Internet Explorer</span>
+  </div>
+</div>
 </section>
 
 <section class="carousel" aria-label="Product walkthrough" tabindex="0">
