@@ -73,7 +73,6 @@
       letter-spacing:-0.01em;
       white-space:nowrap;
     }
-    /* Reduce BSP logo size */
     .logo img{ height:32px; width:auto; }
 
     nav{
@@ -182,14 +181,12 @@
       border:2px solid transparent;
       user-select:none;
     }
-    /* Orange buttons (both Download & Sign up) */
     .btn-orange{
       background: linear-gradient(135deg, var(--orange), var(--orange-2));
       color:#0b1220;
       box-shadow:0 16px 34px rgba(245,158,11,0.26);
     }
 
-    /* "blink" hover */
     @keyframes blinkPulse{
       0%{ filter:brightness(1); }
       50%{ filter:brightness(1.12); }
@@ -235,7 +232,6 @@
       background:linear-gradient(180deg,#ffffff 0%,#f9fbff 55%,#ffffff 100%);
       border-bottom:1px solid var(--border);
     }
-    /* World map from ACP page */
     .trust-proof::before{
       content:"";
       position:absolute;
@@ -268,14 +264,18 @@
       color:var(--muted);
     }
 
+    /* ✅ Centered, responsive logo grid that won’t “stick left” */
     .trust-logos{
-      margin:0 auto;
+      max-width: 980px;
+      margin: 0 auto;
       display:grid;
-      grid-template-columns:repeat(5,1fr);
+      grid-template-columns:repeat(5, minmax(140px, 1fr));
       gap:22px;
       align-items:stretch;
+      justify-items:center;
     }
     .logo-tile{
+      width:100%;
       height:76px;
       padding:10px 16px;
       border-radius:16px;
@@ -284,8 +284,8 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      border:none;                 /* remove outline feel */
-      backdrop-filter: blur(10px); /* blend with bg */
+      border:none;
+      backdrop-filter: blur(10px);
       overflow:hidden;
     }
     .logo-tile img{
@@ -330,11 +330,11 @@
     }
 
     @media (max-width: 1024px){
-      .trust-logos{ grid-template-columns:repeat(3,1fr); }
+      .trust-logos{ grid-template-columns:repeat(3, minmax(160px, 1fr)); }
       .trust-metrics{ grid-template-columns:repeat(2,1fr); }
     }
     @media (max-width: 640px){
-      .trust-logos{ grid-template-columns:repeat(2,1fr); }
+      .trust-logos{ grid-template-columns:repeat(2, minmax(140px, 1fr)); }
       .trust-metrics{ grid-template-columns:1fr; }
       .trust-proof::before{ display:none; }
     }
@@ -429,10 +429,13 @@
     .feature-list a{ text-decoration:none; }
     .feature-list a:hover{ color:var(--blue-700); text-decoration:underline; }
 
-    /* Sentence + browser logos (separate BELOW the card) */
+    /* Supported browsers block (outside card) */
     .below-card{
       margin-top:14px;
       padding:0 6px;
+      display:flex;
+      flex-direction:column;
+      align-items:center; /* ✅ ensures centered */
     }
     .below-card .below-title{
       font-size:18px;
@@ -442,15 +445,22 @@
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       text-align:center;
+      max-width: 860px;
     }
 
+    /* ✅ Centered grid like live page */
     .browser-grid{
+      width:100%;
+      max-width: 980px;
+      margin: 0 auto;
       display:grid;
-      grid-template-columns:repeat(5, minmax(120px, 1fr));
+      grid-template-columns:repeat(5, minmax(140px, 1fr));
       gap:14px;
-      align-items:center;
+      align-items:stretch;
+      justify-items:center; /* ✅ key */
     }
     .browser-tile{
+      width:100%;
       background:#ffffff;
       border:1px solid rgba(15,23,42,0.06);
       border-radius:16px;
@@ -478,10 +488,10 @@
     }
 
     @media (max-width: 1100px){
-      .browser-grid{ grid-template-columns:repeat(3, 1fr); }
+      .browser-grid{ grid-template-columns:repeat(3, minmax(160px, 1fr)); }
     }
     @media (max-width: 640px){
-      .browser-grid{ grid-template-columns:repeat(2, 1fr); }
+      .browser-grid{ grid-template-columns:repeat(2, minmax(140px, 1fr)); }
     }
 
     /* ---------- CAROUSEL ---------- */
@@ -529,7 +539,6 @@
       margin:0 auto 22px;
     }
 
-    /* No navigation arrows (per request) */
     .carousel-nav{
       display:flex;
       justify-content:center;
@@ -734,7 +743,6 @@
       color: #0b1220;
       line-height:1;
     }
-    /* star AFTER 7 */
     .plan-amount-row .amt .star{
       font-size: 18px;
       font-weight: 1000;
@@ -929,7 +937,7 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <!-- Update this filename if your repo name differs -->
+      <!-- If this file name differs in your repo, update it here -->
       <img src="Browser Security Plus_Black (2).png" alt="Browser Security Plus logo">
     </div>
 
@@ -969,13 +977,13 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <!-- Sourced from the BSP page links (individual logos) -->
+    <!-- ✅ Use YOUR repo logos (exact filenames). Space is URL-encoded. -->
     <div class="trust-logos" aria-label="Customer logos">
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-detroi.png" alt="City of Detroit"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/doitt.png" alt="DOITT"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/st-clair-country.png" alt="St. Clair County State Bank"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/erh.png" alt="ERH"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-dallas.png" alt="City of Dallas"></div>
+      <div class="logo-tile"><img src="city%20of%20detroit.png" alt="City of Detroit" loading="lazy"></div>
+      <div class="logo-tile"><img src="NYC%20doitt.png" alt="NYC DOITT" loading="lazy"></div>
+      <div class="logo-tile"><img src="st%20clair.png" alt="St. Clair" loading="lazy"></div>
+      <div class="logo-tile"><img src="ellenville.png" alt="Ellenville" loading="lazy"></div>
+      <div class="logo-tile"><img src="city%20of%20dallas.jpg" alt="City of Dallas" loading="lazy"></div>
     </div>
 
     <div class="trust-spacer" aria-hidden="true"></div>
@@ -1029,7 +1037,7 @@
         </ul>
       </div>
 
-      <!-- REQUIRED: sentence + browser logos OUTSIDE the card -->
+      <!-- ✅ Supported browsers centered + responsive -->
       <div class="below-card" aria-label="Supported browsers">
         <div class="below-title">Manage multiple browsers seamlessly from a single interface.</div>
 
@@ -1047,7 +1055,6 @@
             <span>Mozilla Firefox</span>
           </div>
           <div class="browser-tile">
-            <!-- Ulaa logo from Zoho/ManageEngine asset -->
             <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy" />
             <span>Ulaa</span>
           </div>
@@ -1069,7 +1076,6 @@
             <span>Cốc Cốc</span>
           </div>
           <div class="browser-tile">
-            <!-- Naver Whale: use official favicon as colored icon -->
             <img src="https://whale.naver.com/favicon.ico" alt="Naver Whale" loading="lazy" />
             <span>Naver Whale</span>
           </div>
@@ -1136,7 +1142,6 @@
 
       <div class="carousel-nav" aria-label="Choose a slide"></div>
 
-      <!-- Demo strip below carousel -->
       <div class="demo-strip" aria-label="Demo prompt">
         <div class="demo-strip-inner">
           <h3>Want to see how device policies work in your environment?</h3>
@@ -1152,7 +1157,6 @@
 
 <section class="pricing-compare" id="pricing">
   <div class="pricing-wrap">
-    <!-- Follow ACP wording -->
     <h2 class="pricing-title">Pick the right path to control</h2>
     <p class="pricing-sub">
       Start free to validate policies. Upgrade when you are ready to roll out controls at scale.
@@ -1161,10 +1165,8 @@
     <div class="pricing-grid">
       <div class="compare-card" aria-label="Plans comparison">
         <div class="compare-cols">
-          <!-- Free -->
           <div class="plan-col">
             <h3>Free Edition</h3>
-
             <div class="plan-price">
               <span class="plan-kicker">STARTS AT</span>
               <div class="plan-amount-row">
@@ -1172,9 +1174,7 @@
                 <span class="unit">up to 25 endpoints</span>
               </div>
             </div>
-
             <div class="plan-divider" aria-hidden="true"></div>
-
             <ul class="plan-list">
               <li>Start with baseline controls and centralized visibility</li>
               <li>Validate policies before scaling enforcement</li>
@@ -1182,16 +1182,13 @@
               <li>Ideal for small teams and pilot rollouts</li>
               <li>No credit card required</li>
             </ul>
-
             <div class="plan-cta-row">
               <a href="https://www.manageengine.com/browser-security/download.html" target="_blank" rel="noopener" class="plan-btn outline">Get started</a>
             </div>
           </div>
 
-          <!-- Professional -->
           <div class="plan-col">
             <h3>Professional Edition</h3>
-
             <div class="plan-price">
               <span class="plan-kicker">STARTS AT</span>
               <div class="plan-amount-row">
@@ -1199,9 +1196,7 @@
                 <span class="unit">/ device per year</span>
               </div>
             </div>
-
             <div class="plan-divider" aria-hidden="true"></div>
-
             <ul class="plan-list">
               <li>Enforce security hardening policies at scale</li>
               <li>Centralized add-on and extension control</li>
@@ -1209,7 +1204,6 @@
               <li>Audit-ready policy visibility and reporting</li>
               <li>Designed for enterprise environments</li>
             </ul>
-
             <div class="plan-cta-row">
               <a href="https://www.manageengine.com/browser-security/get-quote.html" target="_blank" rel="noopener" class="plan-btn solid">
                 Get quote
@@ -1324,7 +1318,6 @@
     });
   }
 
-  // Keyboard navigation still allowed
   carouselEl.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") setActive(currentIndex - 1);
     if (e.key === "ArrowRight") setActive(currentIndex + 1);
@@ -1349,7 +1342,7 @@
   faqPrev.addEventListener("click", () => showFaq(faqIndex - 1));
   showFaq(0);
 
-  /* ================= Browser logos: fail-safe fallback (prevents broken icons) ================= */
+  /* ================= Browser logos: fail-safe fallback ================= */
   const FALLBACK_SVG = encodeURIComponent(`
     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
       <defs>
