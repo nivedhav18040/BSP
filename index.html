@@ -764,6 +764,7 @@
     }
 
     .compare-cols{
+      gap: 0; 
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -780,9 +781,11 @@
   height: 100%;           /* NEW */
 }
    .plan-col + .plan-col{
-  border-left: none;                 /* remove the vertical divider */
-  background: rgba(245,158,11,0.06);
+  border-left: 0 !important;      /* hard kill */
+  box-shadow: none !important;    /* hard kill */
+  background: transparent;        /* removes the “split” look */
 }
+
     .plan-col h3{
       font-size: 22px;
       font-weight: 1000;
