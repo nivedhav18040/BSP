@@ -119,28 +119,6 @@
         radial-gradient(900px 460px at 92% 20%, rgba(251,146,60,0.18), transparent 60%),
         linear-gradient(135deg, var(--blue-900), var(--blue-800), var(--blue-700));
     }
-    .hero::before{
-      content:"";
-      position:absolute;
-      top:-60px;
-      left:-60px;
-      width:520px;
-      height:520px;
-      background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);
-      border-radius:50%;
-      pointer-events:none;
-    }
-    .hero::after{
-      content:"";
-      position:absolute;
-      bottom:-70px;
-      right:-70px;
-      width:440px;
-      height:440px;
-      background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%);
-      border-radius:50%;
-      pointer-events:none;
-    }
     .hero > .container{ position:relative; z-index:1; }
 
     .hero h1{
@@ -185,19 +163,9 @@
       color:#0b1220;
       box-shadow:0 16px 34px rgba(245,158,11,0.26);
     }
-    @keyframes blinkPulse{
-      0%{ filter:brightness(1); }
-      50%{ filter:brightness(1.12); }
-      100%{ filter:brightness(1); }
-    }
     .btn-orange:hover{
       transform:translateY(-2px);
       box-shadow:0 22px 52px rgba(0,0,0,0.22);
-      animation: blinkPulse 0.6s ease-in-out 1;
-    }
-    .btn:focus-visible{
-      outline:3px solid rgba(255,255,255,0.35);
-      outline-offset:3px;
     }
     .cta-note{
       font-size:13px;
@@ -333,9 +301,7 @@
       .trust-proof::before{ display:none; }
     }
 
-    /* ==========================================================
-       FEATURES (FIXED: equal height + EDLP-like hover reveal)
-       ========================================================== */
+    /* ===================== FEATURES ===================== */
     .features{
       padding:var(--section-y) 0;
       background:var(--bg-light);
@@ -358,6 +324,7 @@
       font-weight:1000;
     }
 
+    /* enforce 2 columns + equal height */
     .feature-grid{
       max-width:var(--container);
       margin:0 auto;
@@ -365,7 +332,7 @@
       grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:24px;
       padding:0 var(--pad-x);
-      align-items:stretch; /* IMPORTANT */
+      align-items:stretch;
     }
     @media (max-width: 980px){
       .feature-grid{ grid-template-columns:1fr; }
@@ -374,6 +341,7 @@
     .feature-col{
       display:flex;
       flex-direction:column;
+      gap:24px;
       height:100%;
     }
 
@@ -387,9 +355,8 @@
       text-align:left;
       transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
       border:2px solid transparent;
-      flex:1;              /* IMPORTANT */
-      height:100%;         /* IMPORTANT */
-      min-height:320px;
+      min-height:280px;
+      height:100%;
     }
     .card:hover{
       background-color:#fff7ed;
@@ -398,7 +365,7 @@
       transform:translateY(-2px);
     }
 
-    /* ACP-ish blobs */
+    /* ACP-ish decorative blobs */
     .card::before{
       content:"";
       position:absolute;
@@ -442,8 +409,9 @@
       place-items:center;
       background:linear-gradient(135deg, rgba(37,99,235,0.14), rgba(245,158,11,0.18));
       border:1px solid rgba(15,23,42,0.08);
+      color:#0f172a;
     }
-    .card-icon svg{ width:26px; height:26px; color:#0f172a; }
+    .card-icon svg{ width:26px; height:26px; }
 
     .card h3{
       margin:0 0 8px;
@@ -460,13 +428,11 @@
       z-index:1;
     }
 
-    /* EDLP-like: show only heading, reveal subline on hover of each row */
     .feature-list{ list-style:none; position:relative; z-index:1; }
     .feature-list li{
       margin-bottom:16px;
       position:relative;
       padding-left:24px;
-      padding-right:10px;
     }
     .feature-list li::before{
       content:"✓";
@@ -481,76 +447,67 @@
       font-weight:900;
       color:var(--dark);
     }
+
+    /* ✅ EDLP-like collapse animation (THIS was missing in your BSP file) */
     .feature-list span{
       display:block;
       margin-top:6px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
       font-size:14px;
       color:var(--muted);
       font-weight:600;
-
-      /* hidden by default */
-      max-height:0;
-      opacity:0;
-      overflow:hidden;
-      transition:max-height .25s ease, opacity .25s ease;
+      transition:max-height .35s ease, opacity .25s ease;
     }
-    .feature-list li:hover span{
-      max-height:70px;
+    .card:hover .feature-list span{
+      max-height:120px;
       opacity:1;
     }
 
     .feature-list a{ text-decoration:none; }
     .feature-list a:hover{ color:var(--blue-700); text-decoration:underline; }
 
-    /* ==========================================================
-       SUPPORTED BROWSERS (MOVED OUTSIDE left column + CENTERED)
-       ========================================================== */
-    .browsers-section{
-      padding:10px 0 var(--section-y);
-      background:var(--bg-light);
-    }
-    .browsers-title{
-      font-size:28px;
+    /* ---------- Supported browsers ---------- */
+    .below-card{ padding:0 6px; }
+    .below-card .below-title{
+      font-size:18px;
       font-weight:1000;
-      margin:6px auto 18px;
-      text-align:center;
-      padding:0 var(--pad-x);
+      margin:10px 0 14px;
       background:linear-gradient(90deg, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
+      text-align:left;
     }
 
+    /* ✅ Center the whole grid block */
     .browser-grid{
-      max-width:980px;
+      max-width:920px;
       margin:0 auto;
       display:grid;
-      grid-template-columns:repeat(5, minmax(0, 1fr));
-      gap:16px;
-      justify-items:center;
-      padding:0 var(--pad-x);
+      grid-template-columns:repeat(5, minmax(120px, 1fr));
+      gap:14px;
+      align-items:stretch;
+      justify-items:stretch;
     }
-
     .browser-tile{
-      width:100%;
-      max-width:170px;
       background:#ffffff;
       border:1px solid rgba(15,23,42,0.06);
-      border-radius:18px;
-      padding:16px 12px;
+      border-radius:16px;
+      padding:14px 12px;
       box-shadow:0 12px 30px rgba(15,23,42,0.06);
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:120px;
+      min-height:110px;
     }
     .browser-tile img{
-      width:46px;
-      height:46px;
+      width:44px;
+      height:44px;
       object-fit:contain;
       filter: drop-shadow(0 6px 14px rgba(15,23,42,0.10));
-      background:transparent;
     }
     .browser-tile span{
       font-weight:900;
@@ -561,11 +518,11 @@
     }
 
     @media (max-width: 1100px){
-      .browser-grid{ grid-template-columns:repeat(3, 1fr); max-width:720px; }
+      .browser-grid{ grid-template-columns:repeat(3, 1fr); max-width:640px; }
     }
     @media (max-width: 640px){
-      .browser-grid{ grid-template-columns:repeat(2, 1fr); max-width:520px; }
-      .browser-tile{ max-width:none; }
+      .browser-grid{ grid-template-columns:repeat(2, 1fr); max-width:420px; }
+      .below-card .below-title{ text-align:center; }
     }
 
     /* ---------- CAROUSEL ---------- */
@@ -655,10 +612,6 @@
       vertical-align:middle;
     }
     .carousel-dot.active .pill{ background:rgba(15,23,42,0.95); }
-    .carousel-dot:focus-visible{
-      outline:3px solid rgba(245,158,11,0.30);
-      outline-offset:3px;
-    }
 
     @media (max-width: 900px){
       .carousel-item img, .carousel-item video{ height:320px; }
@@ -716,7 +669,7 @@
       .demo-strip h3{ font-size:18px; }
     }
 
-    /* ---------- PRICING (footnote fixed to be close) ---------- */
+    /* ---------- PRICING ---------- */
     .pricing-compare{
       padding: calc(var(--section-y) - 12px) 0;
       background:
@@ -754,15 +707,6 @@
       position: relative;
       max-width:980px;
       margin:0 auto;
-    }
-    .compare-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(900px 360px at 30% 15%, rgba(245,158,11,0.12), transparent 60%),
-        radial-gradient(900px 360px at 70% 10%, rgba(37,99,235,0.10), transparent 65%);
-      pointer-events:none;
     }
 
     .compare-cols{
@@ -859,14 +803,13 @@
       filter: brightness(1.02);
     }
 
+    /* ✅ Pricing footnote: stick close to card */
     .pricing-footnote{
       max-width:980px;
-      margin:10px auto 0;   /* CLOSE to the pricing card */
-      padding:0 var(--pad-x);
+      margin:10px auto 0;
       font-size:14px;
-      font-weight:650;
       color:#64748b;
-      text-align:center;
+      font-weight:650;
       line-height:1.6;
     }
     .pricing-footnote a{
@@ -886,7 +829,6 @@
       .pricing-title{ font-size: 30px; }
       .plan-col{ padding: 26px 22px; }
       .plan-btn{ width: 100%; min-width: 0; }
-      .pricing-footnote{ margin-top:12px; }
     }
 
     /* ---------- FAQ SECTION ---------- */
@@ -955,7 +897,6 @@
       transform: translateY(-2px);
     }
     .faq-nav:hover{ color:var(--orange-deep); transform:scale(1.08); }
-    .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.28); outline-offset:3px; }
 
     @media (max-width: 640px){
       .faq-carousel{ flex-direction:column; }
@@ -1020,12 +961,13 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
+    <!-- ✅ FIXED: use working URLs from live BSP -->
     <div class="trust-logos" aria-label="Customer logos">
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-detroi.png" alt="City of Detroit"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/doitt.png" alt="DOITT"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/st-clair-country.png" alt="St. Clair County State Bank"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/erh.png" alt="ERH"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-dallas.png" alt="City of Dallas"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/city_detroit.png" alt="City of Detroit"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/doitt.png" alt="DOITT"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/stclair.png" alt="St. Clair County State Bank"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/erh.png" alt="ERH"></div>
+      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/cityofdallas.png" alt="City of Dallas"></div>
     </div>
 
     <div class="trust-spacer" aria-hidden="true"></div>
@@ -1039,7 +981,6 @@
   </div>
 </section>
 
-<!-- ===================== FEATURES ===================== -->
 <section class="features">
   <h2 class="feature-heading">
     Get <span class="highlight">enterprise browser security</span> with
@@ -1047,8 +988,10 @@
   </h2>
 
   <div class="feature-grid">
-    <!-- LEFT CARD -->
+
+    <!-- LEFT COLUMN -->
     <div class="feature-col">
+
       <div class="card">
         <div class="card-top">
           <div class="card-icon" aria-hidden="true">
@@ -1078,9 +1021,68 @@
           </li>
         </ul>
       </div>
+
+      <!-- Supported browsers -->
+      <div class="below-card" aria-label="Supported browsers">
+        <div class="below-title">Manage multiple browsers seamlessly from a single interface.</div>
+
+        <!-- ✅ FIXED: stable icon sources -->
+        <div class="browser-grid">
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:googlechrome.svg" alt="Google Chrome" loading="lazy"/>
+            <span>Google Chrome</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:microsoftedge.svg" alt="Microsoft Edge" loading="lazy"/>
+            <span>Microsoft Edge</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:firefoxbrowser.svg" alt="Mozilla Firefox" loading="lazy"/>
+            <span>Mozilla Firefox</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy"/>
+            <span>Ulaa</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:brave.svg" alt="Brave" loading="lazy"/>
+            <span>Brave</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:yandexbrowser.svg" alt="Yandex" loading="lazy"/>
+            <span>Yandex</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:vivaldi.svg" alt="Vivaldi" loading="lazy"/>
+            <span>Vivaldi</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/250px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png" alt="Cốc Cốc" loading="lazy"/>
+            <span>Cốc Cốc</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/arcticons:naver-whale.svg" alt="Naver Whale" loading="lazy"/>
+            <span>Naver Whale</span>
+          </div>
+
+          <div class="browser-tile">
+            <img src="https://api.iconify.design/simple-icons:internetexplorer.svg" alt="Internet Explorer" loading="lazy"/>
+            <span>Internet Explorer</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- RIGHT CARD -->
+    <!-- RIGHT COLUMN -->
     <div class="feature-col">
       <div class="card">
         <div class="card-top">
@@ -1107,65 +1109,7 @@
         </ul>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ===================== SUPPORTED BROWSERS (FULL WIDTH + CENTER) ===================== -->
-<section class="browsers-section" aria-label="Supported browsers">
-  <div class="browsers-title">Manage multiple browsers seamlessly from a single interface.</div>
-
-  <div class="browser-grid" id="browserGrid">
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28February_2022%29.svg" alt="Google Chrome" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Google Chrome</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg" alt="Microsoft Edge" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Microsoft Edge</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg" alt="Mozilla Firefox" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Mozilla Firefox</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Ulaa</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Brave_icon.svg" alt="Brave" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Brave</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Yandex_browser_logo.svg" alt="Yandex" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Yandex</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Vivaldi_web_browser_logo.svg" alt="Vivaldi" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Vivaldi</span>
-    </div>
-
-    <!-- Coc Coc (fixed) -->
-    <div class="browser-tile">
-      <img src="https://en.wikipedia.org/wiki/Special:FilePath/C%E1%BB%91c%20C%E1%BB%91c%20logo.svg" alt="Cốc Cốc" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Cốc Cốc</span>
-    </div>
-
-    <!-- Naver Whale (fixed: stable PNG icon source) -->
-    <div class="browser-tile">
-      <img src="https://hexmos.com/freedevtools/assets/images/png_icons/naver/naver_whale.png" alt="Naver Whale" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Naver Whale</span>
-    </div>
-
-    <div class="browser-tile">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Internet_Explorer_10_logo.svg" alt="Internet Explorer" loading="lazy" referrerpolicy="no-referrer"/>
-      <span>Internet Explorer</span>
-    </div>
   </div>
 </section>
 
@@ -1218,17 +1162,15 @@
   </div>
 </section>
 
-<!-- ===================== PRICING ===================== -->
 <section class="pricing-compare" id="pricing">
   <div class="pricing-wrap">
-    <h2 class="pricing-title">Choose what fits</h2>
+    <h2 class="pricing-title">Pick the right path to control</h2>
     <p class="pricing-sub">
-      Start free to validate in audit mode. Upgrade when you're ready to enforce controls at scale.
+      Start free to validate policies. Upgrade when you are ready to roll out controls at scale.
     </p>
 
     <div class="compare-card" aria-label="Plans comparison">
       <div class="compare-cols">
-        <!-- Free -->
         <div class="plan-col">
           <h3>Free Edition</h3>
 
@@ -1239,6 +1181,7 @@
           </div>
 
           <div class="plan-divider" aria-hidden="true"></div>
+
           <p class="plan-note">Includes all features of Professional edition</p>
 
           <div class="plan-cta-row">
@@ -1248,7 +1191,6 @@
           </div>
         </div>
 
-        <!-- Professional -->
         <div class="plan-col">
           <h3>Professional Edition</h3>
 
@@ -1269,7 +1211,7 @@
       </div>
     </div>
 
-    <!-- Footnote close to the card -->
+    <!-- ✅ FIXED: sticky close to pricing card -->
     <div class="pricing-footnote">
       *As the number of endpoints increases, the price per endpoint decreases.<br/>
       For full pricing, visit <a href="https://store.manageengine.com/secure-browser/" target="_blank" rel="noopener">ManageEngine Store</a>.
