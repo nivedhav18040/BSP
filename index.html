@@ -994,6 +994,17 @@
 .browser-tile img[src$=".svg"]{
   filter: none !important;
 }
+    /* ===== Fix: prevent right feature card from stretching ===== */
+.feature-grid{ align-items: start !important; }
+
+/* Let columns size naturally */
+.feature-col{ height: auto !important; }
+
+/* Cards should NOT fill column height by default */
+.feature-col .card{ height: auto !important; }
+
+/* Only make LEFT card look balanced (optional) */
+.feature-col:first-child .card{ min-height: 360px; }
 
   </style>
 </head>
