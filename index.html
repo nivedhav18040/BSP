@@ -764,18 +764,21 @@
     }
 
     .compare-cols{
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;   /* forces both columns to same height */
+}
     }
     .plan-col{
-       display: flex;
-      flex-direction: column;
-      height: 100%;
-      position: relative;
-      padding: 24px 24px 22px;
-      text-align: left;
-    }
+  position: relative;
+  padding: 24px 24px 22px;
+  text-align: left;
+
+  display: flex;          /* NEW */
+  flex-direction: column; /* NEW */
+  height: 100%;           /* NEW */
+}
     .plan-col + .plan-col{
       border-left: 1px solid rgba(15,23,42,0.08);
       background: rgba(245,158,11,0.06);
@@ -841,11 +844,12 @@
     }
 
     .plan-cta-row{
-      margin-top: auto;
-      margin-top: 18px;
-      display: flex;
-      justify-content: center;
-    }
+  margin-top: auto;       /* NEW: pushes button row to bottom */
+  padding-top: 18px;      /* keeps spacing same as before */
+  display: flex;
+  justify-content: center;
+}
+
     .plan-btn{
       display: inline-flex;
       align-items: center;
