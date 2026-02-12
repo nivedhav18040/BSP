@@ -119,6 +119,28 @@
         radial-gradient(900px 460px at 92% 20%, rgba(251,146,60,0.18), transparent 60%),
         linear-gradient(135deg, var(--blue-900), var(--blue-800), var(--blue-700));
     }
+    .hero::before{
+      content:"";
+      position:absolute;
+      top:-60px;
+      left:-60px;
+      width:520px;
+      height:520px;
+      background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      bottom:-70px;
+      right:-70px;
+      width:440px;
+      height:440px;
+      background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%);
+      border-radius:50%;
+      pointer-events:none;
+    }
     .hero > .container{ position:relative; z-index:1; }
 
     .hero h1{
@@ -163,9 +185,19 @@
       color:#0b1220;
       box-shadow:0 16px 34px rgba(245,158,11,0.26);
     }
+    @keyframes blinkPulse{
+      0%{ filter:brightness(1); }
+      50%{ filter:brightness(1.12); }
+      100%{ filter:brightness(1); }
+    }
     .btn-orange:hover{
       transform:translateY(-2px);
       box-shadow:0 22px 52px rgba(0,0,0,0.22);
+      animation: blinkPulse 0.6s ease-in-out 1;
+    }
+    .btn:focus-visible{
+      outline:3px solid rgba(255,255,255,0.35);
+      outline-offset:3px;
     }
     .cta-note{
       font-size:13px;
@@ -301,7 +333,9 @@
       .trust-proof::before{ display:none; }
     }
 
-    /* ===================== FEATURES ===================== */
+    /* ==========================================================
+       FEATURES (2-column + hover expand behavior)
+       ========================================================== */
     .features{
       padding:var(--section-y) 0;
       background:var(--bg-light);
@@ -324,7 +358,6 @@
       font-weight:1000;
     }
 
-    /* enforce 2 columns + equal height */
     .feature-grid{
       max-width:var(--container);
       margin:0 auto;
@@ -332,19 +365,13 @@
       grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:24px;
       padding:0 var(--pad-x);
-      align-items:stretch;
+      align-items:stretch; /* ensures equal height columns */
     }
     @media (max-width: 980px){
       .feature-grid{ grid-template-columns:1fr; }
     }
 
-    .feature-col{
-      display:flex;
-      flex-direction:column;
-      gap:24px;
-      height:100%;
-    }
-
+    .feature-col{ display:flex; flex-direction:column; }
     .card{
       position:relative;
       overflow:hidden;
@@ -355,8 +382,7 @@
       text-align:left;
       transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
       border:2px solid transparent;
-      min-height:280px;
-      height:100%;
+      height:100%; /* makes both cards equal height in the same row */
     }
     .card:hover{
       background-color:#fff7ed;
@@ -365,7 +391,7 @@
       transform:translateY(-2px);
     }
 
-    /* ACP-ish decorative blobs */
+    /* ACP-ish decorative blobs inside each card */
     .card::before{
       content:"";
       position:absolute;
@@ -409,7 +435,6 @@
       place-items:center;
       background:linear-gradient(135deg, rgba(37,99,235,0.14), rgba(245,158,11,0.18));
       border:1px solid rgba(15,23,42,0.08);
-      color:#0f172a;
     }
     .card-icon svg{ width:26px; height:26px; }
 
@@ -419,6 +444,8 @@
       font-weight:1000;
       letter-spacing:-0.01em;
     }
+
+    /* Collapsed by default: hide the subtitle & list descriptions */
     .card p{
       margin:0 0 18px;
       color:var(--muted);
@@ -426,6 +453,14 @@
       font-weight:600;
       position:relative;
       z-index:1;
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
+      transition:max-height .35s ease, opacity .25s ease;
+    }
+    .card:hover p{
+      max-height:120px;
+      opacity:1;
     }
 
     .feature-list{ list-style:none; position:relative; z-index:1; }
@@ -448,49 +483,56 @@
       color:var(--dark);
     }
 
-    /* ✅ EDLP-like collapse animation (THIS was missing in your BSP file) */
+    /* Collapsed by default: show ONLY headings, reveal description on hover */
     .feature-list span{
       display:block;
       margin-top:6px;
-      max-height:0;
-      overflow:hidden;
-      opacity:0;
       font-size:14px;
       color:var(--muted);
       font-weight:600;
+
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
       transition:max-height .35s ease, opacity .25s ease;
     }
     .card:hover .feature-list span{
-      max-height:120px;
+      max-height:80px;
       opacity:1;
     }
 
     .feature-list a{ text-decoration:none; }
     .feature-list a:hover{ color:var(--blue-700); text-decoration:underline; }
 
-    /* ---------- Supported browsers ---------- */
-    .below-card{ padding:0 6px; }
+    /* ---------- Supported browsers (moved OUTSIDE the 2-col grid) ---------- */
+    .below-card{
+      max-width:var(--container);
+      margin:34px auto 0;
+      padding:0 var(--pad-x);
+      text-align:center;
+    }
     .below-card .below-title{
       font-size:18px;
       font-weight:1000;
-      margin:10px 0 14px;
+      margin:0 0 14px;
       background:linear-gradient(90deg, #2563eb, #f59e0b);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
-      text-align:left;
+      text-align:center;
     }
 
-    /* ✅ Center the whole grid block */
     .browser-grid{
-      max-width:920px;
+      max-width:980px;
       margin:0 auto;
       display:grid;
       grid-template-columns:repeat(5, minmax(120px, 1fr));
       gap:14px;
+      justify-items:center;
       align-items:stretch;
-      justify-items:stretch;
+      place-content:center;
     }
     .browser-tile{
+      width:100%;
       background:#ffffff;
       border:1px solid rgba(15,23,42,0.06);
       border-radius:16px;
@@ -518,11 +560,10 @@
     }
 
     @media (max-width: 1100px){
-      .browser-grid{ grid-template-columns:repeat(3, 1fr); max-width:640px; }
+      .browser-grid{ grid-template-columns:repeat(3, 1fr); }
     }
     @media (max-width: 640px){
-      .browser-grid{ grid-template-columns:repeat(2, 1fr); max-width:420px; }
-      .below-card .below-title{ text-align:center; }
+      .browser-grid{ grid-template-columns:repeat(2, 1fr); }
     }
 
     /* ---------- CAROUSEL ---------- */
@@ -612,6 +653,10 @@
       vertical-align:middle;
     }
     .carousel-dot.active .pill{ background:rgba(15,23,42,0.95); }
+    .carousel-dot:focus-visible{
+      outline:3px solid rgba(245,158,11,0.30);
+      outline-offset:3px;
+    }
 
     @media (max-width: 900px){
       .carousel-item img, .carousel-item video{ height:320px; }
@@ -708,6 +753,15 @@
       max-width:980px;
       margin:0 auto;
     }
+    .compare-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 360px at 30% 15%, rgba(245,158,11,0.12), transparent 60%),
+        radial-gradient(900px 360px at 70% 10%, rgba(37,99,235,0.10), transparent 65%);
+      pointer-events:none;
+    }
 
     .compare-cols{
       position: relative;
@@ -761,12 +815,26 @@
       background: rgba(245,158,11,0.22);
       margin: 14px 0 14px;
     }
+
+    /* Tick in green for the free note */
     .plan-note{
       font-size:14px;
       color:#0f172a;
       font-weight:650;
       line-height:1.6;
       margin-top:8px;
+
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .plan-note::before{
+      content:"✓";
+      color:#16a34a;
+      font-weight:1000;
+      font-size:16px;
+      line-height:1.2;
+      margin-top:2px;
     }
 
     .plan-cta-row{
@@ -803,19 +871,20 @@
       filter: brightness(1.02);
     }
 
-    /* ✅ Pricing footnote: stick close to card */
+    /* Store sentence close to the card */
     .pricing-footnote{
       max-width:980px;
       margin:10px auto 0;
-      font-size:14px;
+      padding:0 6px;
       color:#64748b;
       font-weight:650;
+      font-size:14px;
       line-height:1.6;
     }
     .pricing-footnote a{
-      color:var(--blue-700);
-      font-weight:900;
-      text-decoration:underline;
+      color: var(--blue-700);
+      text-decoration: underline;
+      font-weight: 900;
     }
 
     @media (max-width: 820px){
@@ -829,6 +898,7 @@
       .pricing-title{ font-size: 30px; }
       .plan-col{ padding: 26px 22px; }
       .plan-btn{ width: 100%; min-width: 0; }
+      .pricing-footnote{ margin-top:12px; }
     }
 
     /* ---------- FAQ SECTION ---------- */
@@ -897,6 +967,7 @@
       transform: translateY(-2px);
     }
     .faq-nav:hover{ color:var(--orange-deep); transform:scale(1.08); }
+    .faq-nav:focus-visible{ outline:3px solid rgba(245,158,11,0.28); outline-offset:3px; }
 
     @media (max-width: 640px){
       .faq-carousel{ flex-direction:column; }
@@ -961,13 +1032,13 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <!-- ✅ FIXED: use working URLs from live BSP -->
+    <!-- FIX: Use LOCAL repo images so GitHub Pages never blocks them -->
     <div class="trust-logos" aria-label="Customer logos">
-      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/city_detroit.png" alt="City of Detroit"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/doitt.png" alt="DOITT"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/stclair.png" alt="St. Clair County State Bank"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/erh.png" alt="ERH"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/ems/images/logo/cityofdallas.png" alt="City of Dallas"></div>
+      <div class="logo-tile"><img src="city of detroit.png" alt="City of Detroit"></div>
+      <div class="logo-tile"><img src="NYC doitit.png" alt="DOITT"></div>
+      <div class="logo-tile"><img src="st clair.png" alt="St. Clair County State Bank"></div>
+      <div class="logo-tile"><img src="ellenville.png" alt="ERH"></div>
+      <div class="logo-tile"><img src="city of dallas.jpg" alt="City of Dallas"></div>
     </div>
 
     <div class="trust-spacer" aria-hidden="true"></div>
@@ -981,6 +1052,7 @@
   </div>
 </section>
 
+<!-- ===================== FEATURES ===================== -->
 <section class="features">
   <h2 class="feature-heading">
     Get <span class="highlight">enterprise browser security</span> with
@@ -989,9 +1061,8 @@
 
   <div class="feature-grid">
 
-    <!-- LEFT COLUMN -->
+    <!-- LEFT -->
     <div class="feature-col">
-
       <div class="card">
         <div class="card-top">
           <div class="card-icon" aria-hidden="true">
@@ -1021,68 +1092,9 @@
           </li>
         </ul>
       </div>
-
-      <!-- Supported browsers -->
-      <div class="below-card" aria-label="Supported browsers">
-        <div class="below-title">Manage multiple browsers seamlessly from a single interface.</div>
-
-        <!-- ✅ FIXED: stable icon sources -->
-        <div class="browser-grid">
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:googlechrome.svg" alt="Google Chrome" loading="lazy"/>
-            <span>Google Chrome</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:microsoftedge.svg" alt="Microsoft Edge" loading="lazy"/>
-            <span>Microsoft Edge</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:firefoxbrowser.svg" alt="Mozilla Firefox" loading="lazy"/>
-            <span>Mozilla Firefox</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy"/>
-            <span>Ulaa</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:brave.svg" alt="Brave" loading="lazy"/>
-            <span>Brave</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:yandexbrowser.svg" alt="Yandex" loading="lazy"/>
-            <span>Yandex</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:vivaldi.svg" alt="Vivaldi" loading="lazy"/>
-            <span>Vivaldi</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/250px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png" alt="Cốc Cốc" loading="lazy"/>
-            <span>Cốc Cốc</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/arcticons:naver-whale.svg" alt="Naver Whale" loading="lazy"/>
-            <span>Naver Whale</span>
-          </div>
-
-          <div class="browser-tile">
-            <img src="https://api.iconify.design/simple-icons:internetexplorer.svg" alt="Internet Explorer" loading="lazy"/>
-            <span>Internet Explorer</span>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- RIGHT COLUMN -->
+    <!-- RIGHT -->
     <div class="feature-col">
       <div class="card">
         <div class="card-top">
@@ -1110,6 +1122,67 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- FIX: browsers are OUTSIDE the 2-col grid, so cards stay equal and don't "stretch" -->
+  <div class="below-card" aria-label="Supported browsers">
+    <div class="below-title">Manage multiple browsers seamlessly from a single interface.</div>
+
+    <div class="browser-grid" id="browserGrid">
+      <!-- Row 1 -->
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28March_2011%29.svg" alt="Google Chrome" loading="lazy" />
+        <span>Google Chrome</span>
+      </div>
+
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg" alt="Microsoft Edge" loading="lazy" />
+        <span>Microsoft Edge</span>
+      </div>
+
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg" alt="Mozilla Firefox" loading="lazy" />
+        <span>Mozilla Firefox</span>
+      </div>
+
+      <div class="browser-tile">
+        <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy" />
+        <span>Ulaa</span>
+      </div>
+
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Brave_Lion_Icon.svg" alt="Brave" loading="lazy" />
+        <span>Brave</span>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Yandex_Browser_icon.svg" alt="Yandex" loading="lazy" />
+        <span>Yandex</span>
+      </div>
+
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Vivaldi_web_browser_logo.svg" alt="Vivaldi" loading="lazy" />
+        <span>Vivaldi</span>
+      </div>
+
+      <div class="browser-tile">
+        <!-- FIX: Coc Coc direct image (no broken link) -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/C%E1%BB%91c_C%E1%BB%91c_logo.svg/1280px-C%E1%BB%91c_C%E1%BB%91c_logo.svg.png" alt="Cốc Cốc" loading="lazy" />
+        <span>Cốc Cốc</span>
+      </div>
+
+      <div class="browser-tile">
+        <!-- FIX: Naver Whale reliable SVG -->
+        <img src="https://api.iconify.design/arcticons/naver-whale.svg" alt="Naver Whale" loading="lazy" />
+        <span>Naver Whale</span>
+      </div>
+
+      <div class="browser-tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Internet_Explorer_10_logo.svg" alt="Internet Explorer" loading="lazy" />
+        <span>Internet Explorer</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1162,6 +1235,7 @@
   </div>
 </section>
 
+<!-- ===================== PRICING ===================== -->
 <section class="pricing-compare" id="pricing">
   <div class="pricing-wrap">
     <h2 class="pricing-title">Pick the right path to control</h2>
@@ -1171,6 +1245,7 @@
 
     <div class="compare-card" aria-label="Plans comparison">
       <div class="compare-cols">
+        <!-- Free -->
         <div class="plan-col">
           <h3>Free Edition</h3>
 
@@ -1191,6 +1266,7 @@
           </div>
         </div>
 
+        <!-- Professional -->
         <div class="plan-col">
           <h3>Professional Edition</h3>
 
@@ -1211,11 +1287,11 @@
       </div>
     </div>
 
-    <!-- ✅ FIXED: sticky close to pricing card -->
-    <div class="pricing-footnote">
+    <!-- FIX: Footnote close to pricing card (like your screenshot) -->
+    <p class="pricing-footnote">
       *As the number of endpoints increases, the price per endpoint decreases.<br/>
       For full pricing, visit <a href="https://store.manageengine.com/secure-browser/" target="_blank" rel="noopener">ManageEngine Store</a>.
-    </div>
+    </p>
 
   </div>
 </section>
