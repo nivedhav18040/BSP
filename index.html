@@ -475,12 +475,32 @@
       color:var(--dark);
     }
     .feature-list span{
-      display:block;
-      margin-top:6px;
-      font-size:14px;
-      color:var(--muted);
-      font-weight:600;
-    }
+  display:block;
+  margin-top:6px;
+  font-size:14px;
+  color:var(--muted);
+  font-weight:600;
+
+  /* hidden by default */
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:max-height .35s ease, opacity .25s ease;
+}
+
+/* reveal on hover */
+.card:hover .feature-list span{
+  max-height:120px;
+  opacity:1;
+}
+
+/* mobile: always visible (no hover) */
+@media (max-width: 980px){
+  .feature-list span{
+    max-height:none;
+    opacity:1;
+  }
+}
     .feature-list a{ text-decoration:none; }
     .feature-list a:hover{ color:var(--blue-700); text-decoration:underline; }
 
@@ -501,12 +521,14 @@
 
     /* 5 cols => perfect 2 rows of 5 for 10 logos */
     .browser-grid{
-      display:grid;
-      grid-template-columns:repeat(5, minmax(120px, 1fr));
-      gap:14px;
-      align-items:stretch;
-      justify-items:stretch;
-    }
+  display:grid;
+  grid-template-columns:repeat(5, minmax(120px, 1fr));
+  gap:14px;
+  align-items:stretch;
+  justify-items:stretch;
+  max-width: 980px;
+  margin: 0 auto;
+}
     .browser-tile{
       background:#ffffff;
       border:1px solid rgba(15,23,42,0.06);
@@ -929,6 +951,14 @@
       background:#fff;
       font-weight:600;
     }
+    /* FIX: make both feature cards same height */
+.feature-grid{ align-items: stretch; }
+.feature-col{ height: 100%; }
+.feature-col .card{ height: 100%; display: flex; flex-direction: column; }
+    /* FIX: pricing buttons align same baseline */
+.compare-cols{ align-items: stretch; }
+.plan-col{ display:flex; flex-direction:column; }
+.plan-cta-row{ margin-top:auto; padding-top:16px; }    
   </style>
 </head>
 
@@ -976,13 +1006,13 @@
       <p class="trust-kicker">Trusted by leading brands worldwide</p>
     </div>
 
-    <div class="trust-logos" aria-label="Customer logos">
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-detroi.png" alt="City of Detroit"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/doitt.png" alt="DOITT"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/st-clair-country.png" alt="St. Clair County State Bank"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/erh.png" alt="ERH"></div>
-      <div class="logo-tile"><img src="https://www.manageengine.com/browser-security/images/logos/city-of-dallas.png" alt="City of Dallas"></div>
-    </div>
+   <div class="trust-logos" aria-label="Customer logos">
+  <div class="logo-tile"><img src="city%20of%20detroit.png" alt="City of Detroit" loading="lazy"></div>
+  <div class="logo-tile"><img src="NYC%20doitt.png" alt="DOITT" loading="lazy"></div>
+  <div class="logo-tile"><img src="st%20clair.png" alt="St. Clair County State Bank" loading="lazy"></div>
+  <div class="logo-tile"><img src="ellenville.png" alt="ERH" loading="lazy"></div>
+  <div class="logo-tile"><img src="city%20of%20dallas.jpg" alt="City of Dallas" loading="lazy"></div>
+</div>
 
     <div class="trust-spacer" aria-hidden="true"></div>
 
@@ -1060,12 +1090,12 @@
           </div>
 
           <div class="browser-tile">
-            <img src="https://www.manageengine.com/browser-security/images/ulaa-logo.png" alt="Ulaa" loading="lazy" referrerpolicy="no-referrer"/>
+            <img src="https://ulaa.com/favicon.ico" alt="Ulaa" loading="lazy" referrerpolicy="no-referrer"/>
             <span>Ulaa</span>
           </div>
 
           <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Brave%20Lion%20Icon.svg" alt="Brave" loading="lazy" referrerpolicy="no-referrer"/>
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/brave.svg" alt="Brave" loading="lazy" referrerpolicy="no-referrer"/>
             <span>Brave</span>
           </div>
 
@@ -1086,7 +1116,7 @@
           </div>
 
           <div class="browser-tile">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Naver%20Whale%20logo.png" alt="Naver Whale" loading="lazy" referrerpolicy="no-referrer"/>
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/naverwhale.svg" alt="Naver Whale" loading="lazy" referrerpolicy="no-referrer"/>
             <span>Naver Whale</span>
           </div>
 
@@ -1234,7 +1264,14 @@
 
   </div>
 </section>
-
+  <p style="text-align:center; margin:18px auto 0; color:#64748b; font-weight:650; max-width:980px; padding:0 24px;">
+  *As the number of endpoints increases, the price per endpoint decreases.
+  For full pricing, visit
+  <a href="https://store.manageengine.com/secure-browser/" target="_blank" rel="noopener"
+     style="color:#1b57a6; font-weight:900; text-decoration:underline;">
+    ManageEngine Store
+  </a>.
+</p>
 <section class="faq-section">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
