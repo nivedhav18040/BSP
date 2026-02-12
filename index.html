@@ -779,10 +779,10 @@
   flex-direction: column; /* NEW */
   height: 100%;           /* NEW */
 }
-    .plan-col + .plan-col{
-      border-left: 1px solid rgba(15,23,42,0.08);
-      background: rgba(245,158,11,0.06);
-    }
+   .plan-col + .plan-col{
+  border-left: none;                 /* remove the vertical divider */
+  background: rgba(245,158,11,0.06);
+}
     .plan-col h3{
       font-size: 22px;
       font-weight: 1000;
@@ -896,11 +896,11 @@
     }
 
     @media (max-width: 820px){
-      .compare-cols{ grid-template-columns: 1fr; }
-      .plan-col + .plan-col{
-        border-left: none;
-        border-top: 1px solid rgba(15,23,42,0.08);
-      }
+  .plan-col + .plan-col{
+    border-left: none;
+    border-top: none;
+  }
+}
     }
     @media (max-width: 640px){
       .pricing-title{ font-size: 30px; }
