@@ -537,14 +537,16 @@
     }
 
     /* 5 cols => perfect 2 rows of 5 for 10 logos */
-    .browser-grid{
+   .browser-grid{
   display:grid;
   grid-template-columns:repeat(5, minmax(120px, 1fr));
   gap:14px;
   align-items:stretch;
   justify-items:stretch;
+
   max-width: 980px;
   margin: 0 auto;
+  justify-content: center;
 }
     .browser-tile{
       background:#ffffff;
@@ -1005,6 +1007,20 @@
 
 /* Only make LEFT card look balanced (optional) */
 .feature-col:first-child .card{ min-height: 360px; }
+    /* ===== Fix: Make both feature cards same height (not tied to browser grid) ===== */
+.feature-grid .card{
+  min-height: 420px; /* adjust if you want taller/shorter */
+}
+
+@media (max-width: 980px){
+  .feature-grid .card{
+    min-height: unset;
+  }
+}
+/* Step 2.3: Ensure SVG browser icons render clearly */
+.browser-tile img[src$=".svg"]{
+  filter: none !important;
+}
 
   </style>
 </head>
@@ -1158,7 +1174,7 @@
           </div>
 
           <div class="browser-tile">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/CocCoc_Logo.png" alt="Cốc Cốc" loading="lazy" referrerpolicy="no-referrer"/>
+           <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/CocCoc_Logo.png" alt="Cốc Cốc" loading="lazy" referrerpolicy="no-referrer"/>
             <span>Cốc Cốc</span>
           </div>
 
