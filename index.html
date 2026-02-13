@@ -804,11 +804,15 @@
       color: rgba(100,116,139,0.95);
       margin-bottom: 6px;
       font-weight:700;
+      .plan-col .plan-kicker{
+  align-self: center;   /* ADD */
     }
     .plan-amount-row{
       display: flex;
       align-items: baseline;
       gap: 10px;
+      justify-content: center;  /* ADD */
+  text-align: center;       /* ADD */
     }
     .plan-amount-row .amt{
       font-size: 36px;
@@ -1031,6 +1035,21 @@
 #pricing .plan-cta-row{
   margin-top: auto !important;
   padding-top: 18px !important;
+}
+      /* Center only the pricing header + amount rows (keep notes left) */
+.plan-col > h3,
+.plan-col > .plan-kicker,
+.plan-col > .plan-amount-row{
+  text-align: center;
+}
+
+.plan-amount-row{
+  justify-content: center;
+}
+
+/* Keep the sentence / note left-aligned */
+.plan-note{
+  text-align: left;
 }
 
   </style>
