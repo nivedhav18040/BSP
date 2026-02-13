@@ -744,15 +744,18 @@
     }
 
     .compare-card{
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(15,23,42,0.08);
-      border-radius: 22px;
-      box-shadow: 0 18px 48px rgba(15,23,42,0.10);
-      overflow: hidden;
-      position: relative;
-      max-width:980px;
-      margin:0 auto;
-    }
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 22px;
+  box-shadow: 0 18px 48px rgba(15,23,42,0.10);
+  overflow: hidden;
+  position: relative;
+
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;          /* <-- centers */
+}
+
     .compare-card::before{
       content:"";
       position:absolute;
@@ -781,10 +784,10 @@
   height: 100%;           /* NEW */
 }
    .plan-col + .plan-col{
-  border-left: 0 !important;      /* hard kill */
-  box-shadow: none !important;    /* hard kill */
-  background: transparent;        /* removes the “split” look */
+  border-left: none !important;
+  background: rgba(245,158,11,0.06); /* keep tint if you want */
 }
+
 
     .plan-col h3{
       font-size: 22px;
